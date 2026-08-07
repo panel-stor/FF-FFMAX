@@ -30,13 +30,10 @@
             overflow-x: hidden;
         }
 
-        /* RED GLOWING FALLING LIGHTS CANVAS */
         #bgCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 1;
         }
@@ -44,21 +41,14 @@
         .container {
             max-width: 480px;
             margin: 0 auto;
-            padding: 15px 15px 140px 15px;
+            padding: 15px 15px 100px 15px;
             position: relative;
             z-index: 10;
         }
 
-        /* VIEW SWITCHING LOGIC */
-        .page-view {
-            display: none;
-        }
-        .page-view.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
+        .page-view { display: none; }
+        .page-view.active { display: block; animation: fadeIn 0.3s ease-in-out; }
 
-        /* COMMON DASHBOARD STYLES */
         .dash-card {
             background: var(--card-dark);
             border: 1px solid var(--red-glow);
@@ -69,7 +59,6 @@
             backdrop-filter: blur(8px);
         }
 
-        /* HEADER & LOGO */
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -122,7 +111,6 @@
             font-weight: bold;
         }
 
-        /* MAIN HEADING */
         .main-heading {
             text-align: center;
             font-size: 24px;
@@ -138,10 +126,8 @@
             margin-bottom: 25px;
         }
 
-        /* BANNER PLACEHOLDER */
         .banner-box {
-            width: 100%;
-            height: 130px;
+            width: 100%; height: 130px;
             background: linear-gradient(135deg, #1f0505, #0a0000);
             border: 1px dashed var(--red-glow);
             border-radius: 12px;
@@ -153,7 +139,6 @@
             margin-bottom: 12px;
         }
 
-        /* BUTTONS */
         .btn-glow-blue {
             background: linear-gradient(135deg, #0088ff, #004499);
             color: #fff;
@@ -181,213 +166,133 @@
         }
 
         .btn-glow-yellow {
-            width: 100%;
-            padding: 16px;
+            width: 100%; padding: 16px;
             background: linear-gradient(135deg, #ffcc00, #b38f00);
-            color: #000;
-            font-size: 18px;
-            font-weight: 900;
-            border: 2px solid #ffee80;
-            border-radius: 12px;
+            color: #000; font-size: 18px; font-weight: 900;
+            border: 2px solid #ffee80; border-radius: 12px;
             cursor: pointer;
             box-shadow: 0 0 20px var(--yellow-glow);
         }
 
         .btn-buy-card {
             width: 100%;
-            background: #1a2233;
-            color: #fff;
+            background: #1a2233; color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.2s;
+            padding: 8px; border-radius: 8px;
+            font-weight: bold; font-size: 13px;
+            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px;
         }
 
-        .btn-buy-card:hover, .btn-buy-card.active {
+        .btn-buy-card:hover {
             background: var(--red-glow);
             box-shadow: 0 0 12px var(--red-glow);
-            border-color: #ff9999;
         }
 
-        /* 2x2 PRICING GRID */
         .pricing-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 15px;
+            gap: 12px; margin-top: 15px;
         }
 
         .price-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px;
-            text-align: left;
-            position: relative;
+            border-radius: 12px; padding: 12px; text-align: left;
         }
 
-        .duration-tag {
-            font-size: 12px;
-            color: #aaaaaa;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-bottom: 8px;
+        .duration-tag { font-size: 12px; color: #aaaaaa; text-transform: uppercase; font-weight: bold; margin-bottom: 8px; }
+        .price-amount { font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 10px; }
+
+        /* FLOATING RED ROUND SUPPORT BUTTON */
+        .btn-floating-support {
+            position: fixed;
+            bottom: 65px;
+            right: 20px;
+            width: 55px; height: 55px;
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #fff; font-size: 22px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px var(--red-glow);
+            cursor: pointer; z-index: 150;
+            animation: pulse-red 2s infinite;
         }
 
-        .price-amount {
-            font-size: 18px;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        /* MODAL */
+        /* SUPPORT MODAL STYLING */
         .modal-overlay {
             display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(8px);
-            z-index: 200;
-            justify-content: center;
-            align-items: center;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
+            z-index: 200; justify-content: center; align-items: center;
         }
 
-        .modal-card {
-            background: #0d121d;
-            width: 90%;
-            max-width: 380px;
-            border-radius: 16px;
-            border: 1px solid var(--red-glow);
-            box-shadow: 0 0 25px rgba(255, 26, 26, 0.4);
-            padding: 20px;
+        .modal-card-support {
+            background: #0d121d; width: 90%; max-width: 380px;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid rgba(255, 26, 26, 0.4);
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.3);
             text-align: left;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            background: #151c28;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            color: #fff;
-            margin-top: 6px;
-            margin-bottom: 14px;
-            outline: none;
+        .support-modal-header {
+            background: linear-gradient(135deg, #e60000, #990000);
+            padding: 15px; display: flex; align-items: center; justify-content: space-between;
         }
 
-        .form-input:focus {
-            border-color: var(--red-glow);
+        .chat-icon-circle {
+            width: 40px; height: 40px; background: #fff; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; color: #e60000; font-size: 20px;
         }
 
-        .notice-modal-text {
-            font-size: 12px;
-            color: var(--green-glow);
-            margin-bottom: 15px;
-            text-align: center;
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 13px; color: #aaaaaa; margin-bottom: 6px; }
+
+        .form-input-box, .form-textarea-box {
+            width: 100%; padding: 12px; background: #151c28;
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 14px; outline: none;
+        }
+        .form-textarea-box { height: 90px; resize: none; }
+
+        .btn-submit-support {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #e60000, #990000);
+            color: #fff; border: none; border-radius: 10px; font-weight: 800; font-size: 15px;
+            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+            box-shadow: 0 0 15px rgba(230, 0, 0, 0.5);
         }
 
-        /* GLOBAL FLOATING SUPPORT & BOTTOM NAV */
-        .global-bottom-bar {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            background: rgba(10, 12, 18, 0.95);
-            border-top: 1px solid rgba(255, 26, 26, 0.3);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            padding: 10px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        /* BOTTOM NAV BAR */
+        .bottom-nav-bar {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex; justify-content: space-around; padding: 10px 0; z-index: 100;
         }
 
-        .btn-support-global {
-            width: 100%;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: #fff;
-            border: 1px solid #70e69d;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            display: block;
+        .nav-link-item {
+            display: flex; flex-direction: column; align-items: center; gap: 2px;
+            color: #888888; text-decoration: none; font-size: 11px; font-weight: bold; background: none; border: none; cursor: pointer;
         }
-
-        .nav-tabs {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .nav-btn {
-            background: transparent;
-            border: none;
-            color: #aaa;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 5px 15px;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .nav-btn.active, .nav-btn:hover {
-            color: #fff;
-            background: rgba(255, 26, 26, 0.2);
-            border: 1px solid var(--red-glow);
-        }
+        .nav-link-item.active { color: var(--red-glow); }
 
         .btn-back-nav {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-bottom: 15px;
+            background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff;
+            padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-bottom: 15px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes flash {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; filter: drop-shadow(0 0 12px var(--yellow-glow)); }
-        }
-
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 5px rgba(0, 255, 102, 0.4); }
-            50% { box-shadow: 0 0 15px rgba(0, 255, 102, 0.9); }
-            100% { box-shadow: 0 0 5px rgba(0, 255, 102, 0.4); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes flash { 0% { opacity: 0.3; } 100% { opacity: 1; filter: drop-shadow(0 0 12px var(--yellow-glow)); } }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } 50% { box-shadow: 0 0 22px rgba(255, 26, 26, 0.9); } 100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } }
     </style>
 </head>
 <body>
 
-    <!-- RED LIGHT PARTICLES BACKGROUND -->
     <canvas id="bgCanvas"></canvas>
 
     <div class="container">
 
-        <!-- ================= PAGE 1: ORIGINAL HOME PAGE ================= -->
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             <div class="top-nav">
                 <div style="font-weight:900; color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">FF&FFMAX CHEAT STORE</div>
@@ -410,8 +315,7 @@
                 </p>
             </div>
         </div>
-
-        <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
+                <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
         <div id="pageMainStore" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back Home</button>
             
@@ -453,18 +357,11 @@
                     <button class="btn-glow-green" onclick="switchPage('pageIosInternal')">Buy Internal</button>
                 </div>
             </div>
-
-            <!-- DASHBOARD 3: PC EMULATOR PANEL -->
-            <div class="dash-card" style="opacity: 0.7;">
-                <div class="banner-box">📸 PC EMULATOR BANNER</div>
-                <h4 style="text-align:left;">PC STEAM PANEL</h4>
-            </div>
         </div>
 
-        <!-- ================= PAGE 3: ANDROID EXTERNAL PANELS ================= -->
+        <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-
             <div class="top-nav">
                 <div style="font-weight:bold; font-size:15px;">Panel External</div>
                 <div class="badge-need-root">⚡ Need RooT</div>
@@ -475,99 +372,49 @@
             </div>
             <div style="height:15px;"></div>
 
-            <!-- 1. DRIP-CLIENT -->
+            <!-- DRIP-CLIENT -->
             <div class="dash-card">
                 <div class="banner-box">📸 DRIP-CLIENT BANNER</div>
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Antiban] Updated all server.</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">10 Days</div>
-                        <div class="price-amount">₹310</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (10 Days)', '310')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">15 Days</div>
-                        <div class="price-amount">₹380</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (15 Days)', '380')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹550</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (30 Days)', '550')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">3 Month</div>
-                        <div class="price-amount">₹999</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (3 Month)', '999')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 2. HAXX CRACKER -->
+            <!-- HAXX CRACKER -->
             <div class="dash-card">
                 <div class="banner-box">📸 HAXX CRACKER BANNER</div>
                 <h3 style="color:#fff; text-align:left;">HAXX CRACKER</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Vip Safe] Auto Headshot.</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">10 Days</div>
-                        <div class="price-amount">₹310</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (10 Days)', '310')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">15 Days</div>
-                        <div class="price-amount">₹380</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (15 Days)', '380')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹550</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (30 Days)', '550')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">3 Month</div>
-                        <div class="price-amount">₹999</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (3 Month)', '999')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 3. SILENT CHEAT -->
+            <!-- SILENT CHEAT -->
             <div class="dash-card">
                 <div class="banner-box">📸 SILENT CHEAT BANNER</div>
                 <h3 style="color:#fff; text-align:left;">SILENT CHEAT</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Undetected] Rank Working.</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">10 Days</div>
-                        <div class="price-amount">₹310</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (10 Days)', '310')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">15 Days</div>
-                        <div class="price-amount">₹380</div>
-                <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹550</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (30 Days)', '550')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">3 Month</div>
-                        <div class="price-amount">₹999</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (3 Month)', '999')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 4: ANDROID INTERNAL PANELS ================= -->
+        <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-
             <div class="top-nav">
                 <div style="font-weight:bold; font-size:15px;">Panel Internal</div>
                 <div class="online-badge-green">● ONLINE</div>
@@ -578,98 +425,46 @@
             </div>
             <div style="height:15px;"></div>
 
-            <!-- 1. DRIP-CLIENT INTERNAL -->
+            <!-- DRIP INTERNAL -->
             <div class="dash-card">
                 <div class="banner-box">📸 DRIP-CLIENT INTERNAL BANNER</div>
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT INTERNAL</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Needed] Updated Version.</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">10 Days</div>
-                        <div class="price-amount">₹310</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (10 Days)', '310')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">15 Days</div>
-                        <div class="price-amount">₹380</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (15 Days)', '380')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹550</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (30 Days)', '550')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">3 Month</div>
-                        <div class="price-amount">₹999</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (3 Month)', '999')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 2. HAXX CRACKER INTERNAL -->
+            <!-- HAXX INTERNAL -->
             <div class="dash-card">
-                <div class="banner-box">📸 HAXX CRACKER INTERNAL BANNER</div>
+                <div class="banner-box">📸 HAXX INTERNAL BANNER</div>
                 <h3 style="color:#fff; text-align:left;">HAXX CRACKER INTERNAL</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Safe] Auto Headshot.</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">10 Days</div>
-                        <div class="price-amount">₹310</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX INTERNAL (10 Days)', '310')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">15 Days</div>
-                        <div class="price-amount">₹380</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX INTERNAL (15 Days)', '380')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹550</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX INTERNAL (30 Days)', '550')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">3 Month</div>
-                        <div class="price-amount">₹999</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('HAXX INTERNAL (3 Month)', '999')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 3. SILENT CHEAT INTERNAL -->
+            <!-- SILENT INTERNAL -->
             <div class="dash-card">
-                <div class="banner-box">📸 SILENT CHEAT INTERNAL BANNER</div>
+                <div class="banner-box">📸 SILENT INTERNAL BANNER</div>
                 <h3 style="color:#fff; text-align:left;">SILENT CHEAT INTERNAL</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Safe] Rank Working.</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">10 Days</div>
-                        <div class="price-amount">₹310</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT INTERNAL (10 Days)', '310')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">15 Days</div>
-                        <div class="price-amount">₹380</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT INTERNAL (15 Days)', '380')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹550</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT INTERNAL (30 Days)', '550')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">3 Month</div>
-                        <div class="price-amount">₹999</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT INTERNAL (3 Month)', '999')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
-        </div>
-
-        <!-- ================= PAGE 5: IOS EXTERNAL PANELS ================= -->
+    </div>
+          <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -683,98 +478,47 @@
             </div>
             <div style="height:15px;"></div>
 
-            <!-- 1. FULORITE IOS PANEL -->
+            <!-- FULORITE IOS -->
             <div class="dash-card">
                 <div class="banner-box">📸 FULORITE IOS BANNER</div>
                 <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹560</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (30 Days)', '560')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">60 Days</div>
-                        <div class="price-amount">₹1040</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (60 Days)', '1040')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">90 Days</div>
-                        <div class="price-amount">₹1509</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (90 Days)', '1509')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">Permanent</div>
-                        <div class="price-amount">₹13,504</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (Permanent)', '13504')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 2. MIGOL PRO -->
+            <!-- MIGOL PRO -->
             <div class="dash-card">
                 <div class="banner-box">📸 MIGOL PRO BANNER</div>
                 <h3 style="color:#fff; text-align:left;">MIGOL PRO</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹560</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (30 Days)', '560')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">60 Days</div>
-                        <div class="price-amount">₹1040</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (60 Days)', '1040')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">90 Days</div>
-                        <div class="price-amount">₹1509</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (90 Days)', '1509')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">Permanent</div>
-                        <div class="price-amount">₹13,504</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (Permanent)', '13504')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 3. LOTUS IOS -->
+            <!-- LOTUS IOS -->
             <div class="dash-card">
                 <div class="banner-box">📸 LOTUS IOS BANNER</div>
                 <h3 style="color:#fff; text-align:left;">LOTUS IOS</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹560</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (30 Days)', '560')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">60 Days</div>
-                        <div class="price-amount">₹1040</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (60 Days)', '1040')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">90 Days</div>
-                        <div class="price-amount">₹1509</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (90 Days)', '1509')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">Permanent</div>
-                        <div class="price-amount">₹13,504</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (Permanent)', '13504')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 6: IOS INTERNAL PANELS ================= -->
+        <!-- ================= PAGE 6: IOS INTERNAL ================= -->
         <div id="pageIosInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -788,113 +532,93 @@
             </div>
             <div style="height:15px;"></div>
 
-            <!-- 1. FULORITE IOS PANEL INTERNAL -->
+            <!-- FULORITE INTERNAL -->
             <div class="dash-card">
-                <div class="banner-box">📸 FULORITE IOS INTERNAL BANNER</div>
+                <div class="banner-box">📸 FULORITE INTERNAL BANNER</div>
                 <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹560</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (30 Days)', '560')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">60 Days</div>
-                        <div class="price-amount">₹1040</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (60 Days)', '1040')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">90 Days</div>
-                        <div class="price-amount">₹1509</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (90 Days)', '1509')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">Permanent</div>
-                        <div class="price-amount">₹13,504</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (Permanent)', '13504')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 2. MIGOL PRO INTERNAL -->
+            <!-- MIGOL PRO INTERNAL -->
             <div class="dash-card">
                 <div class="banner-box">📸 MIGOL PRO INTERNAL BANNER</div>
                 <h3 style="color:#fff; text-align:left;">MIGOL PRO</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹560</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (30 Days)', '560')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">60 Days</div>
-                        <div class="price-amount">₹1040</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (60 Days)', '1040')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">90 Days</div>
-                        <div class="price-amount">₹1509</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (90 Days)', '1509')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">Permanent</div>
-                        <div class="price-amount">₹13,504</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (Permanent)', '13504')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
 
-            <!-- 3. LOTUS IOS INTERNAL -->
+            <!-- LOTUS INTERNAL -->
             <div class="dash-card">
-                <div class="banner-box">📸 LOTUS IOS INTERNAL BANNER</div>
+                <div class="banner-box">📸 LOTUS INTERNAL BANNER</div>
                 <h3 style="color:#fff; text-align:left;">LOTUS IOS</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
-
                 <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹560</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (30 Days)', '560')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">60 Days</div>
-                        <div class="price-amount">₹1040</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (60 Days)', '1040')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">90 Days</div>
-                        <div class="price-amount">₹1509</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (90 Days)', '1509')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">Permanent</div>
-                        <div class="price-amount">₹13,504</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (Permanent)', '13504')">🛒 Buy Now</button>
-                    </div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
 
+          <!-- FLOATING RED ROUND SUPPORT BUTTON (VISIBLE ON EVERY PAGE) -->
+    <div class="btn-floating-support" id="btnOpenSupport">
+        ✈️
     </div>
 
-    <!-- GLOBAL FLOATING BOTTOM NAVIGATION & SUPPORT BUTTON -->
-    <div class="global-bottom-bar">
-        <a href="https://wa.me/910000000000?text=Hi,%20I%20need%20Customer%20Support%20for%20CheatX%20Store" target="_blank" class="btn-support-global">
-            💬 CUSTOMER SUPPORT 24/7
-        </a>
-        <div class="nav-tabs">
-            <button class="nav-btn" id="navHomeBtn" onclick="switchPage('pageHome')">🏠 HOME</button>
-            <button class="nav-btn" id="navStoreBtn" onclick="switchPage('pageMainStore')">🛒 STORE</button>
+    <!-- CUSTOMER SUPPORT MODAL (EXACT SCREENSHOT DESIGN) -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-card-support">
+            <div class="support-modal-header">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="chat-icon-circle">💬</div>
+                    <div>
+                        <div style="font-size:16px; font-weight:bold; color:#fff;">Suporte Online</div>
+                        <div style="font-size:11px; color:rgba(255,255,255,0.8);"><span style="color:var(--green-glow);">●</span> Atendimento ativo</div>
+                    </div>
+                </div>
+                <div style="color:#fff; font-size:20px; cursor:pointer; font-weight:bold;" id="btnCloseSupport">✕</div>
+            </div>
+
+            <div style="padding: 20px;">
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" id="custName" class="form-input-box" placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="custEmail" class="form-input-box" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea id="custMsg" class="form-textarea-box" placeholder="Como podemos ajudar?" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-support">
+                        <span>✈️</span> <span>Enviar Mensagem</span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- BUY MODAL -->
+    <!-- BUY CHECKOUT MODAL -->
     <div class="modal-overlay" id="checkoutModal">
-        <div class="modal-card">
+        <div class="modal-card-support" style="padding: 20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <h4 style="color:#fff;" id="modalProductName">Checkout</h4>
                 <span style="color:#fff; cursor:pointer; font-weight:bold;" onclick="closeBuyModal()">✕</span>
@@ -902,9 +626,12 @@
 
             <form id="checkoutForm">
                 <label style="font-size:12px; color:#aaa;">Your Name</label>
-                <input type="text" id="buyName" class="form-input" placeholder="your@gmail.com" required>
+                <input type="text" id="buyName" class="form-input-box" placeholder="Enter full name" required style="margin-bottom:12px;">
 
-                <div class="notice-modal-text">
+                <label style="font-size:12px; color:#aaa;">Your Gmail</label>
+                <input type="email" id="buyEmail" class="form-input-box" placeholder="your@gmail.com" required style="margin-bottom:12px;">
+
+                <div style="font-size:12px; color:var(--green-glow); margin-bottom:15px; text-align:center;">
                     📩 Your product delivered to your Gmail.
                 </div>
 
@@ -915,13 +642,24 @@
         </div>
     </div>
 
+    <!-- BOTTOM NAVIGATION BAR -->
+    <div class="bottom-nav-bar">
+        <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')">
+            <span style="font-size:18px;">🏠</span>
+            <span>Home</span>
+        </button>
+        <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')">
+            <span style="font-size:18px;">🏪</span>
+            <span>Store</span>
+        </button>
+    </div>
+
     <script>
         // PAGE SWITCHING SYSTEM
         function switchPage(pageId) {
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
 
-            // Active Tab Styling
             document.getElementById('navHomeBtn').classList.remove('active');
             document.getElementById('navStoreBtn').classList.remove('active');
 
@@ -930,11 +668,10 @@
             } else {
                 document.getElementById('navStoreBtn').classList.add('active');
             }
-
             window.scrollTo(0,0);
         }
 
-        // RANDOM ONLINE COUNTER (10 SECONDS INTERVAL)
+        // RANDOM LIVE ONLINE COUNTER (10 SEC INTERVAL)
         const counterList = [125, 124, 121, 128, 134, 156, 138, 151, 150, 151, 149, 142, 96, 114, 115];
         let idx = 0;
         setInterval(() => {
@@ -943,13 +680,37 @@
             if(elem) elem.innerText = counterList[idx];
         }, 10000);
 
-        // BUY MODAL LOGIC
-        let currentItem = "";
-        let currentPrice = "";
+        // FLOATING SUPPORT MODAL JS
+        document.getElementById('btnOpenSupport').onclick = function() {
+            document.getElementById('supportModal').style.display = 'flex';
+        };
 
+        document.getElementById('btnCloseSupport').onclick = function() {
+            document.getElementById('supportModal').style.display = 'none';
+        };
+
+        // SUPPORT FORM SUBMIT TO GMAIL
+        document.getElementById('supportForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const email = document.getElementById('custEmail').value;
+            const msg = document.getElementById('custMsg').value;
+
+            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ Name: name, Email: email, Support_Message: msg })
+            }).then(() => {
+                alert("Successfully delivered your problem. Wait For reply in your Gmail account.");
+                document.getElementById('supportModal').style.display = 'none';
+                document.getElementById('supportForm').reset();
+            });
+        };
+
+        // BUY MODAL JS
+        let currentItem = "", currentPrice = "";
         function openBuyModal(name, price) {
-            currentItem = name;
-            currentPrice = price;
+            currentItem = name; currentPrice = price;
             document.getElementById('modalProductName').innerText = name;
             document.getElementById('modalProductPrice').innerText = price;
             document.getElementById('checkoutModal').style.display = 'flex';
@@ -959,79 +720,50 @@
             document.getElementById('checkoutModal').style.display = 'none';
         }
 
-        // PAYMENT FORM SUBMISSION & GMAIL NOTIFICATION
         document.getElementById('checkoutForm').onsubmit = function(e) {
             e.preventDefault();
-            
             const name = document.getElementById('buyName').value;
             const email = document.getElementById('buyEmail').value;
 
-            // Formsubmit AJAX to send payment lead to your gmail
             fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
                 method: "POST",
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    Product: currentItem,
-                    Price: "Rs " + currentPrice,
-                    Customer_Name: name,
-                    Customer_Gmail: email,
-                    Status: "Payment Initiated"
-                })
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ Product: currentItem, Price: "Rs " + currentPrice, Customer_Name: name, Customer_Gmail: email })
             });
 
             closeBuyModal();
             alert("Payment request processing! 5 minute baad payment confirm ka popup mil jayega.");
-            
-            // Redirect to payment UPI app
             window.location.href = `upi://pay?pa=hubofico@gmail.com&pn=CheatXStore&am=${currentPrice}&cu=INR`;
         };
 
-        // CANVAS RED LIGHT FALLING PARTICLES EFFECT
+        // CANVAS BACKGROUND ANIMATION
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
         const particles = [];
         for(let i = 0; i < 40; i++) {
             particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1,
-                speedY: Math.random() * 1.5 + 0.5,
-                opacity: Math.random()
+                x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1, speedY: Math.random() * 1.5 + 0.5
             });
         }
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = 'rgba(255, 26, 26, 0.7)';
-            
             particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
-                
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
                 p.y += p.speedY;
-                if(p.y > canvas.height) {
-                    p.y = 0;
-                    p.x = Math.random() * canvas.width;
-                }
+                if(p.y > canvas.height) { p.y = 0; p.x = Math.random() * canvas.width; }
             });
-
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
     </script>
 </body>
-</html>
-
-         
+                    </html>
+                    </div>
+    
