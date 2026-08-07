@@ -44,7 +44,7 @@
         .container {
             max-width: 480px;
             margin: 0 auto;
-            padding: 15px 15px 90px 15px;
+            padding: 15px 15px 140px 15px;
             position: relative;
             z-index: 10;
         }
@@ -116,10 +116,16 @@
             animation: pulse-green 2s infinite;
         }
 
+        .white-glow-text {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px rgba(255, 255, 255, 0.6);
+            font-weight: bold;
+        }
+
         /* MAIN HEADING */
         .main-heading {
             text-align: center;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
             margin: 15px 0 5px 0;
             letter-spacing: 1px;
@@ -210,7 +216,7 @@
             border-color: #ff9999;
         }
 
-        /* 2x2 PRICING GRID (SCREENSHOT STYLE) */
+        /* 2x2 PRICING GRID */
         .pricing-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -288,13 +294,62 @@
             text-align: center;
         }
 
-        /* FOOTER SUPPORT */
-        .footer-support {
-            text-align: center;
-            color: #888888;
-            font-size: 13px;
-            margin-top: 30px;
+        /* GLOBAL FLOATING SUPPORT & BOTTOM NAV */
+        .global-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: rgba(10, 12, 18, 0.95);
+            border-top: 1px solid rgba(255, 26, 26, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-support-global {
+            width: 100%;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            border: 1px solid #70e69d;
+            padding: 10px;
+            border-radius: 8px;
             font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            display: block;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn.active, .nav-btn:hover {
+            color: #fff;
+            background: rgba(255, 26, 26, 0.2);
+            border: 1px solid var(--red-glow);
         }
 
         .btn-back-nav {
@@ -332,7 +387,7 @@
 
     <div class="container">
 
-        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <!-- ================= PAGE 1: ORIGINAL HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             <div class="top-nav">
                 <div style="font-weight:900; color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">FF&FFMAX CHEAT STORE</div>
@@ -375,7 +430,7 @@
 
             <!-- DASHBOARD 1: ANDROID PANEL -->
             <div class="dash-card">
-                <div class="banner-box">📸 BANNER PLACEHOLDER</div>
+                <div class="banner-box">📸 ANDROID PANEL BANNER</div>
                 <div style="text-align:left; margin-bottom:15px;">
                     <h3 style="color:#fff; font-size:16px;">ANDROID PANEL</h3>
                     <p style="color:#aaa; font-size:12px; margin-top:4px;">All Type antiban and antiblacklist updated panels are Available.</p>
@@ -386,18 +441,27 @@
                 </div>
             </div>
 
-            <!-- DASHBOARD 2, 3, 4 (Placeholder Dashboards) -->
-            <div class="dash-card" style="opacity: 0.7;">
-                <div class="banner-box">📸 IOS PANEL BANNER</div>
-                <h4 style="text-align:left;">IOS VIP PANEL</h4>
+            <!-- DASHBOARD 2: IOS VIP PANEL -->
+            <div class="dash-card">
+                <div class="banner-box">📸 IOS VIP PANEL BANNER</div>
+                <div style="text-align:left; margin-bottom:15px;">
+                    <h3 class="white-glow-text" style="font-size:18px;">IOS VIP PANEL</h3>
+                    <p style="color:#ffffff; font-size:12px; margin-top:4px; opacity: 0.9;">All type antiban antiblacklist ios panel available.</p>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <button class="btn-glow-blue" onclick="switchPage('pageIosExternal')">Buy External</button>
+                    <button class="btn-glow-green" onclick="switchPage('pageIosInternal')">Buy Internal</button>
+                </div>
             </div>
+
+            <!-- DASHBOARD 3: PC EMULATOR PANEL -->
             <div class="dash-card" style="opacity: 0.7;">
                 <div class="banner-box">📸 PC EMULATOR BANNER</div>
                 <h4 style="text-align:left;">PC STEAM PANEL</h4>
             </div>
         </div>
 
-        <!-- ================= PAGE 3: EXTERNAL PANELS ================= -->
+        <!-- ================= PAGE 3: ANDROID EXTERNAL PANELS ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -417,7 +481,6 @@
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Antiban] Updated all server.</p>
 
-                <!-- 2x2 Grid -->
                 <div class="pricing-grid">
                     <div class="price-card">
                         <div class="duration-tag">10 Days</div>
@@ -487,9 +550,7 @@
                     <div class="price-card">
                         <div class="duration-tag">15 Days</div>
                         <div class="price-amount">₹380</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (15 Days)', '380')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
+                <div class="price-card">
                         <div class="duration-tag">30 Days</div>
                         <div class="price-amount">₹550</div>
                         <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (30 Days)', '550')">🛒 Buy Now</button>
@@ -501,11 +562,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="footer-support">Support 24/7</div>
         </div>
 
-        <!-- ================= PAGE 4: INTERNAL PANELS ================= -->
+        <!-- ================= PAGE 4: ANDROID INTERNAL PANELS ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -517,175 +576,6 @@
             <div class="main-heading" style="font-size:22px;">
                 <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
             </div>
-            <div style="height:15px;"></div>
-
-            <!-- DRIP-CLIENT INTERNAL -->
-            <div class="dash-card">
-                <div class="banner-box">📸 DRIP-CLIENT INTERNAL BANNER</div>
-                <h3 style="color:#fff; text-align:left;">DRIP-CLIENT INTERNAL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Needed] Updated Version.</p>
-
-                <div class="pricing-grid">
-                    <div class="price-card">
-                        <div class="duration-tag">10 Days</div>
-                        <div class="price-amount">₹310</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (10 Days)', '310')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">15 Days</div>
-                        <div class="price-amount">₹380</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (15 Days)', '380')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">30 Days</div>
-                        <div class="price-amount">₹550</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (30 Days)', '550')">🛒 Buy Now</button>
-                    </div>
-                    <div class="price-card">
-                        <div class="duration-tag">3 Month</div>
-                        <div class="price-amount">₹999</div>
-                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (3 Month)', '999')">🛒 Buy Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-support">Support 24/7</div>
-        </div>
-
-    </div>
-
-    <!-- BUY MODAL -->
-    <div class="modal-overlay" id="checkoutModal">
-        <div class="modal-card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h4 style="color:#fff;" id="modalProductName">Checkout</h4>
-                <span style="color:#fff; cursor:pointer; font-weight:bold;" onclick="closeBuyModal()">✕</span>
-            </div>
-
-            <form id="checkoutForm">
-                <label style="font-size:12px; color:#aaa;">Your Name</label>
-                <input type="text" id="buyName" class="form-input" placeholder="Enter full name" required>
-
-                <label style="font-size:12px; color:#aaa;">Your Gmail</label>
-                <input type="email" id="buyEmail" class="form-input" placeholder="your@gmail.com" required>
-
-                <div class="notice-modal-text">
-                    📩 Your product delivered to your Gmail.
-                </div>
-
-                <button type="submit" class="btn-glow-yellow" style="font-size:15px; padding:12px; background:linear-gradient(135deg, #ff1a1a, #990000); color:#fff; border-color:#ff6666;">
-                    GO TO PAYMENT (₹<span id="modalProductPrice">0</span>)
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // PAGE SWITCHING SYSTEM
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        // RANDOM ONLINE COUNTER (10 SECONDS INTERVAL)
-        const counterList = [125, 124, 121, 128, 134, 156, 138, 151, 150, 151, 149, 142, 96, 114, 115];
-        let idx = 0;
-        setInterval(() => {
-            idx = (idx + 1) % counterList.length;
-            document.getElementById('counterNum').innerText = counterList[idx];
-        }, 10000);
-
-        // BUY MODAL LOGIC
-        let currentItem = "";
-        let currentPrice = "";
-
-        function openBuyModal(name, price) {
-            currentItem = name;
-            currentPrice = price;
-            document.getElementById('modalProductName').innerText = name;
-            document.getElementById('modalProductPrice').innerText = price;
-            document.getElementById('checkoutModal').style.display = 'flex';
-        }
-
-        function closeBuyModal() {
-            document.getElementById('checkoutModal').style.display = 'none';
-        }
-
-        // PAYMENT FORM SUBMISSION & GMAIL NOTIFICATION
-        document.getElementById('checkoutForm').onsubmit = function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('buyName').value;
-            const email = document.getElementById('buyEmail').value;
-
-            // Formsubmit AJAX to send payment lead to your gmail
-            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
-                method: "POST",
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    Product: currentItem,
-                    Price: "Rs " + currentPrice,
-                    Customer_Name: name,
-                    Customer_Gmail: email,
-                    Status: "Payment Initiated"
-                })
-            });
-
-            closeBuyModal();
-            alert("Payment request processing! 5 minute baad payment confirm ka popup mil jayega.");
-            
-            // Redirect to payment UPI app
-            window.location.href = `upi://pay?pa=hubofico@gmail.com&pn=CheatXStore&am=${currentPrice}&cu=INR`;
-        };
-
-        // CANVAS RED LIGHT FALLING PARTICLES EFFECT
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const particles = [];
-        for(let i = 0; i < 40; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1,
-                speedY: Math.random() * 1.5 + 0.5,
-                opacity: Math.random()
-            });
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(255, 26, 26, 0.7)';
-            
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
-                
-                p.y += p.speedY;
-                if(p.y > canvas.height) {
-                    p.y = 0;
-                    p.x = Math.random() * canvas.width;
-                }
-            });
-
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-    </script>
-</body>
-</html>          </div>
             <div style="height:15px;"></div>
 
             <!-- 1. DRIP-CLIENT INTERNAL -->
@@ -1012,10 +902,7 @@
 
             <form id="checkoutForm">
                 <label style="font-size:12px; color:#aaa;">Your Name</label>
-                <input type="text" id="buyName" class="form-input" placeholder="Enter full name" required>
-
-                <label style="font-size:12px; color:#aaa;">Your Gmail</label>
-                <input type="email" id="buyEmail" class="form-input" placeholder="your@gmail.com" required>
+                <input type="text" id="buyName" class="form-input" placeholder="your@gmail.com" required>
 
                 <div class="notice-modal-text">
                     📩 Your product delivered to your Gmail.
@@ -1043,5 +930,108 @@
             } else {
                 document.getElementById('navStoreBtn').classList.add('active');
             }
+
+            window.scrollTo(0,0);
+        }
+
+        // RANDOM ONLINE COUNTER (10 SECONDS INTERVAL)
+        const counterList = [125, 124, 121, 128, 134, 156, 138, 151, 150, 151, 149, 142, 96, 114, 115];
+        let idx = 0;
+        setInterval(() => {
+            idx = (idx + 1) % counterList.length;
+            const elem = document.getElementById('counterNum');
+            if(elem) elem.innerText = counterList[idx];
+        }, 10000);
+
+        // BUY MODAL LOGIC
+        let currentItem = "";
+        let currentPrice = "";
+
+        function openBuyModal(name, price) {
+            currentItem = name;
+            currentPrice = price;
+            document.getElementById('modalProductName').innerText = name;
+            document.getElementById('modalProductPrice').innerText = price;
+            document.getElementById('checkoutModal').style.display = 'flex';
+        }
+
+        function closeBuyModal() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        // PAYMENT FORM SUBMISSION & GMAIL NOTIFICATION
+        document.getElementById('checkoutForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('buyName').value;
+            const email = document.getElementById('buyEmail').value;
+
+            // Formsubmit AJAX to send payment lead to your gmail
+            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    Product: currentItem,
+                    Price: "Rs " + currentPrice,
+                    Customer_Name: name,
+                    Customer_Gmail: email,
+                    Status: "Payment Initiated"
+                })
+            });
+
+            closeBuyModal();
+            alert("Payment request processing! 5 minute baad payment confirm ka popup mil jayega.");
+            
+            // Redirect to payment UPI app
+            window.location.href = `upi://pay?pa=hubofico@gmail.com&pn=CheatXStore&am=${currentPrice}&cu=INR`;
+        };
+
+        // CANVAS RED LIGHT FALLING PARTICLES EFFECT
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        for(let i = 0; i < 40; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                speedY: Math.random() * 1.5 + 0.5,
+                opacity: Math.random()
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 26, 26, 0.7)';
+            
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                p.y += p.speedY;
+                if(p.y > canvas.height) {
+                    p.y = 0;
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
 
          
