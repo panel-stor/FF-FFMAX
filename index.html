@@ -322,7 +322,8 @@
     <canvas id="bgCanvas"></canvas>
 
     <div class="container">
-                <!-- ================= PAGE 1: HOME PAGE ================= -->
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             <div class="top-nav">
                 <div style="font-weight:900; color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">FF&FFMAX CHEAT STORE</div>
@@ -378,7 +379,7 @@
                     <div class="feature-card-title">Anti-Ban</div>
                 </div>
             </div>
-                                                                                                                                                                                                           </div>
+                    </div>
             <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
         <div id="pageMainStore" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back Home</button>
@@ -399,7 +400,7 @@
             <!-- DASHBOARD 1: ANDROID PANEL -->
             <div class="dash-card">
                 <div class="banner-box">
-                    <img src="your-android-banner.jpg" alt="Android Panel Banner" onerror="this.parentNode.innerHTML='📸 ANDROID PANEL BANNER'">
+                    <img src="android-banner.jpg" alt="Android Panel Banner" onerror="this.parentNode.innerHTML='📸 ANDROID PANEL BANNER'">
                 </div>
                 <div style="text-align:left; margin-bottom:15px;">
                     <h3 style="color:#fff; font-size:16px;">ANDROID PANEL</h3>
@@ -414,7 +415,7 @@
             <!-- DASHBOARD 2: IOS VIP PANEL -->
             <div class="dash-card">
                 <div class="banner-box">
-                    <img src="your-ios-banner.jpg" alt="iOS VIP Panel Banner" onerror="this.parentNode.innerHTML='📸 IOS VIP PANEL BANNER'">
+                    <img src="ios-banner.jpg" alt="iOS VIP Panel Banner" onerror="this.parentNode.innerHTML='📸 IOS VIP PANEL BANNER'">
                 </div>
                 <div style="text-align:left; margin-bottom:15px;">
                     <h3 class="white-glow-heading" style="font-size:18px; margin:0;">IOS VIP PANEL</h3>
@@ -458,7 +459,7 @@
             </div>
         </div>
 
-        <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
+        <!-- ================= PAGE 3: ANDROID EXTERNAL (3 DASHBOARDS) ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
             <div class="top-nav">
@@ -471,7 +472,7 @@
             </div>
             <div style="height:15px;"></div>
 
-            <!-- DRIP-CLIENT -->
+            <!-- 1. DRIP-CLIENT -->
             <div class="dash-card">
                 <div class="banner-box"><img src="drip-banner.jpg" alt="DRIP-CLIENT" onerror="this.parentNode.innerHTML='📸 DRIP-CLIENT BANNER'"></div>
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT</h3>
@@ -484,7 +485,7 @@
                 </div>
             </div>
 
-            <!-- HAXX CRACKER -->
+            <!-- 2. HAXX CRACKER -->
             <div class="dash-card">
                 <div class="banner-box"><img src="haxx-banner.jpg" alt="HAXX CRACKER" onerror="this.parentNode.innerHTML='📸 HAXX CRACKER BANNER'"></div>
                 <h3 style="color:#fff; text-align:left;">HAXX CRACKER</h3>
@@ -496,9 +497,21 @@
                     <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
-        </div>
 
-        <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
+            <!-- 3. SILENT CHEAT -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="silent-banner.jpg" alt="SILENT CHEAT" onerror="this.parentNode.innerHTML='📸 SILENT CHEAT BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">SILENT CHEAT</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Undetected] Rank Working.</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (3 Month)', '999')">🛒 Buy Now</button></div>
+                </div>
+            </div>
+    </div>
+                            <!-- ================= PAGE 4: ANDROID INTERNAL (3 DASHBOARDS) ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
             <div class="top-nav">
@@ -511,7 +524,7 @@
             </div>
             <div style="height:15px;"></div>
 
-            <!-- DRIP INTERNAL -->
+            <!-- 1. DRIP INTERNAL -->
             <div class="dash-card">
                 <div class="banner-box"><img src="drip-int-banner.jpg" alt="DRIP INTERNAL" onerror="this.parentNode.innerHTML='📸 DRIP INTERNAL BANNER'"></div>
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT INTERNAL</h3>
@@ -523,8 +536,35 @@
                     <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (3 Month)', '999')">🛒 Buy Now</button></div>
                 </div>
             </div>
-    </div>
-            <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
+
+            <!-- 2. HAXX CRACKER INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="haxx-int-banner.jpg" alt="HAXX INTERNAL" onerror="this.parentNode.innerHTML='📸 HAXX INTERNAL BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">HAXX CRACKER INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Safe] Auto Headshot.</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (3 Month)', '999')">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 3. SILENT CHEAT INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="silent-int-banner.jpg" alt="SILENT INTERNAL" onerror="this.parentNode.innerHTML='📸 SILENT INTERNAL BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">SILENT CHEAT INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Safe] Rank Working.</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (10 Days)', '310')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (15 Days)', '380')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (30 Days)', '550')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (3 Month)', '999')">🛒 Buy Now</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 5: IOS EXTERNAL (3 DASHBOARDS) ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -538,6 +578,7 @@
             </div>
             <div style="height:15px;"></div>
 
+            <!-- 1. FULORITE IOS PANEL -->
             <div class="dash-card">
                 <div class="banner-box"><img src="fulorite-banner.jpg" alt="FULORITE IOS" onerror="this.parentNode.innerHTML='📸 FULORITE IOS BANNER'"></div>
                 <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL</h3>
@@ -549,9 +590,33 @@
                     <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
+
+            <!-- 2. MIGOL PRO -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="migol-banner.jpg" alt="MIGOL PRO" onerror="this.parentNode.innerHTML='📸 MIGOL PRO BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">MIGOL PRO</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (Permanent)', '13504')">🛒 Buy Now</button></div>
+                </div>
+                   <!-- 3. LOTUS IOS -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="lotus-banner.jpg" alt="LOTUS IOS" onerror="this.parentNode.innerHTML='📸 LOTUS IOS BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">LOTUS IOS</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (Permanent)', '13504')">🛒 Buy Now</button></div>
+                </div>
+            </div>
         </div>
 
-        <!-- ================= PAGE 6: IOS INTERNAL ================= -->
+        <!-- ================= PAGE 6: IOS INTERNAL (3 DASHBOARDS) ================= -->
         <div id="pageIosInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -565,9 +630,10 @@
             </div>
             <div style="height:15px;"></div>
 
+            <!-- 1. FULORITE INTERNAL -->
             <div class="dash-card">
                 <div class="banner-box"><img src="fulorite-int-banner.jpg" alt="FULORITE INTERNAL" onerror="this.parentNode.innerHTML='📸 FULORITE INTERNAL BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL</h3>
+                <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL INTERNAL</h3>
                 <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
                 <div class="pricing-grid">
                     <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
@@ -576,10 +642,106 @@
                     <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
             </div>
+
+            <!-- 2. MIGOL PRO INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="migol-int-banner.jpg" alt="MIGOL PRO INTERNAL" onerror="this.parentNode.innerHTML='📸 MIGOL PRO INTERNAL BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">MIGOL PRO INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 3. LOTUS INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="lotus-int-banner.jpg" alt="LOTUS INTERNAL" onerror="this.parentNode.innerHTML='📸 LOTUS INTERNAL BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">LOTUS IOS INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                </div>
+            </div>
         </div>
 
+    </div>
+    </div>
+                <!-- 3. LOTUS IOS -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="lotus-banner.jpg" alt="LOTUS IOS" onerror="this.parentNode.innerHTML='📸 LOTUS IOS BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">LOTUS IOS</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (Permanent)', '13504')">🛒 Buy Now</button></div>
                 </div>
-        <!-- FLOATING RED ROUND SUPPORT BUTTON (VISIBLE ON EVERY PAGE) -->
+            </div>
+        </div>
+
+        <!-- ================= PAGE 6: IOS INTERNAL (3 DASHBOARDS) ================= -->
+        <div id="pageIosInternal" class="page-view">
+            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <div class="top-nav">
+                <div class="white-glow-heading" style="font-size:16px; margin:0;">IOS INTERNAL</div>
+                <div class="online-badge-green">● ONLINE</div>
+            </div>
+
+            <div class="main-heading" style="font-size:22px;">
+                <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
+            </div>
+            <div style="height:15px;"></div>
+
+            <!-- 1. FULORITE INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="fulorite-int-banner.jpg" alt="FULORITE INTERNAL" onerror="this.parentNode.innerHTML='📸 FULORITE INTERNAL BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 2. MIGOL PRO INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="migol-int-banner.jpg" alt="MIGOL PRO INTERNAL" onerror="this.parentNode.innerHTML='📸 MIGOL PRO INTERNAL BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">MIGOL PRO INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 3. LOTUS INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box"><img src="lotus-int-banner.jpg" alt="LOTUS INTERNAL" onerror="this.parentNode.innerHTML='📸 LOTUS INTERNAL BANNER'"></div>
+                <h3 style="color:#fff; text-align:left;">LOTUS IOS INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (60 Days)', '1040')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (90 Days)', '1509')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                </div>
+            </div>
+        </div>
+
+</div>
+        <!-- FLOATING RED ROUND SUPPORT BUTTON -->
     <div class="btn-floating-support" id="btnOpenSupport">
         ✈️
     </div>
@@ -649,13 +811,13 @@
         </div>
     </div>
 
-    <!-- LOADING & VERIFICATION OVERLAY (NO ALERT POPUPS) -->
+    <!-- LOADING & VERIFICATION OVERLAY (NEW UPI LOGIC) -->
     <div class="modal-overlay" id="verifyingModal" style="z-index: 300;">
         <div class="modal-card-support" style="padding: 30px 20px; text-align: center;">
             <div class="spinner"></div>
-            <h3 style="color:#fff; font-size:18px; margin-bottom:8px;" id="verifyStatusTitle">Verifying Payment...</h3>
+            <h3 style="color:#fff; font-size:18px; margin-bottom:8px;" id="verifyStatusTitle">Complete Your Payment</h3>
             <p style="color:#aaa; font-size:13px; line-height:1.5;" id="verifyStatusMsg">
-                Please complete payment in your UPI app.<br>We are currently verifying your transaction.
+                Please complete the payment in your UPI app.<br>We are verifying your transaction.
             </p>
             <button onclick="closeVerifyModal()" style="margin-top:20px; background:transparent; border:1px solid #555; color:#aaa; padding:6px 16px; border-radius:6px; font-size:12px; cursor:pointer;">Close</button>
         </div>
@@ -724,13 +886,12 @@
             document.getElementById('supportModal').style.display = 'none';
             document.getElementById('supportForm').reset();
             
-            // Show verification style feedback without standard popup alert
             document.getElementById('verifyStatusTitle').innerText = "Message Sent!";
             document.getElementById('verifyStatusMsg').innerText = "Our support team will review your query and reply to your Gmail within 1 hour.";
             document.getElementById('verifyingModal').style.display = 'flex';
         };
 
-        // BUY MODAL JS
+        // BUY MODAL & UPI PAYMENT LOGIC (UPDATED UPI ID: 9354505161@ybl)
         let currentItem = "", currentPrice = "";
         function openBuyModal(name, price) {
             currentItem = name; currentPrice = price;
@@ -747,22 +908,21 @@
             document.getElementById('verifyingModal').style.display = 'none';
         }
 
-        // NO POPUP ALERT - DIRECT UPI INTENT AND VERIFICATION OVERLAY
         document.getElementById('checkoutForm').onsubmit = function(e) {
             e.preventDefault();
             const name = document.getElementById('buyName').value;
             const email = document.getElementById('buyEmail').value;
 
-            // Send notification to admin Gmail with confirmation triggers
+            // Send notification lead to Gmail
             fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
-                    Order_Details: currentItem,
+                    Order_Item: currentItem,
                     Price: "Rs " + currentPrice,
                     Customer_Name: name,
                     Customer_Email: email,
-                    Admin_Actions: "[CONFIRM PAYMENT] or [NON-CONFIRM PAYMENT]"
+                    Payment_Status: "Initiated to 9354505161@ybl"
                 })
             });
 
@@ -773,8 +933,8 @@
             document.getElementById('verifyStatusMsg').innerHTML = "Please complete payment in your UPI app.<br>We are currently verifying your transaction.";
             document.getElementById('verifyingModal').style.display = 'flex';
 
-            // Open UPI Payment directly
-            window.location.href = `upi://pay?pa=hubofico@gmail.com&pn=CheatXStore&am=${currentPrice}&cu=INR`;
+            // Direct Redirect to UPI Payment (Updated target UPI ID: 9354505161@ybl)
+            window.location.href = `upi://pay?pa=9354505161@ybl&pn=CheatXStore&am=${currentPrice}&cu=INR`;
         };
 
         // CANVAS PARTICLES
@@ -806,3 +966,6 @@
     </script>
 </body>
 </html>
+
+    
+    
