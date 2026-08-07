@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FF & FFMAX CHEAT STORE</title>
+    <title>CheatX Store - FF & FFMAX</title>
     <style>
         :root {
             --bg-color: #050505;
             --red-glow: #ff1a1a;
             --yellow-glow: #ffcc00;
             --green-glow: #00ff66;
-            --card-dark: #0f1219;
+            --blue-glow: #0088ff;
+            --card-dark: rgba(15, 18, 25, 0.85);
         }
 
         * {
@@ -27,185 +28,228 @@
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(255, 26, 26, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.08) 0%, transparent 50%);
+        }
+
+        /* RED GLOWING FALLING LIGHTS CANVAS */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
             max-width: 480px;
             margin: 0 auto;
             padding: 15px 15px 90px 15px;
-            text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
-        /* TOP HEADER */
+        /* VIEW SWITCHING LOGIC */
+        .page-view {
+            display: none;
+        }
+        .page-view.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* COMMON DASHBOARD STYLES */
+        .dash-card {
+            background: var(--card-dark);
+            border: 1px solid var(--red-glow);
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.3);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        /* HEADER & LOGO */
         .top-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 5px;
+            margin-bottom: 15px;
         }
 
-        .brand-text {
-            font-size: 14px;
+        .logo-text {
+            font-size: 18px;
             font-weight: 900;
-            color: var(--red-glow);
+            display: flex;
+            align-items: center;
+            gap: 5px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 10px var(--red-glow), 0 0 20px var(--red-glow);
-            animation: redPulse 2s infinite alternate;
         }
 
-        .online-badge {
+        .lightning-bolt {
+            color: var(--yellow-glow);
+            text-shadow: 0 0 10px var(--yellow-glow);
+            animation: flash 1.5s infinite alternate;
+        }
+
+        .online-badge-green {
             color: var(--green-glow);
             font-size: 13px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-shadow: 0 0 8px var(--green-glow);
-            background: rgba(0, 255, 102, 0.08);
-            padding: 4px 10px;
+            background: rgba(0, 255, 102, 0.1);
+            padding: 5px 12px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 255, 102, 0.2);
+            border: 1px solid var(--green-glow);
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
         }
 
-        .green-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--green-glow);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--green-glow);
+        .badge-need-root {
+            color: #72f2a2;
+            font-size: 12px;
+            font-weight: bold;
+            background: rgba(0, 255, 150, 0.12);
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid #00ffaa;
+            text-shadow: 0 0 8px #00ffaa;
+            animation: pulse-green 2s infinite;
         }
 
-        /* HERO LOGO & PANEL BUTTON */
-        .hero-section {
-            margin: 35px 0 25px 0;
+        /* MAIN HEADING */
+        .main-heading {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 900;
+            margin: 15px 0 5px 0;
+            letter-spacing: 1px;
+        }
+
+        .sub-heading {
+            text-align: center;
+            color: #cccccc;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        /* BANNER PLACEHOLDER */
+        .banner-box {
+            width: 100%;
+            height: 130px;
+            background: linear-gradient(135deg, #1f0505, #0a0000);
+            border: 1px dashed var(--red-glow);
+            border-radius: 12px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 20px;
+            color: #888888;
+            font-size: 13px;
+            margin-bottom: 12px;
         }
 
-        .garena-logo {
-            width: 90px;
-            height: 90px;
-            filter: drop-shadow(0 0 15px var(--red-glow));
-            animation: logoGlow 2s infinite alternate;
+        /* BUTTONS */
+        .btn-glow-blue {
+            background: linear-gradient(135deg, #0088ff, #004499);
+            color: #fff;
+            border: 1px solid #80c4ff;
+            box-shadow: 0 0 15px var(--blue-glow);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 48%;
+            text-transform: uppercase;
         }
 
-        .btn-panel-store {
-            width: 90%;
+        .btn-glow-green {
+            background: linear-gradient(135deg, #00cc55, #006622);
+            color: #fff;
+            border: 1px solid #80ffaa;
+            box-shadow: 0 0 15px var(--green-glow);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 48%;
+            text-transform: uppercase;
+        }
+
+        .btn-glow-yellow {
+            width: 100%;
             padding: 16px;
             background: linear-gradient(135deg, #ffcc00, #b38f00);
             color: #000;
             font-size: 18px;
             font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
             border: 2px solid #ffee80;
             border-radius: 12px;
             cursor: pointer;
             box-shadow: 0 0 20px var(--yellow-glow);
-            transition: transform 0.2s;
-            text-decoration: none;
-            display: inline-block;
         }
 
-        .btn-panel-store:active {
-            transform: scale(0.97);
-        }
-
-        /* NOTICE & QUICK LINKS */
-        .notice-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 26, 26, 0.3);
-            border-radius: 14px;
-            padding: 20px 15px;
-            margin-top: 10px;
-            text-align: left;
-            position: relative;
-            box-shadow: inset 0 0 15px rgba(255, 26, 26, 0.1);
-        }
-
-        .notice-desc {
-            color: #cccccc;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 25px;
-            font-weight: 400;
-        }
-
-        .quick-links-title {
-            font-size: 18px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            color: #ffffff;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-
-        .quick-links-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .quick-links-list li {
-            margin-bottom: 10px;
-            font-size: 15px;
-            color: #dddddd;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .quick-links-list li::before {
-            content: '•';
-            color: var(--red-glow);
-            font-size: 20px;
-            text-shadow: 0 0 8px var(--red-glow);
-        }
-
-        .quick-links-list a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        /* FLOATING SUPPORT BUTTON */
-        .btn-floating-support {
-            position: fixed;
-            bottom: 75px;
-            right: 20px;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #ff1a1a, #990000);
-            border-radius: 50%;
+        .btn-buy-card {
+            width: 100%;
+            background: #1a2233;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            font-size: 22px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 20px var(--red-glow);
-            cursor: pointer;
-            z-index: 90;
-            animation: pulse-red 2s infinite;
+            gap: 5px;
+            transition: all 0.2s;
         }
 
-        /* SUPPORT MODAL */
+        .btn-buy-card:hover, .btn-buy-card.active {
+            background: var(--red-glow);
+            box-shadow: 0 0 12px var(--red-glow);
+            border-color: #ff9999;
+        }
+
+        /* 2x2 PRICING GRID (SCREENSHOT STYLE) */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: left;
+            position: relative;
+        }
+
+        .duration-tag {
+            font-size: 12px;
+            color: #aaaaaa;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-size: 18px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        /* MODAL */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
-            z-index: 100;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 200;
             justify-content: center;
             align-items: center;
         }
@@ -215,332 +259,430 @@
             width: 90%;
             max-width: 380px;
             border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 26, 26, 0.4);
-            box-shadow: 0 0 30px rgba(255, 26, 26, 0.3);
+            border: 1px solid var(--red-glow);
+            box-shadow: 0 0 25px rgba(255, 26, 26, 0.4);
+            padding: 20px;
             text-align: left;
-            animation: modalUp 0.3s ease-out;
         }
 
-        .modal-header {
-            background: linear-gradient(135deg, #e60000, #990000);
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .modal-header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .chat-icon-circle {
-            width: 40px;
-            height: 40px;
-            background: #fff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #e60000;
-            font-size: 20px;
-            position: relative;
-        }
-
-        .chat-icon-circle::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 100%;
-            height: 10px;
-            background: var(--green-glow);
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-
-        .modal-title-text {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .modal-subtitle-text {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .close-modal {
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .modal-body {
-            padding: 20px 18px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            color: #aaaaaa;
-            margin-bottom: 6px;
-        }
-
-        .form-input, .form-textarea {
+        .form-input {
             width: 100%;
             padding: 12px;
             background: #151c28;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
             color: #fff;
-            font-size: 14px;
+            margin-top: 6px;
+            margin-bottom: 14px;
             outline: none;
         }
 
-        .form-input:focus, .form-textarea:focus {
+        .form-input:focus {
             border-color: var(--red-glow);
         }
 
-        .form-textarea {
-            height: 90px;
-            resize: none;
-        }
-
-        .btn-submit-support {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #e60000, #990000);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 0 15px rgba(230, 0, 0, 0.5);
-        }
-
-        /* Success Popup */
-        .success-box {
-            display: none;
-            margin-top: 15px;
-            background: rgba(0, 255, 102, 0.1);
-            border: 1px solid var(--green-glow);
+        .notice-modal-text {
+            font-size: 12px;
             color: var(--green-glow);
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 12.5px;
+            margin-bottom: 15px;
             text-align: center;
-            line-height: 1.4;
-            font-weight: bold;
         }
 
-        /* BOTTOM NAVIGATION */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 80;
-        }
-
-        .nav-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
+        /* FOOTER SUPPORT */
+        .footer-support {
+            text-align: center;
             color: #888888;
-            text-decoration: none;
-            font-size: 11px;
+            font-size: 13px;
+            margin-top: 30px;
             font-weight: bold;
         }
 
-        .nav-link.active {
-            color: var(--red-glow);
+        .btn-back-nav {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-bottom: 15px;
         }
 
-        .nav-icon {
-            font-size: 18px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes redPulse {
-            0% { text-shadow: 0 0 8px var(--red-glow); }
-            100% { text-shadow: 0 0 18px var(--red-glow), 0 0 25px var(--red-glow); }
+        @keyframes flash {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; filter: drop-shadow(0 0 12px var(--yellow-glow)); }
         }
 
-        @keyframes logoGlow {
-            0% { filter: drop-shadow(0 0 10px var(--red-glow)); }
-            100% { filter: drop-shadow(0 0 25px var(--red-glow)); }
-        }
-
-        @keyframes pulse-red {
-            0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); }
-            50% { box-shadow: 0 0 22px rgba(255, 26, 26, 0.9); }
-            100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); }
-        }
-
-        @keyframes modalUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 5px rgba(0, 255, 102, 0.4); }
+            50% { box-shadow: 0 0 15px rgba(0, 255, 102, 0.9); }
+            100% { box-shadow: 0 0 5px rgba(0, 255, 102, 0.4); }
         }
     </style>
 </head>
 <body>
 
+    <!-- RED LIGHT PARTICLES BACKGROUND -->
+    <canvas id="bgCanvas"></canvas>
+
     <div class="container">
-        <div class="top-nav">
-            <div class="brand-text">FF&FFMAX CHEAT STORE</div>
-            <div class="online-badge">
-                <div class="green-dot"></div>
-                <span>Online</span>
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <div id="pageHome" class="page-view active">
+            <div class="top-nav">
+                <div style="font-weight:900; color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">FF&FFMAX CHEAT STORE</div>
+                <div class="online-badge-green">● Online</div>
+            </div>
+
+            <div style="text-align:center; margin: 40px 0;">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                    <path d="M50 5L90 25V75L50 95L10 75V25L50 5Z" stroke="#ff1a1a" stroke-width="4" fill="rgba(255, 26, 26, 0.1)"/>
+                    <path d="M50 20L75 35V65L50 80L25 65V35L50 20Z" fill="#ff1a1a"/>
+                </svg>
+                <div style="margin-top:25px;">
+                    <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">PANEL STORE</button>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <p style="color:#ccc; font-size:14px; line-height:1.5;">
+                    The best panels and cheats for Free Fire. Dominate the game with safety and 24/7 dedicated support.
+                </p>
             </div>
         </div>
 
-        <div class="hero-section">
-            <svg class="garena-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5L90 25V75L50 95L10 75V25L50 5Z" stroke="#ff1a1a" stroke-width="4" fill="rgba(255, 26, 26, 0.1)"/>
-                <path d="M50 20L75 35V65L50 80L25 65V35L50 20Z" fill="#ff1a1a"/>
-                <path d="M40 40L65 50L40 60V40Z" fill="#ffffff"/>
-            </svg>
+        <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
+        <div id="pageMainStore" class="page-view">
+            <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back Home</button>
+            
+            <div class="top-nav">
+                <div class="logo-text">
+                    <span class="lightning-bolt">⚡</span>
+                    <span style="color:#fff;">Cheat<span style="color:var(--red-glow);">X</span> Store</span>
+                </div>
+                <div class="online-badge-green" id="liveCounterBadge">⚡ <span id="counterNum">125</span> Online</div>
+            </div>
 
-            <a href="#" class="btn-panel-store">PANEL STORE</a>
+            <div class="main-heading">
+                <span style="color:#ffffff;">CHEAT</span> <span style="color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">STORE</span>
+            </div>
+            <div class="sub-heading">The Best Panel To Dominant FF&FFMAX</div>
+
+            <!-- DASHBOARD 1: ANDROID PANEL -->
+            <div class="dash-card">
+                <div class="banner-box">📸 BANNER PLACEHOLDER</div>
+                <div style="text-align:left; margin-bottom:15px;">
+                    <h3 style="color:#fff; font-size:16px;">ANDROID PANEL</h3>
+                    <p style="color:#aaa; font-size:12px; margin-top:4px;">All Type antiban and antiblacklist updated panels are Available.</p>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <button class="btn-glow-blue" onclick="switchPage('pageExternal')">Buy - External</button>
+                    <button class="btn-glow-green" onclick="switchPage('pageInternal')">Buy - Internal</button>
+                </div>
+            </div>
+
+            <!-- DASHBOARD 2, 3, 4 (Placeholder Dashboards) -->
+            <div class="dash-card" style="opacity: 0.7;">
+                <div class="banner-box">📸 IOS PANEL BANNER</div>
+                <h4 style="text-align:left;">IOS VIP PANEL</h4>
+            </div>
+            <div class="dash-card" style="opacity: 0.7;">
+                <div class="banner-box">📸 PC EMULATOR BANNER</div>
+                <h4 style="text-align:left;">PC STEAM PANEL</h4>
+            </div>
         </div>
 
-        <div class="notice-box">
-            <p class="notice-desc">
-                The best panels and cheats for Free Fire. Dominate the game with safety and 24/7 dedicated support.
-            </p>
+        <!-- ================= PAGE 3: EXTERNAL PANELS ================= -->
+        <div id="pageExternal" class="page-view">
+            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
-            <div class="quick-links-title">QUICK LINKS</div>
-            <ul class="quick-links-list">
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Feedbacks</a></li>
-                <li><a href="#">Cart</a></li>
-            </ul>
+            <div class="top-nav">
+                <div style="font-weight:bold; font-size:15px;">Panel External</div>
+                <div class="badge-need-root">⚡ Need RooT</div>
+            </div>
+
+            <div class="main-heading" style="font-size:22px;">
+                <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
+            </div>
+            <div style="height:15px;"></div>
+
+            <!-- 1. DRIP-CLIENT -->
+            <div class="dash-card">
+                <div class="banner-box">📸 DRIP-CLIENT BANNER</div>
+                <h3 style="color:#fff; text-align:left;">DRIP-CLIENT</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Antiban] Updated all server.</p>
+
+                <!-- 2x2 Grid -->
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="duration-tag">10 Days</div>
+                        <div class="price-amount">₹310</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (10 Days)', '310')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">15 Days</div>
+                        <div class="price-amount">₹380</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (15 Days)', '380')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">30 Days</div>
+                        <div class="price-amount">₹550</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (30 Days)', '550')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">3 Month</div>
+                        <div class="price-amount">₹999</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (3 Month)', '999')">🛒 Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. HAXX CRACKER -->
+            <div class="dash-card">
+                <div class="banner-box">📸 HAXX CRACKER BANNER</div>
+                <h3 style="color:#fff; text-align:left;">HAXX CRACKER</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Vip Safe] Auto Headshot.</p>
+
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="duration-tag">10 Days</div>
+                        <div class="price-amount">₹310</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (10 Days)', '310')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">15 Days</div>
+                        <div class="price-amount">₹380</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (15 Days)', '380')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">30 Days</div>
+                        <div class="price-amount">₹550</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (30 Days)', '550')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">3 Month</div>
+                        <div class="price-amount">₹999</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (3 Month)', '999')">🛒 Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. SILENT CHEAT -->
+            <div class="dash-card">
+                <div class="banner-box">📸 SILENT CHEAT BANNER</div>
+                <h3 style="color:#fff; text-align:left;">SILENT CHEAT</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Undetected] Rank Working.</p>
+
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="duration-tag">10 Days</div>
+                        <div class="price-amount">₹310</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (10 Days)', '310')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">15 Days</div>
+                        <div class="price-amount">₹380</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (15 Days)', '380')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">30 Days</div>
+                        <div class="price-amount">₹550</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (30 Days)', '550')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">3 Month</div>
+                        <div class="price-amount">₹999</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (3 Month)', '999')">🛒 Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-support">Support 24/7</div>
         </div>
+
+        <!-- ================= PAGE 4: INTERNAL PANELS ================= -->
+        <div id="pageInternal" class="page-view">
+            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <div class="top-nav">
+                <div style="font-weight:bold; font-size:15px;">Panel Internal</div>
+                <div class="online-badge-green">● ONLINE</div>
+            </div>
+
+            <div class="main-heading" style="font-size:22px;">
+                <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
+            </div>
+            <div style="height:15px;"></div>
+
+            <!-- DRIP-CLIENT INTERNAL -->
+            <div class="dash-card">
+                <div class="banner-box">📸 DRIP-CLIENT INTERNAL BANNER</div>
+                <h3 style="color:#fff; text-align:left;">DRIP-CLIENT INTERNAL</h3>
+                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Needed] Updated Version.</p>
+
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="duration-tag">10 Days</div>
+                        <div class="price-amount">₹310</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (10 Days)', '310')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">15 Days</div>
+                        <div class="price-amount">₹380</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (15 Days)', '380')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">30 Days</div>
+                        <div class="price-amount">₹550</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (30 Days)', '550')">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="duration-tag">3 Month</div>
+                        <div class="price-amount">₹999</div>
+                        <button class="btn-buy-card" onclick="openBuyModal('DRIP INTERNAL (3 Month)', '999')">🛒 Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-support">Support 24/7</div>
+        </div>
+
     </div>
 
-    <!-- FLOATING SUPPORT BUTTON -->
-    <div class="btn-floating-support" id="btnOpenSupport">
-        ✈️
-    </div>
-
-    <!-- SUPPORT MODAL -->
-    <div class="modal-overlay" id="supportModal">
+    <!-- BUY MODAL -->
+    <div class="modal-overlay" id="checkoutModal">
         <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-header-left">
-                    <div class="chat-icon-circle">💬</div>
-                    <div>
-                        <div class="modal-title-text">Suporte Online</div>
-                        <div class="modal-subtitle-text"><span style="color:var(--green-glow);">●</span> Atendimento ativo</div>
-                    </div>
-                </div>
-                <div class="close-modal" id="btnCloseSupport">✕</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h4 style="color:#fff;" id="modalProductName">Checkout</h4>
+                <span style="color:#fff; cursor:pointer; font-weight:bold;" onclick="closeBuyModal()">✕</span>
             </div>
 
-            <div class="modal-body">
-                <form id="supportForm">
-                    <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" id="custName" class="form-input" placeholder="Seu nome" required>
-                    </div>
+            <form id="checkoutForm">
+                <label style="font-size:12px; color:#aaa;">Your Name</label>
+                <input type="text" id="buyName" class="form-input" placeholder="Enter full name" required>
 
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="custEmail" class="form-input" placeholder="seu@email.com" required>
-                    </div>
+                <label style="font-size:12px; color:#aaa;">Your Gmail</label>
+                <input type="email" id="buyEmail" class="form-input" placeholder="your@gmail.com" required>
 
-                    <div class="form-group">
-                        <label>Mensagem</label>
-                        <textarea id="custMsg" class="form-textarea" placeholder="Como podemos ajudar?" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit-support">
-                        <span>✈️</span> <span>Enviar Mensagem</span>
-                    </button>
-                </form>
-
-                <div class="success-box" id="successPopup">
-                    Successfully delivered your problem. Wait For reply in your Gmail account.
+                <div class="notice-modal-text">
+                    📩 Your product delivered to your Gmail.
                 </div>
-            </div>
+
+                <button type="submit" class="btn-glow-yellow" style="font-size:15px; padding:12px; background:linear-gradient(135deg, #ff1a1a, #990000); color:#fff; border-color:#ff6666;">
+                    GO TO PAYMENT (₹<span id="modalProductPrice">0</span>)
+                </button>
+            </form>
         </div>
-    </div>
-
-    <!-- BOTTOM NAVIGATION -->
-    <div class="bottom-nav">
-        <a href="#" class="nav-link active">
-            <span class="nav-icon">🏠</span>
-            <span>Home</span>
-        </a>
-        <a href="#" class="nav-link">
-            <span class="nav-icon">🏪</span>
-            <span>Store</span>
-        </a>
     </div>
 
     <script>
-        document.getElementById('btnOpenSupport').onclick = function() {
-            document.getElementById('supportModal').style.display = 'flex';
-        };
+        // PAGE SWITCHING SYSTEM
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
 
-        document.getElementById('btnCloseSupport').onclick = function() {
-            document.getElementById('supportModal').style.display = 'none';
-        };
+        // RANDOM ONLINE COUNTER (10 SECONDS INTERVAL)
+        const counterList = [125, 124, 121, 128, 134, 156, 138, 151, 150, 151, 149, 142, 96, 114, 115];
+        let idx = 0;
+        setInterval(() => {
+            idx = (idx + 1) % counterList.length;
+            document.getElementById('counterNum').innerText = counterList[idx];
+        }, 10000);
 
-        document.getElementById('supportForm').onsubmit = function(e) {
+        // BUY MODAL LOGIC
+        let currentItem = "";
+        let currentPrice = "";
+
+        function openBuyModal(name, price) {
+            currentItem = name;
+            currentPrice = price;
+            document.getElementById('modalProductName').innerText = name;
+            document.getElementById('modalProductPrice').innerText = price;
+            document.getElementById('checkoutModal').style.display = 'flex';
+        }
+
+        function closeBuyModal() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        // PAYMENT FORM SUBMISSION & GMAIL NOTIFICATION
+        document.getElementById('checkoutForm').onsubmit = function(e) {
             e.preventDefault();
             
-            var name = document.getElementById('custName').value;
-            var email = document.getElementById('custEmail').value;
-            var msg = document.getElementById('custMsg').value;
+            const name = document.getElementById('buyName').value;
+            const email = document.getElementById('buyEmail').value;
 
-            // Direct Mailto Redirect Fallback & Formspree Endpoint
-            var mailUrl = "https://formsubmit.co/ajax/hubofico@gmail.com";
-
-            fetch(mailUrl, {
+            // Formsubmit AJAX to send payment lead to your gmail
+            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    message: msg
+                    Product: currentItem,
+                    Price: "Rs " + currentPrice,
+                    Customer_Name: name,
+                    Customer_Gmail: email,
+                    Status: "Payment Initiated"
                 })
-            })
-            .then(function() {
-                document.getElementById('successPopup').style.display = 'block';
-                document.getElementById('supportForm').reset();
-            })
-            .catch(function() {
-                document.getElementById('successPopup').style.display = 'block';
-                document.getElementById('supportForm').reset();
             });
+
+            closeBuyModal();
+            alert("Payment request processing! 5 minute baad payment confirm ka popup mil jayega.");
+            
+            // Redirect to payment UPI app
+            window.location.href = `upi://pay?pa=hubofico@gmail.com&pn=CheatXStore&am=${currentPrice}&cu=INR`;
         };
+
+        // CANVAS RED LIGHT FALLING PARTICLES EFFECT
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        for(let i = 0; i < 40; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                speedY: Math.random() * 1.5 + 0.5,
+                opacity: Math.random()
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 26, 26, 0.7)';
+            
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                p.y += p.speedY;
+                if(p.y > canvas.height) {
+                    p.y = 0;
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
-  </html>
-  
+</html>                
