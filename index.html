@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF & FFMAX CHEAT STORE</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --red-glow: #ff1a1a;
+            --yellow-glow: #ffcc00;
+            --green-glow: #00ff66;
+            --card-dark: #0f1219;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(255, 26, 26, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.08) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 15px 15px 90px 15px;
+            text-align: center;
+        }
+
+        /* TOP HEADER */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand-text {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--red-glow);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px var(--red-glow), 0 0 20px var(--red-glow);
+            animation: redPulse 2s infinite alternate;
+        }
+
+        .online-badge {
+            color: var(--green-glow);
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-shadow: 0 0 8px var(--green-glow);
+            background: rgba(0, 255, 102, 0.08);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 102, 0.2);
+        }
+
+        .green-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--green-glow);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--green-glow);
+        }
+
+        /* HERO LOGO & PANEL BUTTON */
+        .hero-section {
+            margin: 35px 0 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .garena-logo {
+            width: 90px;
+            height: 90px;
+            filter: drop-shadow(0 0 15px var(--red-glow));
+            animation: logoGlow 2s infinite alternate;
+        }
+
+        .btn-panel-store {
+            width: 90%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ffcc00, #b38f00);
+            color: #000;
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid #ffee80;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--yellow-glow);
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-panel-store:active {
+            transform: scale(0.97);
+        }
+
+        /* NOTICE & QUICK LINKS */
+        .notice-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 26, 26, 0.3);
+            border-radius: 14px;
+            padding: 20px 15px;
+            margin-top: 10px;
+            text-align: left;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(255, 26, 26, 0.1);
+        }
+
+        .notice-desc {
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .quick-links-title {
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .quick-links-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .quick-links-list li {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #dddddd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-links-list li::before {
+            content: '•';
+            color: var(--red-glow);
+            font-size: 20px;
+            text-shadow: 0 0 8px var(--red-glow);
+        }
+
+        .quick-links-list a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        /* FLOATING SUPPORT BUTTON */
+        .btn-floating-support {
+            position: fixed;
+            bottom: 75px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 22px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px var(--red-glow);
+            cursor: pointer;
+            z-index: 90;
+            animation: pulse-red 2s infinite;
+        }
+
+        /* SUPPORT MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-card {
+            background: #0d121d;
+            width: 90%;
+            max-width: 380px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 26, 26, 0.4);
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.3);
+            text-align: left;
+            animation: modalUp 0.3s ease-out;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #e60000, #990000);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-icon-circle {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #e60000;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .chat-icon-circle::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 100%;
+            height: 10px;
+            background: var(--green-glow);
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .modal-title-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .modal-subtitle-text {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .close-modal {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            padding: 20px 18px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #aaaaaa;
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            background: #151c28;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--red-glow);
+        }
+
+        .form-textarea {
+            height: 90px;
+            resize: none;
+        }
+
+        .btn-submit-support {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #e60000, #990000);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(230, 0, 0, 0.5);
+        }
+
+        /* Success Popup */
+        .success-box {
+            display: none;
+            margin-top: 15px;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--green-glow);
+            color: var(--green-glow);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            text-align: center;
+            line-height: 1.4;
+            font-weight: bold;
+        }
+
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 80;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: #888888;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .nav-link.active {
+            color: var(--red-glow);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        @keyframes redPulse {
+            0% { text-shadow: 0 0 8px var(--red-glow); }
+            100% { text-shadow: 0 0 18px var(--red-glow), 0 0 25px var(--red-glow); }
+        }
+
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 10px var(--red-glow)); }
+            100% { filter: drop-shadow(0 0 25px var(--red-glow)); }
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); }
+            50% { box-shadow: 0 0 22px rgba(255, 26, 26, 0.9); }
+            100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); }
+        }
+
+        @keyframes modalUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-nav">
+            <div class="brand-text">FF&FFMAX CHEAT STORE</div>
+            <div class="online-badge">
+                <div class="green-dot"></div>
+                <span>Online</span>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <svg class="garena-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5L90 25V75L50 95L10 75V25L50 5Z" stroke="#ff1a1a" stroke-width="4" fill="rgba(255, 26, 26, 0.1)"/>
+                <path d="M50 20L75 35V65L50 80L25 65V35L50 20Z" fill="#ff1a1a"/>
+                <path d="M40 40L65 50L40 60V40Z" fill="#ffffff"/>
+            </svg>
+
+            <a href="#" class="btn-panel-store">PANEL STORE</a>
+        </div>
+
+        <div class="notice-box">
+            <p class="notice-desc">
+                The best panels and cheats for Free Fire. Dominate the game with safety and 24/7 dedicated support.
+            </p>
+
+            <div class="quick-links-title">QUICK LINKS</div>
+            <ul class="quick-links-list">
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Feedbacks</a></li>
+                <li><a href="#">Cart</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FLOATING SUPPORT BUTTON -->
+    <div class="btn-floating-support" id="btnOpenSupport">
+        ✈️
+    </div>
+
+    <!-- SUPPORT MODAL -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="chat-icon-circle">💬</div>
+                    <div>
+                        <div class="modal-title-text">Suporte Online</div>
+                        <div class="modal-subtitle-text"><span style="color:var(--green-glow);">●</span> Atendimento ativo</div>
+                    </div>
+                </div>
+                <div class="close-modal" id="btnCloseSupport">✕</div>
+            </div>
+
+            <div class="modal-body">
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" id="custName" class="form-input" placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="custEmail" class="form-input" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea id="custMsg" class="form-textarea" placeholder="Como podemos ajudar?" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-support">
+                        <span>✈️</span> <span>Enviar Mensagem</span>
+                    </button>
+                </form>
+
+                <div class="success-box" id="successPopup">
+                    Successfully delivered your problem. Wait For reply in your Gmail account.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-link active">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link">
+            <span class="nav-icon">🏪</span>
+            <span>Store</span>
+        </a>
+    </div>
+
+    <script>
+        document.getElementById('btnOpenSupport').onclick = function() {
+            document.getElementById('supportModal').style.display = 'flex';
+        };
+
+        document.getElementById('btnCloseSupport').onclick = function() {
+            document.getElementById('supportModal').style.display = 'none';
+        };
+
+        document.getElementById('supportForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            var name = document.getElementById('custName').value;
+            var email = document.getElementById('custEmail').value;
+            var msg = document.getElementById('custMsg').value;
+
+            // Direct Mailto Redirect Fallback & Formspree Endpoint
+            var mailUrl = "https://formsubmit.co/ajax/hubofico@gmail.com";
+
+            fetch(mailUrl, {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    message: msg
+                })
+            })
+            .then(function() {
+                document.getElementById('successPopup').style.display = 'block';
+                document.getElementById('supportForm').reset();
+            })
+            .catch(function() {
+                document.getElementById('successPopup').style.display = 'block';
+                document.getElementById('supportForm').reset();
+            });
+        };
+    </script>
+</body>
+  </html>
+  
