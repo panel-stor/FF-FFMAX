@@ -48,10 +48,6 @@
             padding: 12px 5px; margin-bottom: 15px;
         }
 
-        .logo-text {
-            font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 5px; text-transform: uppercase;
-        }
-
         .store-brand-header {
             text-align: center; font-size: 22px; font-weight: 900; letter-spacing: 1.5px;
             text-transform: uppercase; margin: 15px 0;
@@ -98,11 +94,6 @@
             color: var(--green-glow); font-size: 13px; font-weight: bold;
             background: rgba(0, 255, 102, 0.1); padding: 5px 12px; border-radius: 20px;
             border: 1px solid var(--green-glow); box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
-        }
-
-        .badge-need-root {
-            color: #72f2a2; font-size: 12px; font-weight: bold; background: rgba(0, 255, 150, 0.12);
-            padding: 4px 10px; border-radius: 12px; border: 1px solid #00ffaa; text-shadow: 0 0 8px #00ffaa;
         }
 
         .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
@@ -202,6 +193,12 @@
             padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-bottom: 15px;
         }
 
+        .history-list-box {
+            max-height: 180px; overflow-y: auto; text-align: left;
+            background: rgba(0,0,0,0.5); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px;
+        }
+        .history-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 6px 0; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse-red { 0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } 50% { box-shadow: 0 0 22px rgba(255, 26, 26, 0.9); } 100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } }
     </style>
@@ -280,8 +277,8 @@
             <div style="background:linear-gradient(135deg, #1f0000, #001f0a); border:1px solid var(--green-glow); border-radius:12px; padding:12px; text-align:center; color:var(--green-glow); font-weight:bold; font-size:14px; text-shadow:0 0 10px var(--green-glow);">
                 ⚡ 24/7 DEDICATED CUSTOMER SUPPORT AVAILABLE ⚡
             </div>
-    </div>
-                                                             <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
+                    </div>
+                            <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -385,8 +382,8 @@
                 <input type="text" id="feedMsg_AndroidExt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
                 <button class="btn-buy-card" onclick="submitFeedback('Android External', 'feedMsg_AndroidExt')">Submit Feedback</button>
             </div>
-    </div>
-                                    <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
+                                                                </div>
+                                                                                                                                   <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -490,8 +487,8 @@
                 <input type="text" id="feedMsg_AndroidInt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
                 <button class="btn-buy-card" onclick="submitFeedback('Android Internal', 'feedMsg_AndroidInt')">Submit Feedback</button>
             </div>
-    </div>
-                            <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
+                    </div>
+            <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -516,7 +513,6 @@
                 </div>
                 <div class="brutal-line">Brutal Features - Speed, Magnet, Auto Headshot Etc.</div>
 
-                <!-- PRICING WITH 30% DISCOUNT -->
                 <div class="pricing-grid">
                     <div class="price-card">
                         <div class="discount-badge">30% OFF</div>
@@ -632,14 +628,30 @@
                 </div>
 
                 <button class="btn-glow-green" style="width:100%; margin-bottom:10px;" onclick="openAddMoneyModal()">+ Add Money</button>
-                <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; background:#333; color:#fff;" onclick="openAuthModal()">Login / Sign Up</button>
+
+                <div style="display:flex; gap:10px; margin-bottom:12px;">
+                    <button class="btn-glow-blue" style="width:50%; font-size:11px;" onclick="toggleHistory('purchaseHistoryBox')">📜 Purchases</button>
+                    <button class="btn-glow-yellow" style="width:50%; font-size:11px; padding:12px;" onclick="toggleHistory('depositHistoryBox')">💳 Deposits</button>
+                </div>
+
+                <div id="purchaseHistoryBox" class="history-list-box" style="display:none;">
+                    <strong style="color:var(--blue-glow);">My Purchases:</strong>
+                    <div id="purchaseList">No purchases yet.</div>
+                </div>
+
+                <div id="depositHistoryBox" class="history-list-box" style="display:none;">
+                    <strong style="color:var(--yellow-glow);">Deposit Requests:</strong>
+                    <div id="depositList">No deposit requests.</div>
+                </div>
+
+                <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; margin-top:10px; background:#333; color:#fff;" onclick="openAuthModal()">Login / Sign Up</button>
             </div>
         </div>
 
     </div>
 
     <div class="btn-floating-support" id="btnOpenSupport">👩‍💼</div>
-                                <!-- ADD MONEY MODAL (OPTION B) -->
+                        <!-- ADD MONEY MODAL (OPTION B - AUTO UPI) -->
     <div class="modal-overlay" id="moneyModal">
         <div class="modal-card-support" style="padding: 20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -688,7 +700,7 @@
         </div>
     </div>
 
-    <!-- SUCCESS MODAL -->
+    <!-- SUCCESS POPUP -->
     <div class="modal-overlay" id="successModal">
         <div class="modal-card-support" style="padding: 20px; text-align:center; border-color:var(--green-glow);">
             <div id="successMsg" style="color:#fff;"></div>
@@ -701,8 +713,8 @@
         <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')"><span style="font-size:18px;">🏠</span><span>Home</span></button>
         <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')"><span style="font-size:18px;">🏪</span><span>Store</span></button>
         <button class="nav-link-item" id="navProfileBtn" onclick="switchPage('pageProfile')"><span style="font-size:18px;">👤</span><span>Profile</span></button>
-        </div>
-                        <script>
+    </div>
+        <script>
         const firebaseConfig = {
           apiKey: "AIzaSyAPUoAlktXoQ2wPEfWm29rZTEjefbQRMLA",
           authDomain: "cheatx-store-cdc7f.firebaseapp.com",
@@ -735,6 +747,7 @@
                         document.getElementById('profWalletDisplay').innerText = userWallet;
                     }
                 });
+                loadHistory(user.uid);
             } else {
                 currentUser = null; userWallet = 0;
                 document.getElementById('profNameDisplay').innerText = "Guest User";
@@ -750,7 +763,7 @@
         function openAuthModal() { openModal('authModal'); }
         function openAddMoneyModal() { if(!currentUser) return openAuthModal(); openModal('moneyModal'); }
 
-        // MOBILE HARDWARE BACK-BUTTON NAVIGATION HANDLER
+        // MOBILE HARDWARE BACK-BUTTON HANDLER (1 STEP BACK ONLY)
         window.addEventListener('popstate', function(e) {
             if (activePageHistory.length > 1) {
                 activePageHistory.pop();
@@ -781,7 +794,7 @@
             window.scrollTo(0,0);
         }
 
-        // OPTION B: AUTO UPI INTENT
+        // OPTION B: AUTO UPI PAYMENT INTENT
         function openUpiApp() {
             const amt = document.getElementById('addAmount').value;
             if(!amt || amt <= 0) return alert("Kripya sahi Amount enter karein!");
@@ -865,6 +878,27 @@
             });
         }
 
+        function toggleHistory(id) {
+            const box = document.getElementById(id);
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function loadHistory(uid) {
+            db.ref('orders').orderByChild('uid').equalTo(uid).on('value', snap => {
+                const box = document.getElementById('purchaseList');
+                box.innerHTML = ""; const val = snap.val();
+                if(!val) { box.innerHTML = "No purchases yet."; return; }
+                for(let k in val) box.innerHTML += `<div class="history-item"><b>${val[k].product}</b> - ₹${val[k].price}</div>`;
+            });
+
+            db.ref('requests').orderByChild('uid').equalTo(uid).on('value', snap => {
+                const box = document.getElementById('depositList');
+                box.innerHTML = ""; const val = snap.val();
+                if(!val) { box.innerHTML = "No deposit requests."; return; }
+                for(let k in val) box.innerHTML += `<div class="history-item">₹${val[k].amount} (${val[k].status})</div>`;
+            });
+        }
+
         function sendSupportMessage() {
             const name = document.getElementById('custName').value;
             const email = document.getElementById('custEmail').value;
@@ -873,14 +907,13 @@
 
             db.ref('support_tickets/').push({ name: name, email: email, message: msg, date: new Date().toLocaleString() }).then(() => {
                 closeModal('supportModal');
-                document.getElementById('successMsg').innerHTML = "<h3 style="color:var(--green-glow)">Message Sent!</h3><p style="color:#fff">Support team will contact you soon.</p>";
+                document.getElementById('successMsg').innerHTML = "<h3 style='color:var(--green-glow)'>Message Sent!</h3><p style='color:#fff'>Support team will contact you soon.</p>";
                 openModal('successModal');
             });
         }
 
         document.getElementById('btnOpenSupport').onclick = () => openModal('supportModal');
 
-        // CANVAS ANIMATION
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
