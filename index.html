@@ -107,7 +107,7 @@
 
         .white-glow-heading {
             color: #ffffff;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             text-shadow: 0 0 10px #ffffff, 0 0 20px rgba(255, 255, 255, 0.8);
             margin-bottom: 12px;
@@ -155,7 +155,7 @@
             border-left: 4px solid var(--red-glow);
             border-radius: 12px;
             padding: 16px;
-            margin-top: 20px;
+            margin-top: 15px;
             margin-bottom: 20px;
             text-align: left;
         }
@@ -330,7 +330,6 @@
 <body>
     <canvas id="bgCanvas"></canvas>
     <div class="container">
-
                 <!-- ================= PAGE 1: HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             <div class="top-nav">
@@ -338,27 +337,30 @@
                 <div class="online-badge-green">● Online</div>
             </div>
 
-            <div style="text-align:center; margin: 30px 0 20px 0;">
-                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+            <div style="text-align:center; margin: 20px 0 15px 0;">
+                <svg width="70" height="70" viewBox="0 0 100 100" fill="none">
                     <path d="M50 5L90 25V75L50 95L10 75V25L50 5Z" stroke="#ff1a1a" stroke-width="4" fill="rgba(255, 26, 26, 0.1)"/>
                     <path d="M50 20L75 35V65L50 80L25 65V35L50 20Z" fill="#ff1a1a"/>
                 </svg>
-                <div style="margin-top:25px;">
-                    <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">PANEL STORE</button>
+                <div style="margin-top:15px;">
+                    <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">ENTER PANEL STORE</button>
                 </div>
             </div>
 
-            <div class="dash-card">
-                <p style="color:#ccc; font-size:14px; line-height:1.5;">
-                    The best panels and cheats for Free Fire. Dominate the game with safety and 24/7 dedicated support.
-                </p>
+            <!-- BUYING INSTRUCTIONS -->
+            <div class="guide-box">
+                <div class="white-glow-heading">📖 How To Buy Panel?</div>
+                <div class="guide-step">1. Click <strong>Enter Panel Store</strong> above.</div>
+                <div class="guide-step">2. <strong>Android Users:</strong> Select Android Panel. Choose <strong>External</strong> for Rooted device or <strong>Internal</strong> for Non-Rooted device.</div>
+                <div class="guide-step">3. <strong>iOS Users:</strong> Choose iOS External or Internal as required.</div>
+                <div class="guide-step">4. Ensure your Wallet has sufficient funds before purchasing.</div>
             </div>
 
-            <div class="guide-box">
-                <div class="white-glow-heading">How To Buy Panel?</div>
-                <div class="guide-step">1. Go to the <strong>Panel Store</strong> first.</div>
-                <div class="guide-step">2. <strong>For Android Users:</strong> Select Android Panel. If your phone is rooted, select <strong>External</strong>. If non-rooted, select <strong>Internal</strong>.</div>
-                <div class="guide-step">3. Make sure your Wallet has enough balance before buying.</div>
+            <!-- CUSTOMER SUPPORT & HELP INSTRUCTIONS -->
+            <div class="guide-box" style="border-left-color: var(--green-glow);">
+                <div class="white-glow-heading" style="color:var(--green-glow);">🎧 Support & Help Guide</div>
+                <div class="guide-step">• Need help with key activation or file installation? Click the red floating 👩‍💼 icon at bottom-right or go to <strong>Profile ➔ Customer Support</strong>.</div>
+                <div class="guide-step">• Enter your Name, Email, and Query. Our admin team will respond to you instantly.</div>
             </div>
 
             <div class="feature-grid">
@@ -366,9 +368,8 @@
                 <div class="feature-card"><div style="font-size:20px;">🔄</div><div class="feature-card-title">Always Updated</div></div>
                 <div class="feature-card"><div style="font-size:20px;">🛡️</div><div class="feature-card-title">Anti-Ban</div></div>
             </div>
-        </div>
-
-        <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
+                                              </div>
+                                                      <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
         <div id="pageMainStore" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back Home</button>
             <div class="top-nav">
@@ -380,8 +381,17 @@
             </div>
 
             <div class="main-heading"><span style="color:#ffffff;">CHEAT</span> <span style="color:var(--red-glow);">STORE</span></div>
-            <div class="sub-heading">The Best Panel To Dominant FF&FFMAX</div>
+            <div class="sub-heading">The Best Panel To Dominate FF & FFMAX</div>
 
+            <!-- STORE INSTRUCTIONS -->
+            <div class="guide-box">
+                <div class="white-glow-heading">📌 Store Instructions & Help</div>
+                <div class="guide-step">1. Select your device category below (Android or iOS).</div>
+                <div class="guide-step">2. Check panel compatibility (External = Root / Jailbreak required; Internal = No Root required).</div>
+                <div class="guide-step">3. In case of payment issues, click the red Support button at bottom right.</div>
+            </div>
+
+            <!-- ANDROID CATEGORY -->
             <div class="dash-card">
                 <div class="banner-box"><img src="android-banner.jpg" alt="Android Banner" onerror="this.parentNode.innerHTML='📸 ANDROID PANEL BANNER'"></div>
                 <div style="text-align:left; margin-bottom:15px;">
@@ -394,6 +404,7 @@
                 </div>
             </div>
 
+            <!-- IOS CATEGORY -->
             <div class="dash-card">
                 <div class="banner-box"><img src="ios-banner.jpg" alt="iOS Banner" onerror="this.parentNode.innerHTML='📸 IOS VIP PANEL BANNER'"></div>
                 <div style="text-align:left; margin-bottom:15px;">
@@ -406,26 +417,26 @@
                 </div>
             </div>
         </div>
-                <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
+                <!-- ================= PAGE 3: ANDROID EXTERNAL PRODUCTS ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Panel External</div><div class="badge-need-root">⚡ Need RooT</div></div>
+            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Android External Panel</div><div class="badge-need-root">⚡ Need RooT</div></div>
 
             <div class="dash-card">
-                <h3 style="color:#fff; text-align:left;">DRIP-CLIENT</h3>
+                <h3 style="color:#fff; text-align:left;">DRIP-CLIENT EXTERNAL</h3>
                 <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (10 Days)', 310)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (15 Days)', 380)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (30 Days)', 550)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (3 Month)', 999)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (10 Days)', 310)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (15 Days)', 380)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (30 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (3 Month)', 999)">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
+        <!-- ================= PAGE 4: ANDROID INTERNAL PRODUCTS ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Panel Internal</div><div class="online-badge-green">● ONLINE</div></div>
+            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Android Internal Panel</div><div class="online-badge-green">● NO ROOT</div></div>
 
             <div class="dash-card">
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT INTERNAL</h3>
@@ -438,9 +449,11 @@
             </div>
         </div>
 
-        <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
+        <!-- ================= PAGE 5: IOS EXTERNAL PRODUCTS ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">iOS External Panel</div><div class="badge-need-root">⚡ Need Jailbreak</div></div>
+
             <div class="dash-card">
                 <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL</h3>
                 <div class="pricing-grid">
@@ -450,9 +463,11 @@
             </div>
         </div>
 
-        <!-- ================= PAGE 6: IOS INTERNAL ================= -->
+        <!-- ================= PAGE 6: IOS INTERNAL PRODUCTS ================= -->
         <div id="pageIosInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">iOS Internal Panel</div><div class="online-badge-green">● NO JAILBREAK</div></div>
+
             <div class="dash-card">
                 <h3 style="color:#fff; text-align:left;">FULORITE IOS INTERNAL</h3>
                 <div class="pricing-grid">
@@ -460,8 +475,8 @@
                     <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE INT (60 Days)', 1040)">🛒 Buy Now</button></div>
                 </div>
             </div>
-                    </div>
-                <!-- ================= PAGE 7: FULL PROFILE PAGE ================= -->
+    </div>
+                                                                                                                                   <!-- ================= PAGE 7: FULL PROFILE PAGE ================= -->
         <div id="pageProfile" class="page-view">
             <div class="dash-card" style="text-align:center;">
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-avatar" alt="Avatar">
@@ -501,8 +516,7 @@
 
     <!-- FLOATING SUPPORT BUTTON -->
     <div class="btn-floating-support" id="btnOpenSupport">👩‍💼</div>
-    
-          <!-- CUSTOMER SUPPORT MODAL -->
+        <!-- CUSTOMER SUPPORT MODAL -->
     <div class="modal-overlay" id="supportModal">
         <div class="modal-card-support">
             <div class="support-modal-header">
@@ -581,8 +595,7 @@
         <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')"><span style="font-size:18px;">🏪</span><span>Store</span></button>
         <button class="nav-link-item" id="navProfileBtn" onclick="switchPage('pageProfile')"><span style="font-size:18px;">👤</span><span>Profile</span></button>
     </div>
-    
-           <script>
+        <script>
         // FIREBASE INITIALIZATION
         const firebaseConfig = {
           apiKey: "AIzaSyAPUoAlktXoQ2wPEfWm29rZTEjefbQRMLA",
@@ -687,7 +700,8 @@
                 closeModal('moneyModal');
             });
         }
-                       // SUPPORT FORM SUBMISSION
+
+        // SUPPORT FORM SUBMISSION
         document.getElementById('supportForm').onsubmit = function(e) {
             e.preventDefault();
             const name = document.getElementById('custName').value;
@@ -784,5 +798,3 @@
     </script>
 </body>
 </html>
-
- 
