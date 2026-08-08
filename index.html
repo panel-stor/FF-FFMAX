@@ -11,291 +11,189 @@
             --yellow-glow: #ffcc00;
             --green-glow: #00ff66;
             --blue-glow: #0088ff;
-            --card-dark: rgba(15, 18, 25, 0.85);
+            --pink-glow: #ff007f;
+            --card-dark: rgba(15, 18, 25, 0.9);
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: #ffffff;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            padding-bottom: 75px;
+            background-color: var(--bg-color); color: #ffffff;
+            min-height: 100vh; position: relative; overflow-x: hidden; padding-bottom: 75px;
         }
 
         #bgCanvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
         }
 
         .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 15px 15px 100px 15px;
-            position: relative;
-            z-index: 10;
+            max-width: 480px; margin: 0 auto; padding: 15px 15px 100px 15px; position: relative; z-index: 10;
         }
 
         .page-view { display: none; }
         .page-view.active { display: block; animation: fadeIn 0.3s ease-in-out; }
 
         .dash-card {
-            background: var(--card-dark);
-            border: 1px solid var(--red-glow);
-            box-shadow: 0 0 15px rgba(255, 26, 26, 0.3);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(8px);
+            background: var(--card-dark); border: 1px solid var(--red-glow);
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.3); border-radius: 16px;
+            padding: 16px; margin-bottom: 20px; backdrop-filter: blur(8px);
         }
 
         .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 5px;
-            margin-bottom: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 5px; margin-bottom: 15px;
         }
 
         .logo-text {
-            font-size: 18px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            text-transform: uppercase;
+            font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 5px; text-transform: uppercase;
         }
 
-        .lightning-bolt {
-            color: var(--yellow-glow);
-            text-shadow: 0 0 10px var(--yellow-glow);
-            animation: flash 1.5s infinite alternate;
+        .store-brand-header {
+            text-align: center; font-size: 22px; font-weight: 900; letter-spacing: 1.5px;
+            text-transform: uppercase; margin: 15px 0;
+            animation: glowHeader 2s infinite alternate;
+        }
+
+        @keyframes glowHeader {
+            0% { color: var(--red-glow); text-shadow: 0 0 10px var(--red-glow); }
+            50% { color: var(--yellow-glow); text-shadow: 0 0 12px var(--yellow-glow); }
+            100% { color: #ffffff; text-shadow: 0 0 15px #ffffff; }
+        }
+
+        .glow-pink-title {
+            color: var(--pink-glow); font-size: 18px; font-weight: 900; text-align: left;
+            text-shadow: 0 0 12px var(--pink-glow), 0 0 20px var(--pink-glow); margin-bottom: 10px;
+        }
+
+        .glow-red-title {
+            color: var(--red-glow); font-size: 18px; font-weight: 900; text-align: left;
+            text-shadow: 0 0 12px var(--red-glow), 0 0 20px var(--red-glow); margin-bottom: 10px;
+        }
+
+        .glow-green-title {
+            color: var(--green-glow); font-size: 18px; font-weight: 900; text-align: left;
+            text-shadow: 0 0 12px var(--green-glow), 0 0 20px var(--green-glow); margin-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            font-size: 11px; text-align: left; margin: 10px 0 15px 0;
+            background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .feature-col-title { font-weight: bold; color: #fff; font-size: 12px; margin-bottom: 5px; }
+        .feature-item { color: #cccccc; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+        .feature-item::before { content: "•"; color: var(--yellow-glow); }
+
+        .brutal-line {
+            color: var(--red-glow); font-size: 12px; font-weight: 800; text-align: left;
+            margin: 8px 0; text-shadow: 0 0 8px rgba(255,26,26,0.6);
         }
 
         .online-badge-green {
-            color: var(--green-glow);
-            font-size: 13px;
-            font-weight: bold;
-            background: rgba(0, 255, 102, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--green-glow);
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+            color: var(--green-glow); font-size: 13px; font-weight: bold;
+            background: rgba(0, 255, 102, 0.1); padding: 5px 12px; border-radius: 20px;
+            border: 1px solid var(--green-glow); box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
         }
 
         .badge-need-root {
-            color: #72f2a2;
-            font-size: 12px;
-            font-weight: bold;
-            background: rgba(0, 255, 150, 0.12);
-            padding: 4px 10px;
-            border-radius: 12px;
-            border: 1px solid #00ffaa;
-            text-shadow: 0 0 8px #00ffaa;
+            color: #72f2a2; font-size: 12px; font-weight: bold; background: rgba(0, 255, 150, 0.12);
+            padding: 4px 10px; border-radius: 12px; border: 1px solid #00ffaa; text-shadow: 0 0 8px #00ffaa;
         }
 
-        .white-glow-heading {
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: 900;
-            text-shadow: 0 0 10px #ffffff, 0 0 20px rgba(255, 255, 255, 0.8);
-            margin-bottom: 12px;
-            text-align: left;
-            letter-spacing: 0.5px;
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .price-card {
+            background: #0f1522; border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px; padding: 12px; text-align: left; position: relative; overflow: hidden;
         }
 
-        .main-heading {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 900;
-            margin: 15px 0 5px 0;
-            letter-spacing: 1px;
+        .discount-badge {
+            position: absolute; top: 0; right: 0; background: var(--red-glow); color: #fff;
+            font-size: 9px; font-weight: 900; padding: 3px 6px; border-bottom-left-radius: 8px;
         }
 
-        .sub-heading {
-            text-align: center;
-            color: #cccccc;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
-
-        .banner-box {
-            width: 100%;
-            height: 140px;
-            background: linear-gradient(135deg, #1f0505, #0a0000);
-            border: 1px dashed var(--red-glow);
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            margin-bottom: 12px;
-        }
-
-        .banner-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .guide-box {
-            background: rgba(10, 15, 25, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--red-glow);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 15px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .guide-step {
-            font-size: 13px;
-            color: #dddddd;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .guide-step strong { color: var(--yellow-glow); }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card {
-            background: rgba(20, 25, 35, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 12px;
-            padding: 12px 6px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .feature-card-title {
-            font-size: 12px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-top: 4px;
-        }
-
-        .btn-glow-blue {
-            background: linear-gradient(135deg, #0088ff, #004499);
-            color: #fff; border: 1px solid #80c4ff;
-            box-shadow: 0 0 15px var(--blue-glow);
-            padding: 12px; border-radius: 8px;
-            font-weight: bold; cursor: pointer; width: 48%;
-            text-transform: uppercase;
-        }
-
-        .btn-glow-green {
-            background: linear-gradient(135deg, #00cc55, #006622);
-            color: #fff; border: 1px solid #80ffaa;
-            box-shadow: 0 0 15px var(--green-glow);
-            padding: 12px; border-radius: 8px;
-            font-weight: bold; cursor: pointer; width: 48%;
-            text-transform: uppercase;
-        }
-
-        .btn-glow-yellow {
-            width: 100%; padding: 14px;
-            background: linear-gradient(135deg, #ffcc00, #b38f00);
-            color: #000; font-size: 16px; font-weight: 900;
-            border: 2px solid #ffee80; border-radius: 12px;
-            cursor: pointer; box-shadow: 0 0 20px var(--yellow-glow);
-        }
+        .duration-tag { font-size: 11px; color: #aaaaaa; text-transform: uppercase; font-weight: bold; margin-bottom: 6px; }
+        .price-amount { font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 8px; }
 
         .btn-buy-card {
-            width: 100%; background: #1a2233; color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px; border-radius: 8px;
-            font-weight: bold; font-size: 13px;
+            width: 100%; background: #1a2233; color: #fff; border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px; border-radius: 8px; font-weight: bold; font-size: 13px;
             cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px;
         }
 
         .btn-buy-card:hover { background: var(--red-glow); box-shadow: 0 0 12px var(--red-glow); }
 
-        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        .price-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px; text-align: left; }
-        .duration-tag { font-size: 12px; color: #aaaaaa; text-transform: uppercase; font-weight: bold; margin-bottom: 8px; }
-        .price-amount { font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 10px; }
+        .guide-box {
+            background: rgba(10, 15, 25, 0.9); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--red-glow); border-radius: 12px; padding: 14px;
+            margin-top: 15px; margin-bottom: 15px; text-align: left;
+        }
+
+        .guide-step { font-size: 12px; color: #dddddd; line-height: 1.5; margin-bottom: 6px; }
+        .guide-step strong { color: var(--yellow-glow); }
+
+        .btn-glow-yellow {
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #ffcc00, #b38f00);
+            color: #000; font-size: 15px; font-weight: 900; border: 2px solid #ffee80;
+            border-radius: 12px; cursor: pointer; box-shadow: 0 0 20px var(--yellow-glow);
+        }
+
+        .btn-glow-blue {
+            background: linear-gradient(135deg, #0088ff, #004499); color: #fff; border: 1px solid #80c4ff;
+            box-shadow: 0 0 15px var(--blue-glow); padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 48%;
+        }
+
+        .btn-glow-green {
+            background: linear-gradient(135deg, #00cc55, #006622); color: #fff; border: 1px solid #80ffaa;
+            box-shadow: 0 0 15px var(--green-glow); padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 48%;
+        }
+
+        .feedback-section {
+            background: rgba(15, 20, 30, 0.8); border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px; padding: 12px; margin-top: 15px; text-align: center;
+        }
+
+        .star-rating { display: flex; justify-content: center; gap: 5px; font-size: 20px; cursor: pointer; margin: 8px 0; }
+        .star { color: #555; transition: color 0.2s; }
+        .star.active { color: var(--yellow-glow); text-shadow: 0 0 8px var(--yellow-glow); }
 
         .btn-floating-support {
-            position: fixed; bottom: 75px; right: 20px;
-            width: 55px; height: 55px;
-            background: linear-gradient(135deg, #ff1a1a, #990000);
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            color: #fff; font-size: 26px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 20px var(--red-glow);
-            cursor: pointer; z-index: 150;
-            animation: pulse-red 2s infinite;
+            position: fixed; bottom: 75px; right: 20px; width: 55px; height: 55px;
+            background: linear-gradient(135deg, #ff1a1a, #990000); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; color: #fff; font-size: 26px;
+            border: 2px solid rgba(255, 255, 255, 0.4); box-shadow: 0 0 20px var(--red-glow);
+            cursor: pointer; z-index: 150; animation: pulse-red 2s infinite;
         }
 
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
-            z-index: 200; justify-content: center; align-items: center;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); z-index: 200;
+            justify-content: center; align-items: center;
         }
 
         .modal-card-support {
-            background: #0d121d; width: 90%; max-width: 380px;
-            border-radius: 16px; overflow: hidden;
-            border: 1px solid rgba(255, 26, 26, 0.4);
-            box-shadow: 0 0 30px rgba(255, 26, 26, 0.3); text-align: left;
+            background: #0d121d; width: 90%; max-width: 380px; border-radius: 16px;
+            overflow: hidden; border: 1px solid rgba(255, 26, 26, 0.4); box-shadow: 0 0 30px rgba(255, 26, 26, 0.3); text-align: left;
         }
 
-        .support-modal-header {
-            background: linear-gradient(135deg, #e60000, #990000);
-            padding: 15px; display: flex; align-items: center; justify-content: space-between;
-        }
-
-        .chat-icon-circle {
-            width: 40px; height: 40px; background: #fff; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; color: #e60000; font-size: 20px;
-        }
-
-        .form-group { margin-bottom: 14px; }
-        .form-group label { display: block; font-size: 13px; color: #aaaaaa; margin-bottom: 6px; }
-        .form-input-box, .form-textarea-box {
-            width: 100%; padding: 12px; background: #151c28;
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 14px; outline: none;
-        }
-        .form-textarea-box { height: 90px; resize: none; }
-
-        .btn-submit-support {
-            width: 100%; padding: 14px;
-            background: linear-gradient(135deg, #e60000, #990000);
-            color: #fff; border: none; border-radius: 10px; font-weight: 800; font-size: 15px;
-            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
-            box-shadow: 0 0 15px rgba(230, 0, 0, 0.5);
+        .form-input-box {
+            width: 100%; padding: 12px; background: #151c28; border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px; color: #fff; font-size: 14px; outline: none; margin-bottom: 12px;
         }
 
         .bottom-nav-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex; justify-content: space-around; padding: 10px 0; z-index: 100;
         }
 
         .nav-link-item {
             display: flex; flex-direction: column; align-items: center; gap: 2px;
-            color: #888888; text-decoration: none; font-size: 11px; font-weight: bold; background: none; border: none; cursor: pointer;
+            color: #888888; font-size: 11px; font-weight: bold; background: none; border: none; cursor: pointer;
         }
         .nav-link-item.active { color: var(--red-glow); }
 
@@ -304,25 +202,10 @@
             padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-bottom: 15px;
         }
 
-        .profile-avatar {
-            width: 75px; height: 75px; border-radius: 50%;
-            border: 3px solid var(--green-glow); margin: 0 auto 10px auto;
-            box-shadow: 0 0 15px var(--green-glow); display: block;
-        }
-
-        .history-list-box {
-            max-height: 200px; overflow-y: auto; text-align: left;
-            background: rgba(0,0,0,0.5); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px;
-        }
-
-        .history-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 8px 0; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes flash { 0% { opacity: 0.3; } 100% { opacity: 1; filter: drop-shadow(0 0 12px var(--yellow-glow)); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse-red { 0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } 50% { box-shadow: 0 0 22px rgba(255, 26, 26, 0.9); } 100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } }
     </style>
 
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -333,270 +216,493 @@
                 <!-- ================= PAGE 1: HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             <div class="top-nav">
-                <div style="font-weight:900; color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">FF&FFMAX CHEAT STORE</div>
+                <div style="font-weight:900; color:var(--red-glow);">FF&FFMAX CHEAT STORE</div>
                 <div class="online-badge-green">● Online</div>
             </div>
 
-            <div style="text-align:center; margin: 20px 0 15px 0;">
-                <svg width="70" height="70" viewBox="0 0 100 100" fill="none">
-                    <path d="M50 5L90 25V75L50 95L10 75V25L50 5Z" stroke="#ff1a1a" stroke-width="4" fill="rgba(255, 26, 26, 0.1)"/>
-                    <path d="M50 20L75 35V65L50 80L25 65V35L50 20Z" fill="#ff1a1a"/>
-                </svg>
-                <div style="margin-top:15px;">
-                    <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">ENTER PANEL STORE</button>
-                </div>
+            <div class="store-brand-header">CheatXStore</div>
+
+            <div style="text-align:center; margin: 15px 0;">
+                <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">ENTER PANEL STORE</button>
             </div>
 
-            <!-- BUYING INSTRUCTIONS -->
             <div class="guide-box">
-                <div class="white-glow-heading">📖 How To Buy Panel?</div>
-                <div class="guide-step">1. Click <strong>Enter Panel Store</strong> above.</div>
-                <div class="guide-step">2. <strong>Android Users:</strong> Select Android Panel. Choose <strong>External</strong> for Rooted device or <strong>Internal</strong> for Non-Rooted device.</div>
-                <div class="guide-step">3. <strong>iOS Users:</strong> Choose iOS External or Internal as required.</div>
-                <div class="guide-step">4. Ensure your Wallet has sufficient funds before purchasing.</div>
+                <div style="color:#fff; font-weight:bold; font-size:15px; margin-bottom:8px;">📖 How To Buy Panel?</div>
+                <div class="guide-step">1. Click <strong>ENTER PANEL STORE</strong> above.</div>
+                <div class="guide-step">2. Select Android / iOS External or Internal as required.</div>
+                <div class="guide-step">3. Ensure you have balance in Wallet or click <strong>+ Add Money</strong>.</div>
             </div>
 
-            <!-- CUSTOMER SUPPORT & HELP INSTRUCTIONS -->
             <div class="guide-box" style="border-left-color: var(--green-glow);">
-                <div class="white-glow-heading" style="color:var(--green-glow);">🎧 Support & Help Guide</div>
-                <div class="guide-step">• Need help with key activation or file installation? Click the red floating 👩‍💼 icon at bottom-right or go to <strong>Profile ➔ Customer Support</strong>.</div>
-                <div class="guide-step">• Enter your Name, Email, and Query. Our admin team will respond to you instantly.</div>
+                <div style="color:var(--green-glow); font-weight:bold; font-size:15px; margin-bottom:8px;">🎧 Support & Help Guide</div>
+                <div class="guide-step">• Need assistance? Click the red 👩‍💼 icon at bottom right.</div>
             </div>
+        </div>
 
-            <div class="feature-grid">
-                <div class="feature-card"><div style="font-size:20px;">⭐</div><div class="feature-card-title">4.5★ Rating</div></div>
-                <div class="feature-card"><div style="font-size:20px;">🔄</div><div class="feature-card-title">Always Updated</div></div>
-                <div class="feature-card"><div style="font-size:20px;">🛡️</div><div class="feature-card-title">Anti-Ban</div></div>
-            </div>
-                                              </div>
-                                                      <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
+        <!-- ================= PAGE 2: MAIN STORE PAGE ================= -->
         <div id="pageMainStore" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back Home</button>
-            <div class="top-nav">
-                <div class="logo-text">
-                    <span class="lightning-bolt">⚡</span>
-                    <span style="color:#fff;">Cheat<span style="color:var(--red-glow);">X</span> Store</span>
-                </div>
-                <div class="online-badge-green" id="liveCounterBadge">⚡ <span id="counterNum">125</span> Online</div>
-            </div>
 
-            <div class="main-heading"><span style="color:#ffffff;">CHEAT</span> <span style="color:var(--red-glow);">STORE</span></div>
-            <div class="sub-heading">The Best Panel To Dominate FF & FFMAX</div>
-
-            <!-- STORE INSTRUCTIONS -->
-            <div class="guide-box">
-                <div class="white-glow-heading">📌 Store Instructions & Help</div>
-                <div class="guide-step">1. Select your device category below (Android or iOS).</div>
-                <div class="guide-step">2. Check panel compatibility (External = Root / Jailbreak required; Internal = No Root required).</div>
-                <div class="guide-step">3. In case of payment issues, click the red Support button at bottom right.</div>
-            </div>
+            <div class="store-brand-header">CheatXStore</div>
 
             <!-- ANDROID CATEGORY -->
             <div class="dash-card">
-                <div class="banner-box"><img src="android-banner.jpg" alt="Android Banner" onerror="this.parentNode.innerHTML='📸 ANDROID PANEL BANNER'"></div>
-                <div style="text-align:left; margin-bottom:15px;">
+                <div style="text-align:left; margin-bottom:12px;">
                     <h3 style="color:#fff; font-size:16px;">ANDROID PANEL</h3>
-                    <p style="color:#aaa; font-size:12px; margin-top:4px;">All Type antiban and antiblacklist updated panels.</p>
+                    <p style="color:#aaa; font-size:12px; margin-top:2px;">Antiban & Anti-blacklist Updated Panels.</p>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                    <button class="btn-glow-blue" onclick="switchPage('pageExternal')">Buy - External</button>
-                    <button class="btn-glow-green" onclick="switchPage('pageInternal')">Buy - Internal</button>
+                    <button class="btn-glow-blue" onclick="switchPage('pageExternal')">Buy External</button>
+                    <button class="btn-glow-green" onclick="switchPage('pageInternal')">Buy Internal</button>
                 </div>
             </div>
 
             <!-- IOS CATEGORY -->
             <div class="dash-card">
-                <div class="banner-box"><img src="ios-banner.jpg" alt="iOS Banner" onerror="this.parentNode.innerHTML='📸 IOS VIP PANEL BANNER'"></div>
-                <div style="text-align:left; margin-bottom:15px;">
-                    <h3 class="white-glow-heading" style="font-size:18px; margin:0;">IOS VIP PANEL</h3>
-                    <p style="color:#ffffff; font-size:12px; margin-top:4px;">All type antiban antiblacklist ios panel.</p>
+                <div style="text-align:left; margin-bottom:12px;">
+                    <h3 style="color:#fff; font-size:16px;">IOS VIP PANEL</h3>
+                    <p style="color:#aaa; font-size:12px; margin-top:2px;">Antiban iOS Panels.</p>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
                     <button class="btn-glow-blue" onclick="switchPage('pageIosExternal')">Buy External</button>
                     <button class="btn-glow-green" onclick="switchPage('pageIosInternal')">Buy Internal</button>
                 </div>
             </div>
-        </div>
-                <!-- ================= PAGE 3: ANDROID EXTERNAL PRODUCTS ================= -->
+
+            <!-- STORE INSTRUCTIONS AT BOTTOM -->
+            <div class="guide-box">
+                <div style="color:#fff; font-weight:bold; font-size:14px; margin-bottom:6px;">📌 Store Instructions & Help</div>
+                <div class="guide-step">1. Select appropriate panel (External = Root / Jailbreak, Internal = No Root).</div>
+                <div class="guide-step">2. Make sure wallet has required balance.</div>
+            </div>
+
+            <!-- 24/7 SUPPORT BANNER -->
+            <div style="background:linear-gradient(135deg, #1f0000, #001f0a); border:1px solid var(--green-glow); border-radius:12px; padding:12px; text-align:center; color:var(--green-glow); font-weight:bold; font-size:14px; text-shadow:0 0 10px var(--green-glow);">
+                ⚡ 24/7 DEDICATED CUSTOMER SUPPORT AVAILABLE ⚡
+            </div>
+    </div>
+                                                             <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Android External Panel</div><div class="badge-need-root">⚡ Need RooT</div></div>
 
+            <div class="store-brand-header">CheatXStore</div>
+
+            <!-- DASHBOARD 1: DRIP-CLIENT [EXTERNAL] -->
             <div class="dash-card">
-                <h3 style="color:#fff; text-align:left;">DRIP-CLIENT EXTERNAL</h3>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (10 Days)', 310)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (15 Days)', 380)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (30 Days)', 550)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT EXT (3 Month)', 999)">🛒 Buy Now</button></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= PAGE 4: ANDROID INTERNAL PRODUCTS ================= -->
-        <div id="pageInternal" class="page-view">
-            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Android Internal Panel</div><div class="online-badge-green">● NO ROOT</div></div>
-
-            <div class="dash-card">
-                <h3 style="color:#fff; text-align:left;">DRIP-CLIENT INTERNAL</h3>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (10 Days)', 310)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (15 Days)', 380)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (30 Days)', 550)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (3 Month)', 999)">🛒 Buy Now</button></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= PAGE 5: IOS EXTERNAL PRODUCTS ================= -->
-        <div id="pageIosExternal" class="page-view">
-            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">iOS External Panel</div><div class="badge-need-root">⚡ Need Jailbreak</div></div>
-
-            <div class="dash-card">
-                <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL</h3>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS (30 Days)', 560)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS (60 Days)', 1040)">🛒 Buy Now</button></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= PAGE 6: IOS INTERNAL PRODUCTS ================= -->
-        <div id="pageIosInternal" class="page-view">
-            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">iOS Internal Panel</div><div class="online-badge-green">● NO JAILBREAK</div></div>
-
-            <div class="dash-card">
-                <h3 style="color:#fff; text-align:left;">FULORITE IOS INTERNAL</h3>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE INT (30 Days)', 560)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE INT (60 Days)', 1040)">🛒 Buy Now</button></div>
-                </div>
-            </div>
-    </div>
-                                                                                                                                   <!-- ================= PAGE 7: FULL PROFILE PAGE ================= -->
-        <div id="pageProfile" class="page-view">
-            <div class="dash-card" style="text-align:center;">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-avatar" alt="Avatar">
-                <h2 id="profNameDisplay" style="color:#fff; font-size:20px;">Guest User</h2>
-                <p id="profEmailDisplay" style="color:#aaa; font-size:12px; margin-bottom:15px;"></p>
-
-                <div style="background:rgba(0,255,102,0.1); border:1px solid var(--green-glow); border-radius:12px; padding:15px; margin-bottom:15px;">
-                    <span style="font-size:12px; color:#aaa; text-transform:uppercase;">Wallet Balance</span>
-                    <h1 style="color:var(--green-glow); text-shadow:0 0 10px var(--green-glow); margin-top:5px;">₹<span id="profWalletDisplay">0</span></h1>
-                </div>
-
-                <button class="btn-glow-green" style="width:100%; margin-bottom:12px;" onclick="openAddMoneyModal()">+ Add Money To Wallet</button>
-
-                <div style="display:flex; gap:10px; margin-bottom:12px;">
-                    <button class="btn-glow-blue" style="width:50%; font-size:11px;" onclick="toggleHistory('purchaseHistoryBox')">📜 Purchase History</button>
-                    <button class="btn-glow-yellow" style="width:50%; font-size:11px; padding:12px;" onclick="toggleHistory('depositHistoryBox')">💳 Deposit History</button>
-                </div>
-
-                <!-- Purchase History Box -->
-                <div id="purchaseHistoryBox" class="history-list-box" style="display:none;">
-                    <strong style="color:var(--blue-glow);">My Purchases:</strong>
-                    <div id="purchaseList">No purchase history found.</div>
-                </div>
-
-                <!-- Deposit History Box -->
-                <div id="depositHistoryBox" class="history-list-box" style="display:none;">
-                    <strong style="color:var(--yellow-glow);">Deposit Requests:</strong>
-                    <div id="depositList">No deposit history found.</div>
-                </div>
-
-                <button class="btn-glow-yellow" style="width:100%; background:linear-gradient(135deg, #ff1a1a, #990000); color:#fff; border-color:#ff6666; margin-top:15px;" onclick="openSupportModal()">🎧 Customer Support</button>
-                <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; margin-top:10px; background:#333; color:#fff;" onclick="openAuthModal()">Login / Sign Up</button>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- FLOATING SUPPORT BUTTON -->
-    <div class="btn-floating-support" id="btnOpenSupport">👩‍💼</div>
-        <!-- CUSTOMER SUPPORT MODAL -->
-    <div class="modal-overlay" id="supportModal">
-        <div class="modal-card-support">
-            <div class="support-modal-header">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <div class="chat-icon-circle">🎧</div>
+                <div class="glow-pink-title">DRIP-CLIENT [EXTERNAL]</div>
+                <div class="features-grid">
                     <div>
-                        <div style="font-size:16px; font-weight:bold; color:#fff;">Customer Support</div>
-                        <div style="font-size:11px; color:rgba(255,255,255,0.8);"><span style="color:var(--green-glow);">●</span> Active Online</div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                        <div class="feature-item">Esp Name</div>
+                        <div class="feature-item">Esp Skeleton</div>
                     </div>
                 </div>
-                <div style="color:#fff; font-size:20px; cursor:pointer;" onclick="closeModal('supportModal')">✕</div>
+                <div class="brutal-line">Brutal Features - Speed, Magnet Etc.</div>
+
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP EXT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP EXT (10 Days)', 200)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">25 Days</div><div class="price-amount">₹350</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP EXT (25 Days)', 350)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP EXT (30 Days)', 400)">🛒 Buy Now</button></div>
+                </div>
             </div>
 
-            <div style="padding: 20px;">
-                <form id="supportForm">
-                    <div class="form-group"><label>Name</label><input type="text" id="custName" class="form-input-box" placeholder="Your Name" required></div>
-                    <div class="form-group"><label>Email</label><input type="email" id="custEmail" class="form-input-box" placeholder="Your Gmail" required></div>
-                    <div class="form-group"><label>Describe Problem</label><textarea id="custMsg" class="form-textarea-box" placeholder="Describe issue in detail..." required></textarea></div>
-                    <button type="submit" class="btn-submit-support"><span>👩‍💼</span> <span>Send Message</span></button>
-                </form>
+            <!-- DASHBOARD 2: SILENT CHEAT [EXTERNAL] -->
+            <div class="dash-card">
+                <div class="glow-red-title">SILENT CHEAT [EXTERNAL]</div>
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                        <div class="feature-item">Esp Name</div>
+                        <div class="feature-item">Esp Skeleton</div>
+                    </div>
+                </div>
+                <div class="brutal-line">Brutal Features - Speed, Magnet Etc.</div>
+
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT EXT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT EXT (10 Days)', 200)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">25 Days</div><div class="price-amount">₹350</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT EXT (25 Days)', 350)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT EXT (30 Days)', 400)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- DASHBOARD 3: HAX-CRACKER [EXTERNAL] -->
+            <div class="dash-card">
+                <div class="glow-red-title">HAX-CRACKER [EXTERNAL]</div>
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                        <div class="feature-item">Esp Name</div>
+                        <div class="feature-item">Esp Skeleton</div>
+                    </div>
+                </div>
+
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="buyWithWallet('HAX EXT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="buyWithWallet('HAX EXT (10 Days)', 200)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">25 Days</div><div class="price-amount">₹350</div><button class="btn-buy-card" onclick="buyWithWallet('HAX EXT (25 Days)', 350)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="buyWithWallet('HAX EXT (30 Days)', 400)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- FEEDBACK SECTION -->
+            <div class="feedback-section">
+                <h4 style="color:#fff;">⭐ Rate Android External</h4>
+                <div class="star-rating" onclick="rateFeedback(event, 'Android External')">
+                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
+                </div>
+                <input type="text" id="feedMsg_AndroidExt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
+                <button class="btn-buy-card" onclick="submitFeedback('Android External', 'feedMsg_AndroidExt')">Submit Feedback</button>
+            </div>
+    </div>
+                                    <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
+        <div id="pageInternal" class="page-view">
+            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <div class="store-brand-header">CheatXStore</div>
+
+            <!-- DASHBOARD 1: DRIP-CLIENT [INTERNAL] -->
+            <div class="dash-card">
+                <div class="glow-pink-title">DRIP-CLIENT [INTERNAL]</div>
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                        <div class="feature-item">Esp Name</div>
+                        <div class="feature-item">Esp Skeleton</div>
+                    </div>
+                </div>
+                <div class="brutal-line">Brutal Features - Speed, Magnet Etc.</div>
+
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (10 Days)', 200)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">25 Days</div><div class="price-amount">₹350</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (25 Days)', 350)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (30 Days)', 400)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- DASHBOARD 2: SILENT CHEAT [INTERNAL] -->
+            <div class="dash-card">
+                <div class="glow-red-title">SILENT CHEAT [INTERNAL]</div>
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                        <div class="feature-item">Esp Name</div>
+                        <div class="feature-item">Esp Skeleton</div>
+                    </div>
+                </div>
+                <div class="brutal-line">Brutal Features - Speed, Magnet Etc.</div>
+
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT INT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT INT (10 Days)', 200)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">25 Days</div><div class="price-amount">₹350</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT INT (25 Days)', 350)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="buyWithWallet('SILENT INT (30 Days)', 400)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- DASHBOARD 3: HAX-CRACKER [INTERNAL] -->
+            <div class="dash-card">
+                <div class="glow-red-title">HAX-CRACKER [INTERNAL]</div>
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                        <div class="feature-item">Esp Name</div>
+                        <div class="feature-item">Esp Skeleton</div>
+                    </div>
+                </div>
+
+                <div class="pricing-grid">
+                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="buyWithWallet('HAX INT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="buyWithWallet('HAX INT (10 Days)', 200)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">25 Days</div><div class="price-amount">₹350</div><button class="btn-buy-card" onclick="buyWithWallet('HAX INT (25 Days)', 350)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="buyWithWallet('HAX INT (30 Days)', 400)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- FEEDBACK SECTION -->
+            <div class="feedback-section">
+                <h4 style="color:#fff;">⭐ Rate Android Internal</h4>
+                <div class="star-rating" onclick="rateFeedback(event, 'Android Internal')">
+                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
+                </div>
+                <input type="text" id="feedMsg_AndroidInt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
+                <button class="btn-buy-card" onclick="submitFeedback('Android Internal', 'feedMsg_AndroidInt')">Submit Feedback</button>
+            </div>
+    </div>
+                            <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
+        <div id="pageIosExternal" class="page-view">
+            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <div class="store-brand-header">CheatXStore</div>
+
+            <div class="dash-card">
+                <div class="glow-green-title">FULORITE IOS [EXTERNAL]</div>
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                    </div>
+                </div>
+                <div class="brutal-line">Brutal Features - Speed, Magnet, Auto Headshot Etc.</div>
+
+                <!-- PRICING WITH 30% DISCOUNT -->
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">10 Days</div>
+                        <div class="price-amount">₹310</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS EXT (10 Days)', 310)">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">15 Days</div>
+                        <div class="price-amount">₹380</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS EXT (15 Days)', 380)">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">30 Days</div>
+                        <div class="price-amount">₹550</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS EXT (30 Days)', 550)">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">3 Month</div>
+                        <div class="price-amount">₹999</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS EXT (3 Month)', 999)">🛒 Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEEDBACK SECTION -->
+            <div class="feedback-section">
+                <h4 style="color:#fff;">⭐ Rate iOS External</h4>
+                <div class="star-rating" onclick="rateFeedback(event, 'iOS External')">
+                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
+                </div>
+                <input type="text" id="feedMsg_IosExt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
+                <button class="btn-buy-card" onclick="submitFeedback('iOS External', 'feedMsg_IosExt')">Submit Feedback</button>
             </div>
         </div>
-    </div>
 
-    <!-- AUTHENTICATION MODAL -->
-    <div class="modal-overlay" id="authModal">
-        <div class="modal-card-support" style="padding: 20px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h4 style="color:#fff;" id="authTitleText">Create Account / Login</h4>
-                <span style="color:#fff; cursor:pointer;" onclick="closeModal('authModal')">✕</span>
+        <!-- ================= PAGE 6: IOS INTERNAL ================= -->
+        <div id="pageIosInternal" class="page-view">
+            <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <div class="store-brand-header">CheatXStore</div>
+
+            <div class="dash-card">
+                <div class="glow-green-title">FULORITE IOS [INTERNAL]</div>
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-col-title">Aimbot</div>
+                        <div class="feature-item">Assest-Pro</div>
+                        <div class="feature-item">Aim Silent</div>
+                        <div class="feature-item">Aim Magnet</div>
+                    </div>
+                    <div>
+                        <div class="feature-col-title">Visual [Esp]</div>
+                        <div class="feature-item">Esp Line</div>
+                        <div class="feature-item">Esp Box</div>
+                        <div class="feature-item">Esp Health</div>
+                        <div class="feature-item">Esp Distance</div>
+                    </div>
+                </div>
+                <div class="brutal-line">Brutal Features - Speed, Magnet, Auto Headshot Etc.</div>
+
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">10 Days</div>
+                        <div class="price-amount">₹310</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS INT (10 Days)', 310)">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">15 Days</div>
+                        <div class="price-amount">₹380</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS INT (15 Days)', 380)">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">30 Days</div>
+                        <div class="price-amount">₹550</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS INT (30 Days)', 550)">🛒 Buy Now</button>
+                    </div>
+                    <div class="price-card">
+                        <div class="discount-badge">30% OFF</div>
+                        <div class="duration-tag">3 Month</div>
+                        <div class="price-amount">₹999</div>
+                        <button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS INT (3 Month)', 999)">🛒 Buy Now</button>
+                    </div>
+                </div>
             </div>
-            <input type="text" id="regUname" class="form-input-box" placeholder="Username" style="margin-bottom:12px;">
-            <input type="email" id="authEmail" class="form-input-box" placeholder="Enter Gmail" required style="margin-bottom:12px;">
-            <input type="password" id="authPass" class="form-input-box" placeholder="Enter Password" required style="margin-bottom:15px;">
-            <button class="btn-glow-yellow" style="font-size:15px;" onclick="handleAuth()">Submit</button>
+
+            <!-- FEEDBACK SECTION -->
+            <div class="feedback-section">
+                <h4 style="color:#fff;">⭐ Rate iOS Internal</h4>
+                <div class="star-rating" onclick="rateFeedback(event, 'iOS Internal')">
+                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
+                </div>
+                <input type="text" id="feedMsg_IosInt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
+                <button class="btn-buy-card" onclick="submitFeedback('iOS Internal', 'feedMsg_IosInt')">Submit Feedback</button>
+            </div>
         </div>
+
+        <!-- ================= PAGE 7: PROFILE ================= -->
+        <div id="pageProfile" class="page-view">
+            <div class="dash-card" style="text-align:center;">
+                <h2 id="profNameDisplay" style="color:#fff; font-size:20px;">Guest User</h2>
+                <p id="profEmailDisplay" style="color:#aaa; font-size:12px; margin-bottom:12px;"></p>
+
+                <div style="background:rgba(0,255,102,0.1); border:1px solid var(--green-glow); border-radius:12px; padding:12px; margin-bottom:12px;">
+                    <span style="font-size:12px; color:#aaa;">WALLET BALANCE</span>
+                    <h1 style="color:var(--green-glow); text-shadow:0 0 10px var(--green-glow);">₹<span id="profWalletDisplay">0</span></h1>
+                </div>
+
+                <button class="btn-glow-green" style="width:100%; margin-bottom:10px;" onclick="openAddMoneyModal()">+ Add Money</button>
+                <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; background:#333; color:#fff;" onclick="openAuthModal()">Login / Sign Up</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- ADD MONEY MODAL -->
+    <div class="btn-floating-support" id="btnOpenSupport">👩‍💼</div>
+                                <!-- ADD MONEY MODAL (OPTION B) -->
     <div class="modal-overlay" id="moneyModal">
         <div class="modal-card-support" style="padding: 20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <h4 style="color:#fff;">Add Money to Wallet</h4>
                 <span style="color:#fff; cursor:pointer;" onclick="closeModal('moneyModal')">✕</span>
             </div>
+
             <label style="font-size:12px; color:#aaa;">Amount (INR)</label>
-            <input type="number" id="addAmount" class="form-input-box" placeholder="Amount (e.g. 500)" required style="margin-bottom:12px;">
-            <p style="font-size: 11px; color: #aaa; margin-bottom:6px;">Pay to UPI ID (<b>9354505161@ybl</b>) & enter 12-Digit UTR below:</p>
-            <input type="text" id="utrNo" class="form-input-box" placeholder="12-Digit UTR Number" required style="margin-bottom:15px;">
-            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff;" onclick="submitAddMoney()">Request Approval</button>
+            <input type="number" id="addAmount" class="form-input-box" placeholder="Enter Amount (e.g. 500)" required>
+
+            <button class="btn-glow-yellow" style="margin-bottom:12px;" onclick="openUpiApp()">
+                📱 1. Pay via PhonePe / GPay / Paytm
+            </button>
+
+            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff;" onclick="submitAddMoney()">
+                ✅ 2. Submit Payment Request
+            </button>
         </div>
     </div>
 
-    <!-- INSUFFICIENT BALANCE MODAL -->
-    <div class="modal-overlay" id="noMoneyModal">
-        <div class="modal-card-support" style="padding: 20px; text-align:center;">
-            <h3 style="color:var(--red-glow); margin-bottom:10px;">⚠️ Not Enough Currency</h3>
-            <p style="color:#ccc; font-size:13px; margin-bottom:15px;">Aapke wallet mein is product ko khareedne ke liye paryapt rupya nahi hai.</p>
-            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff; margin-bottom:10px;" onclick="closeModal('noMoneyModal'); openAddMoneyModal();">+ Add Money</button>
-            <button onclick="closeModal('noMoneyModal')" style="background:transparent; border:none; color:#aaa; font-size:12px; cursor:pointer;">Cancel</button>
+    <!-- CUSTOMER SUPPORT MODAL -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-card-support" style="padding:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h3 style="color:#fff;">Customer Support</h3>
+                <span style="color:#fff; cursor:pointer;" onclick="closeModal('supportModal')">✕</span>
+            </div>
+            <input type="text" id="custName" class="form-input-box" placeholder="Your Name">
+            <input type="email" id="custEmail" class="form-input-box" placeholder="Your Email">
+            <textarea id="custMsg" class="form-input-box" placeholder="Describe issue..." style="height:80px;"></textarea>
+            <button class="btn-glow-yellow" onclick="sendSupportMessage()">Send Message</button>
         </div>
     </div>
 
-    <!-- GREEN SUCCESS MODAL -->
+    <!-- AUTH MODAL -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-card-support" style="padding: 20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h4 style="color:#fff;">Create Account / Login</h4>
+                <span style="color:#fff; cursor:pointer;" onclick="closeModal('authModal')">✕</span>
+            </div>
+            <input type="text" id="regUname" class="form-input-box" placeholder="Username">
+            <input type="email" id="authEmail" class="form-input-box" placeholder="Gmail">
+            <input type="password" id="authPass" class="form-input-box" placeholder="Password">
+            <button class="btn-glow-yellow" onclick="handleAuth()">Submit</button>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
     <div class="modal-overlay" id="successModal">
         <div class="modal-card-support" style="padding: 20px; text-align:center; border-color:var(--green-glow);">
-            <h2 style="color:var(--green-glow); text-shadow:0 0 10px var(--green-glow); margin-bottom:10px;">🎉 Success!</h2>
-            <p id="successMsg" style="color:#fff; font-size:14px; margin-bottom:15px;"></p>
-            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff;" onclick="closeModal('successModal')">OK</button>
+            <div id="successMsg" style="color:#fff;"></div>
+            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff; margin-top:15px;" onclick="closeModal('successModal')">OK</button>
         </div>
     </div>
 
-    <!-- BOTTOM NAVIGATION BAR -->
+    <!-- BOTTOM NAV BAR -->
     <div class="bottom-nav-bar">
         <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')"><span style="font-size:18px;">🏠</span><span>Home</span></button>
         <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')"><span style="font-size:18px;">🏪</span><span>Store</span></button>
         <button class="nav-link-item" id="navProfileBtn" onclick="switchPage('pageProfile')"><span style="font-size:18px;">👤</span><span>Profile</span></button>
-    </div>
-        <script>
-        // FIREBASE INITIALIZATION
+        </div>
+                        <script>
         const firebaseConfig = {
           apiKey: "AIzaSyAPUoAlktXoQ2wPEfWm29rZTEjefbQRMLA",
           authDomain: "cheatx-store-cdc7f.firebaseapp.com",
@@ -612,15 +718,15 @@
         const db = firebase.database();
 
         let currentUser = null, userWallet = 0;
+        let activePageHistory = ['pageHome'];
+        let selectedStars = {};
 
-        // AUTH LISTENER
         auth.onAuthStateChanged(user => {
             if(user) {
                 currentUser = user;
                 document.getElementById('profEmailDisplay').innerText = user.email;
                 document.getElementById('authBtnProf').innerText = "Logout";
                 document.getElementById('authBtnProf').onclick = () => auth.signOut();
-                
                 db.ref('users/' + user.uid).on('value', snap => {
                     const data = snap.val();
                     if(data) {
@@ -629,7 +735,6 @@
                         document.getElementById('profWalletDisplay').innerText = userWallet;
                     }
                 });
-                loadUserHistory(user.uid);
             } else {
                 currentUser = null; userWallet = 0;
                 document.getElementById('profNameDisplay').innerText = "Guest User";
@@ -643,19 +748,90 @@
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         function openAuthModal() { openModal('authModal'); }
-        function openSupportModal() { openModal('supportModal'); }
-        function openAddMoneyModal() { 
-            if(!currentUser) { alert("Please login first!"); openAuthModal(); return; }
-            openModal('moneyModal'); 
+        function openAddMoneyModal() { if(!currentUser) return openAuthModal(); openModal('moneyModal'); }
+
+        // MOBILE HARDWARE BACK-BUTTON NAVIGATION HANDLER
+        window.addEventListener('popstate', function(e) {
+            if (activePageHistory.length > 1) {
+                activePageHistory.pop();
+                const previousPage = activePageHistory[activePageHistory.length - 1];
+                renderPage(previousPage, false);
+            }
+        });
+
+        function switchPage(pageId) { renderPage(pageId, true); }
+
+        function renderPage(pageId, pushToHistory) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            if(pushToHistory && activePageHistory[activePageHistory.length - 1] !== pageId) {
+                activePageHistory.push(pageId);
+                history.pushState({ page: pageId }, "", "#" + pageId);
+            }
+
+            document.getElementById('navHomeBtn').classList.remove('active');
+            document.getElementById('navStoreBtn').classList.remove('active');
+            document.getElementById('navProfileBtn').classList.remove('active');
+
+            if(pageId === 'pageHome') document.getElementById('navHomeBtn').classList.add('active');
+            else if(pageId === 'pageMainStore' || pageId.includes('pageExt') || pageId.includes('pageInt')) document.getElementById('navStoreBtn').classList.add('active');
+            else if(pageId === 'pageProfile') document.getElementById('navProfileBtn').classList.add('active');
+
+            window.scrollTo(0,0);
         }
 
-        // SIGN UP / LOGIN HANDLER
+        // OPTION B: AUTO UPI INTENT
+        function openUpiApp() {
+            const amt = document.getElementById('addAmount').value;
+            if(!amt || amt <= 0) return alert("Kripya sahi Amount enter karein!");
+            window.location.href = `upi://pay?pa=9354505161@ybl&pn=CheatX%20Store&am=${amt}&cu=INR`;
+        }
+
+        function submitAddMoney() {
+            const amt = document.getElementById('addAmount').value;
+            if(!amt || amt <= 0) return alert("Kripya pehle Amount enter karke payment karein!");
+            if(!currentUser) return openAuthModal();
+
+            db.ref('requests/').push({
+                uid: currentUser.uid, email: currentUser.email, amount: parseInt(amt),
+                utr: "Auto-UPI Request", status: "pending", date: new Date().toLocaleString()
+            }).then(() => {
+                closeModal('moneyModal');
+                document.getElementById('successMsg').innerHTML = `
+                    <div style="font-size: 18px; font-weight: bold; color: var(--green-glow); margin-bottom: 8px;">
+                        Successfully Submitted!
+                    </div>
+                    <div style="font-size: 13px; color: #dddddd; line-height: 1.5;">
+                        When your payment is verified, the money will be added to your wallet.
+                    </div>
+                `;
+                openModal('successModal');
+                document.getElementById('addAmount').value = "";
+            });
+        }
+
+        function buyWithWallet(pName, price) {
+            if(!currentUser) return openAuthModal();
+            if(userWallet < price) {
+                alert("Wallet balance kam hai! Kripya Add Money karein.");
+                openAddMoneyModal();
+            } else {
+                const newBal = userWallet - price;
+                db.ref('users/' + currentUser.uid + '/wallet').set(newBal).then(() => {
+                    db.ref('admin/wallet').transaction(curr => (curr || 0) + price);
+                    db.ref('orders/').push({ uid: currentUser.uid, email: currentUser.email, product: pName, price: price, date: new Date().toLocaleString() });
+                    document.getElementById('successMsg').innerHTML = `<h3 style="color:var(--green-glow)">Purchase Successful!</h3><p style="color:#fff; font-size:13px; margin-top:5px;">You bought <b>${pName}</b> for ₹${price}</p>`;
+                    openModal('successModal');
+                });
+            }
+        }
+
         function handleAuth() {
             const uname = document.getElementById('regUname').value;
             const e = document.getElementById('authEmail').value;
             const p = document.getElementById('authPass').value;
             if(!e || !p) return alert("Fill Email and Password!");
-
             auth.createUserWithEmailAndPassword(e, p).then(res => {
                 db.ref('users/' + res.user.uid).set({ username: uname || e.split('@')[0], email: e, wallet: 0 });
                 closeModal('authModal');
@@ -664,137 +840,64 @@
             });
         }
 
-        // AUTO WALLET BUY & TRANSFER TO ADMIN
-        function buyWithWallet(pName, price) {
-            if(!currentUser) return openAuthModal();
-
-            if(userWallet < price) {
-                openModal('noMoneyModal');
-            } else {
-                const newBal = userWallet - price;
-                // Deduct from User
-                db.ref('users/' + currentUser.uid + '/wallet').set(newBal).then(() => {
-                    // Add to Admin Personal Wallet
-                    db.ref('admin/wallet').transaction(curr => (curr || 0) + price);
-                    // Add to Order History
-                    db.ref('orders/').push({
-                        uid: currentUser.uid, email: currentUser.email, product: pName, price: price, date: new Date().toLocaleString()
-                    });
-
-                    document.getElementById('successMsg').innerText = `Your purchase for ${pName} (₹${price}) was successfully completed!`;
-                    openModal('successModal');
+        function rateFeedback(e, category) {
+            if(e.target.classList.contains('star')) {
+                const val = e.target.getAttribute('data-val');
+                selectedStars[category] = val;
+                const stars = e.currentTarget.querySelectorAll('.star');
+                stars.forEach((s, idx) => {
+                    if(idx < val) s.classList.add('active'); else s.classList.remove('active');
                 });
             }
         }
 
-        // ADD MONEY REQUEST
-        function submitAddMoney() {
-            const amt = document.getElementById('addAmount').value;
-            const utr = document.getElementById('utrNo').value;
-            if(!amt || !utr) return alert("Enter Amount and UTR!");
+        function submitFeedback(category, inputId) {
+            const msg = document.getElementById(inputId).value;
+            const rating = selectedStars[category] || 5;
+            if(!currentUser) return openAuthModal();
 
-            db.ref('requests/').push({
-                uid: currentUser.uid, email: currentUser.email, amount: parseInt(amt), utr: utr, status: "pending", date: new Date().toLocaleString()
+            db.ref('feedbacks/').push({
+                uid: currentUser.uid, email: currentUser.email, category: category,
+                rating: rating, message: msg, date: new Date().toLocaleString()
             }).then(() => {
-                alert("Deposit request sent to Admin!");
-                closeModal('moneyModal');
+                alert("Thank you for your feedback!");
+                document.getElementById(inputId).value = "";
             });
         }
 
-        // SUPPORT FORM SUBMISSION
-        document.getElementById('supportForm').onsubmit = function(e) {
-            e.preventDefault();
+        function sendSupportMessage() {
             const name = document.getElementById('custName').value;
             const email = document.getElementById('custEmail').value;
             const msg = document.getElementById('custMsg').value;
+            if(!name || !msg) return alert("Please fill fields!");
 
-            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ Name: name, Email: email, Message: msg })
-            });
-
-            closeModal('supportModal');
-            document.getElementById('supportForm').reset();
-            document.getElementById('successMsg').innerText = "Your problem is successfully sent!";
-            openModal('successModal');
-        };
-
-        // HISTORY SWITCHER
-        function toggleHistory(id) {
-            const box = document.getElementById(id);
-            box.style.display = box.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function loadUserHistory(uid) {
-            // Load Purchases
-            db.ref('orders').orderByChild('uid').equalTo(uid).on('value', snap => {
-                const box = document.getElementById('purchaseList');
-                box.innerHTML = ""; const val = snap.val();
-                if(!val) { box.innerHTML = "No purchases yet."; return; }
-                for(let k in val) {
-                    box.innerHTML += `<div class="history-item"><b>${val[k].product}</b> - ₹${val[k].price}<br><small style="color:#aaa">${val[k].date}</small></div>`;
-                }
-            });
-
-            // Load Deposits
-            db.ref('requests').orderByChild('uid').equalTo(uid).on('value', snap => {
-                const box = document.getElementById('depositList');
-                box.innerHTML = ""; const val = snap.val();
-                if(!val) { box.innerHTML = "No deposit requests."; return; }
-                for(let k in val) {
-                    box.innerHTML += `<div class="history-item">Amount: ₹${val[k].amount} (${val[k].status})<br><small style="color:#aaa">UTR: ${val[k].utr}</small></div>`;
-                }
+            db.ref('support_tickets/').push({ name: name, email: email, message: msg, date: new Date().toLocaleString() }).then(() => {
+                closeModal('supportModal');
+                document.getElementById('successMsg').innerHTML = "<h3 style="color:var(--green-glow)">Message Sent!</h3><p style="color:#fff">Support team will contact you soon.</p>";
+                openModal('successModal');
             });
         }
 
-        // PAGE SWITCHING SYSTEM
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+        document.getElementById('btnOpenSupport').onclick = () => openModal('supportModal');
 
-            document.getElementById('navHomeBtn').classList.remove('active');
-            document.getElementById('navStoreBtn').classList.remove('active');
-            document.getElementById('navProfileBtn').classList.remove('active');
-
-            // Hide Floating Support Icon on Profile Page
-            const floatBtn = document.getElementById('btnOpenSupport');
-            if(pageId === 'pageProfile') {
-                floatBtn.style.display = 'none';
-                document.getElementById('navProfileBtn').classList.add('active');
-            } else {
-                floatBtn.style.display = 'flex';
-                if(pageId === 'pageHome') document.getElementById('navHomeBtn').classList.add('active');
-                else if(pageId === 'pageMainStore') document.getElementById('navStoreBtn').classList.add('active');
-            }
-            window.scrollTo(0,0);
-        }
-
-        document.getElementById('btnOpenSupport').onclick = openSupportModal;
-
-        // CANVAS PARTICLES
+        // CANVAS ANIMATION
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-
         const particles = [];
-        for(let i = 0; i < 40; i++) {
-            particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 2 + 1, speedY: Math.random() * 1.5 + 0.5 });
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(255, 26, 26, 0.7)';
+        for(let i = 0; i < 35; i++) particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, radius: Math.random()*2 + 1, speedY: Math.random()*1.2 + 0.4 });
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = 'rgba(255,26,26,0.6)';
             particles.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
-                p.y += p.speedY;
-                if(p.y > canvas.height) { p.y = 0; p.x = Math.random() * canvas.width; }
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2); ctx.fill();
+                p.y += p.speedY; if(p.y > canvas.height) { p.y = 0; p.x = Math.random()*canvas.width; }
             });
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animate);
         }
-        animateParticles();
+        animate();
     </script>
 </body>
 </html>
