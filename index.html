@@ -104,8 +104,8 @@
             border: 1px solid #00ffaa;
             text-shadow: 0 0 8px #00ffaa;
         }
-            
-            .white-glow-heading {
+
+        .white-glow-heading {
             color: #ffffff;
             font-size: 20px;
             font-weight: 900;
@@ -212,9 +212,9 @@
         }
 
         .btn-glow-yellow {
-            width: 100%; padding: 16px;
+            width: 100%; padding: 14px;
             background: linear-gradient(135deg, #ffcc00, #b38f00);
-            color: #000; font-size: 18px; font-weight: 900;
+            color: #000; font-size: 16px; font-weight: 900;
             border: 2px solid #ffee80; border-radius: 12px;
             cursor: pointer; box-shadow: 0 0 20px var(--yellow-glow);
         }
@@ -286,14 +286,6 @@
             box-shadow: 0 0 15px rgba(230, 0, 0, 0.5);
         }
 
-        .spinner {
-            border: 4px solid rgba(255,255,255,0.1);
-            width: 45px; height: 45px; border-radius: 50%;
-            border-left-color: var(--red-glow);
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px auto;
-        }
-
         .bottom-nav-bar {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px);
@@ -312,23 +304,34 @@
             padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-bottom: 15px;
         }
 
+        .profile-avatar {
+            width: 75px; height: 75px; border-radius: 50%;
+            border: 3px solid var(--green-glow); margin: 0 auto 10px auto;
+            box-shadow: 0 0 15px var(--green-glow); display: block;
+        }
+
+        .history-list-box {
+            max-height: 200px; overflow-y: auto; text-align: left;
+            background: rgba(0,0,0,0.5); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px;
+        }
+
+        .history-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 8px 0; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes flash { 0% { opacity: 0.3; } 100% { opacity: 1; filter: drop-shadow(0 0 12px var(--yellow-glow)); } }
         @keyframes pulse-red { 0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } 50% { box-shadow: 0 0 22px rgba(255, 26, 26, 0.9); } 100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } }
     </style>
 
-    <!-- Firebase Compatibility SDKs -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 </head>
 <body>
-        <canvas id="bgCanvas"></canvas>
-
+    <canvas id="bgCanvas"></canvas>
     <div class="container">
 
-        <!-- ================= PAGE 1: HOME PAGE ================= -->
+                <!-- ================= PAGE 1: HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             <div class="top-nav">
                 <div style="font-weight:900; color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">FF&FFMAX CHEAT STORE</div>
@@ -351,45 +354,23 @@
                 </p>
             </div>
 
-            <!-- HOW TO BUY GUIDE -->
             <div class="guide-box">
                 <div class="white-glow-heading">How To Buy Panel?</div>
                 <div class="guide-step">1. Go to the <strong>Panel Store</strong> first.</div>
                 <div class="guide-step">2. <strong>For Android Users:</strong> Select Android Panel. If your phone is rooted, select <strong>External</strong>. If non-rooted, select <strong>Internal</strong>.</div>
-                <div class="guide-step">3. Enter your correct <strong>Gmail Address</strong> during checkout. Your panel setup file will be sent there.</div>
-                <div class="guide-step">4. <strong>For iOS Users:</strong> Choose iOS Panel. Select <strong>External</strong> if your device is Jailbroken, otherwise select <strong>Internal</strong>.</div>
-                <div class="guide-step">5. Ensure your Gmail is accurate for automatic key delivery.</div>
+                <div class="guide-step">3. Make sure your Wallet has enough balance before buying.</div>
             </div>
 
-            <!-- HELP & SUPPORT GUIDE -->
-            <div class="guide-box" style="border-left-color: var(--yellow-glow);">
-                <div class="white-glow-heading" style="color: var(--yellow-glow); text-shadow:0 0 10px var(--yellow-glow);">Support / Help</div>
-                <div class="guide-step">● Click the <strong>Customer Support Floating Button (👩‍💼)</strong> at the bottom right corner.</div>
-                <div class="guide-step">● Enter your Name, Gmail ID, and describe your issue.</div>
-                <div class="guide-step">● Click Send. Our team will resolve your issue within <strong>1 Hour</strong>.</div>
-            </div>
-
-            <!-- 3 BADGES BOX -->
             <div class="feature-grid">
-                <div class="feature-card">
-                    <div style="font-size:20px;">⭐</div>
-                    <div class="feature-card-title">4.5★ Rating</div>
-                </div>
-                <div class="feature-card">
-                    <div style="font-size:20px;">🔄</div>
-                    <div class="feature-card-title">Always Updated</div>
-                </div>
-                <div class="feature-card">
-                    <div style="font-size:20px;">🛡️</div>
-                    <div class="feature-card-title">Anti-Ban</div>
-                </div>
+                <div class="feature-card"><div style="font-size:20px;">⭐</div><div class="feature-card-title">4.5★ Rating</div></div>
+                <div class="feature-card"><div style="font-size:20px;">🔄</div><div class="feature-card-title">Always Updated</div></div>
+                <div class="feature-card"><div style="font-size:20px;">🛡️</div><div class="feature-card-title">Anti-Ban</div></div>
             </div>
         </div>
 
         <!-- ================= PAGE 2: PANEL STORE MAIN ================= -->
         <div id="pageMainStore" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back Home</button>
-            
             <div class="top-nav">
                 <div class="logo-text">
                     <span class="lightning-bolt">⚡</span>
@@ -398,19 +379,14 @@
                 <div class="online-badge-green" id="liveCounterBadge">⚡ <span id="counterNum">125</span> Online</div>
             </div>
 
-            <div class="main-heading">
-                <span style="color:#ffffff;">CHEAT</span> <span style="color:var(--red-glow); text-shadow:0 0 10px var(--red-glow);">STORE</span>
-            </div>
+            <div class="main-heading"><span style="color:#ffffff;">CHEAT</span> <span style="color:var(--red-glow);">STORE</span></div>
             <div class="sub-heading">The Best Panel To Dominant FF&FFMAX</div>
 
-            <!-- DASHBOARD 1: ANDROID PANEL -->
             <div class="dash-card">
-                <div class="banner-box">
-                    <img src="android-banner.jpg" alt="Android Panel Banner" onerror="this.parentNode.innerHTML='📸 ANDROID PANEL BANNER'">
-                </div>
+                <div class="banner-box"><img src="android-banner.jpg" alt="Android Banner" onerror="this.parentNode.innerHTML='📸 ANDROID PANEL BANNER'"></div>
                 <div style="text-align:left; margin-bottom:15px;">
                     <h3 style="color:#fff; font-size:16px;">ANDROID PANEL</h3>
-                    <p style="color:#aaa; font-size:12px; margin-top:4px;">All Type antiban and antiblacklist updated panels are Available.</p>
+                    <p style="color:#aaa; font-size:12px; margin-top:4px;">All Type antiban and antiblacklist updated panels.</p>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
                     <button class="btn-glow-blue" onclick="switchPage('pageExternal')">Buy - External</button>
@@ -418,71 +394,30 @@
                 </div>
             </div>
 
-            <!-- DASHBOARD 2: IOS VIP PANEL -->
             <div class="dash-card">
-                <div class="banner-box">
-                    <img src="ios-banner.jpg" alt="iOS VIP Panel Banner" onerror="this.parentNode.innerHTML='📸 IOS VIP PANEL BANNER'">
-                </div>
+                <div class="banner-box"><img src="ios-banner.jpg" alt="iOS Banner" onerror="this.parentNode.innerHTML='📸 IOS VIP PANEL BANNER'"></div>
                 <div style="text-align:left; margin-bottom:15px;">
                     <h3 class="white-glow-heading" style="font-size:18px; margin:0;">IOS VIP PANEL</h3>
-                    <p style="color:#ffffff; font-size:12px; margin-top:4px; opacity: 0.9;">All type antiban antiblacklist ios panel available.</p>
+                    <p style="color:#ffffff; font-size:12px; margin-top:4px;">All type antiban antiblacklist ios panel.</p>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
                     <button class="btn-glow-blue" onclick="switchPage('pageIosExternal')">Buy External</button>
                     <button class="btn-glow-green" onclick="switchPage('pageIosInternal')">Buy Internal</button>
                 </div>
             </div>
-    </div>
-                    
-            <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
+        </div>
+                <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav">
-                <div style="font-weight:bold; font-size:15px;">Panel External</div>
-                <div class="badge-need-root">⚡ Need RooT</div>
-            </div>
+            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Panel External</div><div class="badge-need-root">⚡ Need RooT</div></div>
 
-            <div class="main-heading" style="font-size:22px;">
-                <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
-            </div>
-            <div style="height:15px;"></div>
-
-            <!-- DRIP-CLIENT -->
             <div class="dash-card">
-                <div class="banner-box"><img src="drip-banner.jpg" alt="DRIP-CLIENT" onerror="this.parentNode.innerHTML='📸 DRIP-CLIENT BANNER'"></div>
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Antiban] Updated all server.</p>
                 <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (10 Days)', '310')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (15 Days)', '380')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (30 Days)', '550')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('DRIP-CLIENT (3 Month)', '999')">🛒 Buy Now</button></div>
-                </div>
-            </div>
-
-            <!-- HAXX CRACKER -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="haxx-banner.jpg" alt="HAXX CRACKER" onerror="this.parentNode.innerHTML='📸 HAXX CRACKER BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">HAXX CRACKER</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Vip Safe] Auto Headshot.</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (10 Days)', '310')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (15 Days)', '380')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (30 Days)', '550')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('HAXX CRACKER (3 Month)', '999')">🛒 Buy Now</button></div>
-                </div>
-            </div>
-
-            <!-- SILENT CHEAT -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="silent-banner.jpg" alt="SILENT CHEAT" onerror="this.parentNode.innerHTML='📸 SILENT CHEAT BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">SILENT CHEAT</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[Undetected] Rank Working.</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (10 Days)', '310')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (15 Days)', '380')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (30 Days)', '550')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('SILENT CHEAT (3 Month)', '999')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (10 Days)', 310)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (15 Days)', 380)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (30 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP-CLIENT (3 Month)', 999)">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
@@ -490,105 +425,27 @@
         <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav">
-                <div style="font-weight:bold; font-size:15px;">Panel Internal</div>
-                <div class="online-badge-green">● ONLINE</div>
-            </div>
+            <div class="top-nav"><div style="font-weight:bold; font-size:15px;">Panel Internal</div><div class="online-badge-green">● ONLINE</div></div>
 
-            <div class="main-heading" style="font-size:22px;">
-                <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
-            </div>
-            <div style="height:15px;"></div>
-
-            <!-- DRIP INTERNAL -->
             <div class="dash-card">
-                <div class="banner-box"><img src="drip-int-banner.jpg" alt="DRIP INTERNAL" onerror="this.parentNode.innerHTML='📸 DRIP INTERNAL BANNER'"></div>
                 <h3 style="color:#fff; text-align:left;">DRIP-CLIENT INTERNAL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Needed] Updated Version.</p>
                 <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (10 Days)', '310')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (15 Days)', '380')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (30 Days)', '550')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (3 Month)', '999')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (10 Days)', 310)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (15 Days)', 380)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (30 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="buyWithWallet('DRIP INT (3 Month)', 999)">🛒 Buy Now</button></div>
                 </div>
             </div>
+        </div>
 
-            <!-- HAXX CRACKER INTERNAL -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="haxx-int-banner.jpg" alt="HAXX INTERNAL" onerror="this.parentNode.innerHTML='📸 HAXX INTERNAL BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">HAXX CRACKER INTERNAL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Safe] Auto Headshot.</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (10 Days)', '310')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (15 Days)', '380')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (30 Days)', '550')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('HAXX INT (3 Month)', '999')">🛒 Buy Now</button></div>
-                </div>
-            </div>
-
-            <!-- SILENT CHEAT INTERNAL -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="silent-int-banner.jpg" alt="SILENT INTERNAL" onerror="this.parentNode.innerHTML='📸 SILENT INTERNAL BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">SILENT CHEAT INTERNAL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">[No Root Safe] Rank Working.</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (10 Days)', '310')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">15 Days</div><div class="price-amount">₹380</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (15 Days)', '380')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (30 Days)', '550')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">3 Month</div><div class="price-amount">₹999</div><button class="btn-buy-card" onclick="openBuyModal('SILENT INT (3 Month)', '999')">🛒 Buy Now</button></div>
-                </div>
-            </div>
-    </div>
-                                                                                                                           
-             <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
+        <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav">
-                <div class="white-glow-heading" style="font-size:16px; margin:0;">IOS EXTERNAL</div>
-                <div class="online-badge-green" style="color:#00ff66; border-color:#00ff66;">Jailbreak</div>
-            </div>
-
-            <div class="main-heading" style="font-size:22px;">
-                <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
-            </div>
-            <div style="height:15px;"></div>
-
-            <!-- FULORITE IOS PANEL -->
             <div class="dash-card">
-                <div class="banner-box"><img src="fulorite-banner.jpg" alt="FULORITE IOS" onerror="this.parentNode.innerHTML='📸 FULORITE IOS BANNER'"></div>
                 <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
                 <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (30 Days)', '560')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (60 Days)', '1040')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (90 Days)', '1509')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS (Permanent)', '13504')">🛒 Buy Now</button></div>
-                </div>
-            </div>
-
-            <!-- MIGOL PRO -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="migol-banner.jpg" alt="MIGOL PRO" onerror="this.parentNode.innerHTML='📸 MIGOL PRO BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">MIGOL PRO</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (30 Days)', '560')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (60 Days)', '1040')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (90 Days)', '1509')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO (Permanent)', '13504')">🛒 Buy Now</button></div>
-                </div>
-            </div>
-
-            <!-- LOTUS IOS -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="lotus-banner.jpg" alt="LOTUS IOS" onerror="this.parentNode.innerHTML='📸 LOTUS IOS BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">LOTUS IOS</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (30 Days)', '560')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (60 Days)', '1040')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (90 Days)', '1509')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS (Permanent)', '13504')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS (30 Days)', 560)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE IOS (60 Days)', 1040)">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
@@ -596,206 +453,136 @@
         <!-- ================= PAGE 6: IOS INTERNAL ================= -->
         <div id="pageIosInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="top-nav">
-                <div class="white-glow-heading" style="font-size:16px; margin:0;">IOS INTERNAL</div>
-                <div class="online-badge-green">● ONLINE</div>
-            </div>
-
-            <div class="main-heading" style="font-size:22px;">
-                <span style="color:var(--red-glow);">Cheat</span><span style="color:var(--yellow-glow);">X</span><span style="color:#fff;">Store</span>
-            </div>
-            <div style="height:15px;"></div>
-
-            <!-- FULORITE INTERNAL -->
             <div class="dash-card">
-                <div class="banner-box"><img src="fulorite-int-banner.jpg" alt="FULORITE INTERNAL" onerror="this.parentNode.innerHTML='📸 FULORITE INTERNAL BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">FULORITE IOS PANEL INTERNAL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
+                <h3 style="color:#fff; text-align:left;">FULORITE IOS INTERNAL</h3>
                 <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (60 Days)', '1040')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (90 Days)', '1509')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE INT (30 Days)', 560)">🛒 Buy Now</button></div>
+                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="buyWithWallet('FULORITE INT (60 Days)', 1040)">🛒 Buy Now</button></div>
                 </div>
             </div>
+                    </div>
+                <!-- ================= PAGE 7: FULL PROFILE PAGE ================= -->
+        <div id="pageProfile" class="page-view">
+            <div class="dash-card" style="text-align:center;">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-avatar" alt="Avatar">
+                <h2 id="profNameDisplay" style="color:#fff; font-size:20px;">Guest User</h2>
+                <p id="profEmailDisplay" style="color:#aaa; font-size:12px; margin-bottom:15px;"></p>
 
-            <!-- MIGOL PRO INTERNAL -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="migol-int-banner.jpg" alt="MIGOL PRO INTERNAL" onerror="this.parentNode.innerHTML='📸 MIGOL PRO INTERNAL BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">MIGOL PRO INTERNAL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (30 Days)', '560')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (60 Days)', '1040')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (90 Days)', '1509')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('MIGOL PRO INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                <div style="background:rgba(0,255,102,0.1); border:1px solid var(--green-glow); border-radius:12px; padding:15px; margin-bottom:15px;">
+                    <span style="font-size:12px; color:#aaa; text-transform:uppercase;">Wallet Balance</span>
+                    <h1 style="color:var(--green-glow); text-shadow:0 0 10px var(--green-glow); margin-top:5px;">₹<span id="profWalletDisplay">0</span></h1>
                 </div>
-            </div>
 
-            <!-- LOTUS INTERNAL -->
-            <div class="dash-card">
-                <div class="banner-box"><img src="lotus-int-banner.jpg" alt="LOTUS INTERNAL" onerror="this.parentNode.innerHTML='📸 LOTUS INTERNAL BANNER'"></div>
-                <h3 style="color:#fff; text-align:left;">LOTUS IOS INTERNAL</h3>
-                <p style="color:var(--green-glow); font-size:12px; text-align:left; margin-bottom:10px;">Antiban Internal</p>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹560</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (30 Days)', '560')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">60 Days</div><div class="price-amount">₹1040</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (60 Days)', '1040')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">90 Days</div><div class="price-amount">₹1509</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (90 Days)', '1509')">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">Permanent</div><div class="price-amount">₹13,504</div><button class="btn-buy-card" onclick="openBuyModal('LOTUS IOS INT (Permanent)', '13504')">🛒 Buy Now</button></div>
+                <button class="btn-glow-green" style="width:100%; margin-bottom:12px;" onclick="openAddMoneyModal()">+ Add Money To Wallet</button>
+
+                <div style="display:flex; gap:10px; margin-bottom:12px;">
+                    <button class="btn-glow-blue" style="width:50%; font-size:11px;" onclick="toggleHistory('purchaseHistoryBox')">📜 Purchase History</button>
+                    <button class="btn-glow-yellow" style="width:50%; font-size:11px; padding:12px;" onclick="toggleHistory('depositHistoryBox')">💳 Deposit History</button>
                 </div>
+
+                <!-- Purchase History Box -->
+                <div id="purchaseHistoryBox" class="history-list-box" style="display:none;">
+                    <strong style="color:var(--blue-glow);">My Purchases:</strong>
+                    <div id="purchaseList">No purchase history found.</div>
+                </div>
+
+                <!-- Deposit History Box -->
+                <div id="depositHistoryBox" class="history-list-box" style="display:none;">
+                    <strong style="color:var(--yellow-glow);">Deposit Requests:</strong>
+                    <div id="depositList">No deposit history found.</div>
+                </div>
+
+                <button class="btn-glow-yellow" style="width:100%; background:linear-gradient(135deg, #ff1a1a, #990000); color:#fff; border-color:#ff6666; margin-top:15px;" onclick="openSupportModal()">🎧 Customer Support</button>
+                <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; margin-top:10px; background:#333; color:#fff;" onclick="openAuthModal()">Login / Sign Up</button>
             </div>
         </div>
 
-                                                                                                                            </div>
-        <!-- FLOATING RED ROUND SUPPORT BUTTON WITH CUSTOMER SERVICE ICON -->
-    <div class="btn-floating-support" id="btnOpenSupport">
-        👩‍💼
     </div>
 
-    <!-- CUSTOMER SUPPORT MODAL -->
+    <!-- FLOATING SUPPORT BUTTON -->
+    <div class="btn-floating-support" id="btnOpenSupport">👩‍💼</div>
+    
+          <!-- CUSTOMER SUPPORT MODAL -->
     <div class="modal-overlay" id="supportModal">
         <div class="modal-card-support">
             <div class="support-modal-header">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <div class="chat-icon-circle">🎧</div>
                     <div>
-                        <div style="font-size:16px; font-weight:bold; color:#fff;">Suporte Online</div>
-                        <div style="font-size:11px; color:rgba(255,255,255,0.8);"><span style="color:var(--green-glow);">●</span> Atendimento ativo</div>
+                        <div style="font-size:16px; font-weight:bold; color:#fff;">Customer Support</div>
+                        <div style="font-size:11px; color:rgba(255,255,255,0.8);"><span style="color:var(--green-glow);">●</span> Active Online</div>
                     </div>
                 </div>
-                <div style="color:#fff; font-size:20px; cursor:pointer; font-weight:bold;" id="btnCloseSupport">✕</div>
+                <div style="color:#fff; font-size:20px; cursor:pointer;" onclick="closeModal('supportModal')">✕</div>
             </div>
 
             <div style="padding: 20px;">
                 <form id="supportForm">
-                    <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" id="custName" class="form-input-box" placeholder="Seu nome" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="custEmail" class="form-input-box" placeholder="seu@email.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mensagem</label>
-                        <textarea id="custMsg" class="form-textarea-box" placeholder="Como podemos ajudar?" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit-support">
-                        <span>👩‍💼</span> <span>Enviar Mensagem</span>
-                    </button>
+                    <div class="form-group"><label>Name</label><input type="text" id="custName" class="form-input-box" placeholder="Your Name" required></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="custEmail" class="form-input-box" placeholder="Your Gmail" required></div>
+                    <div class="form-group"><label>Describe Problem</label><textarea id="custMsg" class="form-textarea-box" placeholder="Describe issue in detail..." required></textarea></div>
+                    <button type="submit" class="btn-submit-support"><span>👩‍💼</span> <span>Send Message</span></button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- PROFILE & WALLET MODAL -->
-    <div class="modal-overlay" id="profileModal">
-        <div class="modal-card-support" style="padding: 20px; text-align:center;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h3 style="color:#fff;">👤 My Account</h3>
-                <span style="color:#fff; cursor:pointer; font-weight:bold;" onclick="closeProfileModal()">✕</span>
-            </div>
-            
-            <p style="color:#aaa; font-size:13px;">User: <strong id="profName" style="color:#fff;">Guest</strong></p>
-            <div style="background:rgba(0,255,102,0.1); border:1px solid var(--green-glow); border-radius:10px; padding:12px; margin:15px 0;">
-                <span style="font-size:13px; color:#aaa;">Wallet Balance</span>
-                <h2 style="color:var(--green-glow); margin-top:4px;">₹<span id="profWallet">0</span></h2>
-            </div>
-
-            <button class="btn-glow-yellow" style="font-size:14px; padding:12px; background:linear-gradient(135deg, #00cc55, #006622); color:#fff; border-color:#80ffaa; margin-bottom:10px;" onclick="openAddMoneyModal()">
-                + Add Money To Wallet
-            </button>
-            <button class="btn-glow-yellow" id="authBtn" style="font-size:14px; padding:12px; background:linear-gradient(135deg, #ff1a1a, #990000); color:#fff; border-color:#ff6666;" onclick="openAuthModal()">
-                Login / Sign Up
-            </button>
-        </div>
-    </div>
-
     <!-- AUTHENTICATION MODAL -->
-    <div class="modal-overlay" id="authModal" style="z-index:250;">
+    <div class="modal-overlay" id="authModal">
         <div class="modal-card-support" style="padding: 20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h4 style="color:#fff;">Login / Register</h4>
-                <span style="color:#fff; cursor:pointer; font-weight:bold;" onclick="closeModal('authModal')">✕</span>
+                <h4 style="color:#fff;" id="authTitleText">Create Account / Login</h4>
+                <span style="color:#fff; cursor:pointer;" onclick="closeModal('authModal')">✕</span>
             </div>
+            <input type="text" id="regUname" class="form-input-box" placeholder="Username" style="margin-bottom:12px;">
             <input type="email" id="authEmail" class="form-input-box" placeholder="Enter Gmail" required style="margin-bottom:12px;">
             <input type="password" id="authPass" class="form-input-box" placeholder="Enter Password" required style="margin-bottom:15px;">
-            <button class="btn-glow-yellow" style="font-size:15px; padding:12px;" onclick="handleAuth()">Submit</button>
+            <button class="btn-glow-yellow" style="font-size:15px;" onclick="handleAuth()">Submit</button>
         </div>
     </div>
 
     <!-- ADD MONEY MODAL -->
-    <div class="modal-overlay" id="moneyModal" style="z-index:250;">
+    <div class="modal-overlay" id="moneyModal">
         <div class="modal-card-support" style="padding: 20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <h4 style="color:#fff;">Add Money to Wallet</h4>
-                <span style="color:#fff; cursor:pointer; font-weight:bold;" onclick="closeModal('moneyModal')">✕</span>
+                <span style="color:#fff; cursor:pointer;" onclick="closeModal('moneyModal')">✕</span>
             </div>
             <label style="font-size:12px; color:#aaa;">Amount (INR)</label>
-            <input type="number" id="addAmount" class="form-input-box" placeholder="Amount (e.g. 100)" required style="margin-bottom:12px;">
-            <p style="font-size: 11px; color: #aaa; margin-bottom:6px;">Pay to UPI ID (9354505161@ybl) & enter 12-Digit UTR below:</p>
+            <input type="number" id="addAmount" class="form-input-box" placeholder="Amount (e.g. 500)" required style="margin-bottom:12px;">
+            <p style="font-size: 11px; color: #aaa; margin-bottom:6px;">Pay to UPI ID (<b>9354505161@ybl</b>) & enter 12-Digit UTR below:</p>
             <input type="text" id="utrNo" class="form-input-box" placeholder="12-Digit UTR Number" required style="margin-bottom:15px;">
-            <button class="btn-glow-yellow" style="font-size:15px; padding:12px; background:linear-gradient(135deg, #00cc55, #006622); color:#fff;" onclick="submitAddMoney()">Request Approval</button>
+            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff;" onclick="submitAddMoney()">Request Approval</button>
         </div>
     </div>
 
-    <!-- BUY CHECKOUT MODAL -->
-    <div class="modal-overlay" id="checkoutModal">
-        <div class="modal-card-support" style="padding: 20px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h4 style="color:#fff;" id="modalProductName">Checkout</h4>
-                <span style="color:#fff; cursor:pointer; font-weight:bold;" onclick="closeBuyModal()">✕</span>
-            </div>
-
-            <form id="checkoutForm">
-                <label style="font-size:12px; color:#aaa;">Your Name</label>
-                <input type="text" id="buyName" class="form-input-box" placeholder="Enter full name" required style="margin-bottom:12px;">
-
-                <label style="font-size:12px; color:#aaa;">Your Gmail</label>
-                <input type="email" id="buyEmail" class="form-input-box" placeholder="your@gmail.com" required style="margin-bottom:12px;">
-
-                <div style="font-size:12px; color:var(--green-glow); margin-bottom:15px; text-align:center;">
-                    📩 Panel delivery will be sent to your Gmail.
-                </div>
-
-                <button type="submit" class="btn-glow-yellow" style="font-size:15px; padding:12px; background:linear-gradient(135deg, #ff1a1a, #990000); color:#fff; border-color:#ff6666;">
-                    GO TO PAYMENT (₹<span id="modalProductPrice">0</span>)
-                </button>
-            </form>
+    <!-- INSUFFICIENT BALANCE MODAL -->
+    <div class="modal-overlay" id="noMoneyModal">
+        <div class="modal-card-support" style="padding: 20px; text-align:center;">
+            <h3 style="color:var(--red-glow); margin-bottom:10px;">⚠️ Not Enough Currency</h3>
+            <p style="color:#ccc; font-size:13px; margin-bottom:15px;">Aapke wallet mein is product ko khareedne ke liye paryapt rupya nahi hai.</p>
+            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff; margin-bottom:10px;" onclick="closeModal('noMoneyModal'); openAddMoneyModal();">+ Add Money</button>
+            <button onclick="closeModal('noMoneyModal')" style="background:transparent; border:none; color:#aaa; font-size:12px; cursor:pointer;">Cancel</button>
         </div>
     </div>
 
-    <!-- LOADING & VERIFICATION OVERLAY -->
-    <div class="modal-overlay" id="verifyingModal" style="z-index: 300;">
-        <div class="modal-card-support" style="padding: 30px 20px; text-align: center;">
-            <div class="spinner"></div>
-            <h3 style="color:#fff; font-size:18px; margin-bottom:8px;" id="verifyStatusTitle">Complete Your Payment</h3>
-            <p style="color:#aaa; font-size:13px; line-height:1.5;" id="verifyStatusMsg">
-                Please complete the payment in your UPI app.<br>We are verifying your transaction.
-            </p>
-            <button onclick="closeVerifyModal()" style="margin-top:20px; background:transparent; border:1px solid #555; color:#aaa; padding:6px 16px; border-radius:6px; font-size:12px; cursor:pointer;">Close</button>
+    <!-- GREEN SUCCESS MODAL -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-card-support" style="padding: 20px; text-align:center; border-color:var(--green-glow);">
+            <h2 style="color:var(--green-glow); text-shadow:0 0 10px var(--green-glow); margin-bottom:10px;">🎉 Success!</h2>
+            <p id="successMsg" style="color:#fff; font-size:14px; margin-bottom:15px;"></p>
+            <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff;" onclick="closeModal('successModal')">OK</button>
         </div>
     </div>
 
-    <!-- BOTTOM NAVIGATION BAR (WITH PROFILE BUTTON) -->
+    <!-- BOTTOM NAVIGATION BAR -->
     <div class="bottom-nav-bar">
-        <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')">
-            <span style="font-size:18px;">🏠</span>
-            <span>Home</span>
-        </button>
-        <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')">
-            <span style="font-size:18px;">🏪</span>
-            <span>Store</span>
-        </button>
-        <button class="nav-link-item" id="navProfileBtn" onclick="openProfileModal()">
-            <span style="font-size:18px;">👤</span>
-            <span>Profile</span>
-        </button>
+        <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')"><span style="font-size:18px;">🏠</span><span>Home</span></button>
+        <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')"><span style="font-size:18px;">🏪</span><span>Store</span></button>
+        <button class="nav-link-item" id="navProfileBtn" onclick="switchPage('pageProfile')"><span style="font-size:18px;">👤</span><span>Profile</span></button>
     </div>
-        <script>
+    
+           <script>
         // FIREBASE INITIALIZATION
         const firebaseConfig = {
           apiKey: "AIzaSyAPUoAlktXoQ2wPEfWm29rZTEjefbQRMLA",
@@ -811,67 +598,139 @@
         const auth = firebase.auth();
         const db = firebase.database();
 
-        let currentUser = null;
+        let currentUser = null, userWallet = 0;
 
-        // AUTH STATE LISTENER
+        // AUTH LISTENER
         auth.onAuthStateChanged(user => {
             if(user) {
                 currentUser = user;
-                document.getElementById('profName').innerText = user.email;
-                document.getElementById('authBtn').innerText = "Logout";
-                document.getElementById('authBtn').onclick = () => auth.signOut();
+                document.getElementById('profEmailDisplay').innerText = user.email;
+                document.getElementById('authBtnProf').innerText = "Logout";
+                document.getElementById('authBtnProf').onclick = () => auth.signOut();
                 
                 db.ref('users/' + user.uid).on('value', snap => {
                     const data = snap.val();
-                    document.getElementById('profWallet').innerText = data && data.wallet ? data.wallet : 0;
+                    if(data) {
+                        userWallet = data.wallet || 0;
+                        document.getElementById('profNameDisplay').innerText = data.username || user.email.split('@')[0];
+                        document.getElementById('profWalletDisplay').innerText = userWallet;
+                    }
                 });
+                loadUserHistory(user.uid);
             } else {
-                currentUser = null;
-                document.getElementById('profName').innerText = "Guest";
-                document.getElementById('profWallet').innerText = "0";
-                document.getElementById('authBtn').innerText = "Login / Sign Up";
-                document.getElementById('authBtn').onclick = openAuthModal;
+                currentUser = null; userWallet = 0;
+                document.getElementById('profNameDisplay').innerText = "Guest User";
+                document.getElementById('profEmailDisplay').innerText = "";
+                document.getElementById('profWalletDisplay').innerText = "0";
+                document.getElementById('authBtnProf').innerText = "Login / Sign Up";
+                document.getElementById('authBtnProf').onclick = openAuthModal;
             }
         });
 
-        function openProfileModal() { document.getElementById('profileModal').style.display = 'flex'; }
-        function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
-        function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function openAuthModal() { openModal('authModal'); }
+        function openSupportModal() { openModal('supportModal'); }
         function openAddMoneyModal() { 
             if(!currentUser) { alert("Please login first!"); openAuthModal(); return; }
-            document.getElementById('moneyModal').style.display = 'flex'; 
+            openModal('moneyModal'); 
         }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        // LOGIN / SIGN UP HANDLER
+        // SIGN UP / LOGIN HANDLER
         function handleAuth() {
+            const uname = document.getElementById('regUname').value;
             const e = document.getElementById('authEmail').value;
             const p = document.getElementById('authPass').value;
-            if(!e || !p) return alert("Fill all details!");
+            if(!e || !p) return alert("Fill Email and Password!");
 
-            auth.signInWithEmailAndPassword(e, p).catch(() => {
-                auth.createUserWithEmailAndPassword(e, p).then(res => {
-                    db.ref('users/' + res.user.uid).set({ email: e, wallet: 0 });
-                }).catch(err => alert(err.message));
-            }).then(() => closeModal('authModal'));
+            auth.createUserWithEmailAndPassword(e, p).then(res => {
+                db.ref('users/' + res.user.uid).set({ username: uname || e.split('@')[0], email: e, wallet: 0 });
+                closeModal('authModal');
+            }).catch(() => {
+                auth.signInWithEmailAndPassword(e, p).then(() => closeModal('authModal')).catch(err => alert(err.message));
+            });
         }
 
-        // SUBMIT ADD MONEY REQUEST
+        // AUTO WALLET BUY & TRANSFER TO ADMIN
+        function buyWithWallet(pName, price) {
+            if(!currentUser) return openAuthModal();
+
+            if(userWallet < price) {
+                openModal('noMoneyModal');
+            } else {
+                const newBal = userWallet - price;
+                // Deduct from User
+                db.ref('users/' + currentUser.uid + '/wallet').set(newBal).then(() => {
+                    // Add to Admin Personal Wallet
+                    db.ref('admin/wallet').transaction(curr => (curr || 0) + price);
+                    // Add to Order History
+                    db.ref('orders/').push({
+                        uid: currentUser.uid, email: currentUser.email, product: pName, price: price, date: new Date().toLocaleString()
+                    });
+
+                    document.getElementById('successMsg').innerText = `Your purchase for ${pName} (₹${price}) was successfully completed!`;
+                    openModal('successModal');
+                });
+            }
+        }
+
+        // ADD MONEY REQUEST
         function submitAddMoney() {
             const amt = document.getElementById('addAmount').value;
             const utr = document.getElementById('utrNo').value;
             if(!amt || !utr) return alert("Enter Amount and UTR!");
 
             db.ref('requests/').push({
-                uid: currentUser.uid,
-                email: currentUser.email,
-                amount: parseInt(amt),
-                utr: utr,
-                status: "pending"
+                uid: currentUser.uid, email: currentUser.email, amount: parseInt(amt), utr: utr, status: "pending", date: new Date().toLocaleString()
             }).then(() => {
-                alert("Payment Request Sent to Admin!");
+                alert("Deposit request sent to Admin!");
                 closeModal('moneyModal');
-                closeProfileModal();
+            });
+        }
+                       // SUPPORT FORM SUBMISSION
+        document.getElementById('supportForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const email = document.getElementById('custEmail').value;
+            const msg = document.getElementById('custMsg').value;
+
+            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ Name: name, Email: email, Message: msg })
+            });
+
+            closeModal('supportModal');
+            document.getElementById('supportForm').reset();
+            document.getElementById('successMsg').innerText = "Your problem is successfully sent!";
+            openModal('successModal');
+        };
+
+        // HISTORY SWITCHER
+        function toggleHistory(id) {
+            const box = document.getElementById(id);
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function loadUserHistory(uid) {
+            // Load Purchases
+            db.ref('orders').orderByChild('uid').equalTo(uid).on('value', snap => {
+                const box = document.getElementById('purchaseList');
+                box.innerHTML = ""; const val = snap.val();
+                if(!val) { box.innerHTML = "No purchases yet."; return; }
+                for(let k in val) {
+                    box.innerHTML += `<div class="history-item"><b>${val[k].product}</b> - ₹${val[k].price}<br><small style="color:#aaa">${val[k].date}</small></div>`;
+                }
+            });
+
+            // Load Deposits
+            db.ref('requests').orderByChild('uid').equalTo(uid).on('value', snap => {
+                const box = document.getElementById('depositList');
+                box.innerHTML = ""; const val = snap.val();
+                if(!val) { box.innerHTML = "No deposit requests."; return; }
+                for(let k in val) {
+                    box.innerHTML += `<div class="history-item">Amount: ₹${val[k].amount} (${val[k].status})<br><small style="color:#aaa">UTR: ${val[k].utr}</small></div>`;
+                }
             });
         }
 
@@ -884,89 +743,20 @@
             document.getElementById('navStoreBtn').classList.remove('active');
             document.getElementById('navProfileBtn').classList.remove('active');
 
-            if(pageId === 'pageHome') {
-                document.getElementById('navHomeBtn').classList.add('active');
-            } else if(pageId === 'pageMainStore') {
-                document.getElementById('navStoreBtn').classList.add('active');
+            // Hide Floating Support Icon on Profile Page
+            const floatBtn = document.getElementById('btnOpenSupport');
+            if(pageId === 'pageProfile') {
+                floatBtn.style.display = 'none';
+                document.getElementById('navProfileBtn').classList.add('active');
+            } else {
+                floatBtn.style.display = 'flex';
+                if(pageId === 'pageHome') document.getElementById('navHomeBtn').classList.add('active');
+                else if(pageId === 'pageMainStore') document.getElementById('navStoreBtn').classList.add('active');
             }
             window.scrollTo(0,0);
         }
 
-        // RANDOM LIVE COUNTER
-        const counterList = [125, 124, 121, 128, 134, 156, 138, 151, 150, 149, 142];
-        let idx = 0;
-        setInterval(() => {
-            idx = (idx + 1) % counterList.length;
-            const elem = document.getElementById('counterNum');
-            if(elem) elem.innerText = counterList[idx];
-        }, 10000);
-
-        // FLOATING SUPPORT MODAL
-        document.getElementById('btnOpenSupport').onclick = function() {
-            document.getElementById('supportModal').style.display = 'flex';
-        };
-
-        document.getElementById('btnCloseSupport').onclick = function() {
-            document.getElementById('supportModal').style.display = 'none';
-        };
-
-        // SUPPORT FORM SUBMISSION
-        document.getElementById('supportForm').onsubmit = function(e) {
-            e.preventDefault();
-            const name = document.getElementById('custName').value;
-            const email = document.getElementById('custEmail').value;
-            const msg = document.getElementById('custMsg').value;
-
-            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ Name: name, Email: email, Support_Message: msg })
-            });
-
-            document.getElementById('supportModal').style.display = 'none';
-            document.getElementById('supportForm').reset();
-            
-            document.getElementById('verifyStatusTitle').innerText = "Message Sent!";
-            document.getElementById('verifyStatusMsg').innerText = "Our support team will review your query and reply to your Gmail within 1 hour.";
-            document.getElementById('verifyingModal').style.display = 'flex';
-        };
-
-        // BUY MODAL & UPI PAYMENT LOGIC
-        let currentItem = "", currentPrice = "";
-        function openBuyModal(name, price) {
-            currentItem = name; currentPrice = price;
-            document.getElementById('modalProductName').innerText = name;
-            document.getElementById('modalProductPrice').innerText = price;
-            document.getElementById('checkoutModal').style.display = 'flex';
-        }
-
-        function closeBuyModal() { document.getElementById('checkoutModal').style.display = 'none'; }
-        function closeVerifyModal() { document.getElementById('verifyingModal').style.display = 'none'; }
-
-        document.getElementById('checkoutForm').onsubmit = function(e) {
-            e.preventDefault();
-            const name = document.getElementById('buyName').value;
-            const email = document.getElementById('buyEmail').value;
-
-            fetch("https://formsubmit.co/ajax/hubofico@gmail.com", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({
-                    Order_Item: currentItem,
-                    Price: "Rs " + currentPrice,
-                    Customer_Name: name,
-                    Customer_Email: email,
-                    Payment_Status: "Initiated to 9354505161@ybl"
-                })
-            });
-
-            closeBuyModal();
-            document.getElementById('verifyStatusTitle').innerText = "Verifying Payment...";
-            document.getElementById('verifyStatusMsg').innerHTML = "Please complete payment in your UPI app.<br>We are currently verifying your transaction.";
-            document.getElementById('verifyingModal').style.display = 'flex';
-
-            window.location.href = `upi://pay?pa=9354505161@ybl&pn=CheatXStore&am=${currentPrice}&cu=INR`;
-        };
+        document.getElementById('btnOpenSupport').onclick = openSupportModal;
 
         // CANVAS PARTICLES
         const canvas = document.getElementById('bgCanvas');
@@ -977,10 +767,7 @@
 
         const particles = [];
         for(let i = 0; i < 40; i++) {
-            particles.push({
-                x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1, speedY: Math.random() * 1.5 + 0.5
-            });
+            particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 2 + 1, speedY: Math.random() * 1.5 + 0.5 });
         }
 
         function animateParticles() {
@@ -998,4 +785,4 @@
 </body>
 </html>
 
-                                                                                                                                                                                                                                            
+ 
