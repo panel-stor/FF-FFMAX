@@ -37,7 +37,7 @@
         .page-view { display: none; }
         .page-view.active { display: block; animation: fadeIn 0.3s ease-in-out; }
 
-        /* FIXED HEADER BAR (Visible Across All Pages) */
+        /* FIXED HEADER BAR */
         .header-bar {
             position: fixed; top: 0; left: 0; width: 100%; height: 60px;
             background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px);
@@ -169,6 +169,63 @@
             justify-content: center; align-items: center;
         }
 
+        /* FLOATING RED SUPPORT BUTTON AT BOTTOM RIGHT */
+        .floating-support-btn {
+            position: fixed; bottom: 70px; right: 18px; width: 52px; height: 52px;
+            background: linear-gradient(135deg, #ff1a1a, #b30000); border-radius: 50%;
+            border: 2px solid #ff8080; color: #fff; display: flex; justify-content: center;
+            align-items: center; box-shadow: 0 0 20px rgba(255, 26, 26, 0.8);
+            cursor: pointer; z-index: 220; animation: floatPulse 2s infinite;
+        }
+        @keyframes floatPulse {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255,26,26,0.6); }
+            50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(255,26,26,0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,26,26,0.6); }
+        }
+
+        /* CUSTOM SUPPORT MODAL (MATCHING REFERENCE IMAGE) */
+        .support-card-modal {
+            width: 90%; max-width: 380px; background: #0b111e; border-radius: 16px;
+            overflow: hidden; border: 1px solid rgba(255, 26, 26, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+        }
+        .support-modal-header {
+            background: #d61818; padding: 15px 18px; display: flex;
+            align-items: center; justify-content: space-between;
+        }
+        .support-header-title-box { display: flex; align-items: center; gap: 12px; }
+        .support-avatar-circle {
+            width: 40px; height: 40px; background: #fff; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; position: relative;
+        }
+        .online-status-dot {
+            width: 10px; height: 10px; background: var(--green-glow); border-radius: 50%;
+            position: absolute; bottom: 0; right: 0; border: 2px solid #d61818;
+        }
+        .support-header-text h3 { font-size: 16px; color: #fff; font-weight: bold; margin: 0; }
+        .support-header-text span { font-size: 11px; color: #ffcccc; display: flex; align-items: center; gap: 4px; }
+        .support-close-x { color: #fff; font-size: 22px; cursor: pointer; opacity: 0.8; }
+        .support-close-x:hover { opacity: 1; }
+        
+        .support-modal-body { padding: 20px; }
+        .support-field-group { margin-bottom: 14px; text-align: left; }
+        .support-field-group label { display: block; font-size: 13px; color: #a0aab8; margin-bottom: 6px; }
+        .support-input-custom {
+            width: 100%; background: #131a29; border: 1px solid #243046; border-radius: 8px;
+            padding: 12px 14px; color: #fff; font-size: 13px; outline: none; transition: border 0.2s;
+        }
+        .support-input-custom:focus { border-color: var(--red-glow); }
+        .support-textarea-custom {
+            width: 100%; background: #131a29; border: 1px solid #243046; border-radius: 8px;
+            padding: 12px 14px; color: #fff; font-size: 13px; outline: none; resize: none; height: 90px;
+        }
+        .btn-support-submit {
+            width: 100%; background: #e61919; color: #fff; border: none; padding: 13px;
+            border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            box-shadow: 0 4px 15px rgba(230, 25, 25, 0.4); margin-top: 10px;
+        }
+
         .history-list-box {
             max-height: 200px; overflow-y: auto; text-align: left;
             background: rgba(0,0,0,0.5); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px;
@@ -210,7 +267,7 @@
 </head>
 <body>
     <canvas id="bgCanvas"></canvas>
-        <!-- UNIVERSAL FIXED TOP HEADER BAR -->
+    <!-- UNIVERSAL FIXED TOP HEADER BAR -->
     <div class="header-bar">
         <div class="brand-header-left" onclick="switchPage('pageHome')">
             <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
@@ -235,8 +292,7 @@
         <button class="btn-glow-yellow" onclick="toggleSideDrawer(false); switchPage('pagePurchaseHistory');">📜 Purchase History</button>
         <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="toggleSideDrawer(false); switchPage('pageDepositHistory');">💳 Deposit History</button>
     </div>
-
-    <div class="container">
+        <div class="container">
         <!-- ================= PAGE 1: HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             
@@ -273,8 +329,8 @@
             <div id="storeEntryBox" class="dash-card" style="display:none; text-align:center;">
                 <div style="font-size:16px; color:var(--green-glow); font-weight:bold; margin-bottom:10px;">Welcome Back!</div>
                 <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">ENTER PANEL STORE ➔</button>
-    </div>
-                            <!-- CUSTOMER RESULTS TITLE -->
+            </div>
+            <!-- CUSTOMER RESULTS TITLE -->
             <div style="text-align:center; margin:30px 0 10px 0;">
                 <h2 style="font-size:22px; font-weight:900; letter-spacing:1px; text-transform:uppercase;">CUSTOMER RESULTS</h2>
                 <p style="color:#aaa; font-size:12px; margin-top:4px;">See what our customers are achieving</p>
@@ -326,8 +382,9 @@
             <div class="result-card">
                 <img src="https://i.ibb.co/s90Nfbbg/image.jpg" class="result-img" alt="Result 8">
                 <div class="result-meta"><span class="result-dot"></span> <b>eklavya_mods</b> — "CheatX Store is 100% Trusted!"</div>
-                    </div>
-                        <!-- FOOTER & SUPPORT SECTION (UNIVERSAL REUSABLE COMPONENT) -->
+            </div>
+            
+            <!-- FOOTER & SUPPORT SECTION -->
             <div class="footer-support-box">
                 <div class="brand-header-left" style="font-size:18px; margin-bottom:8px;">
                     <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
@@ -345,9 +402,9 @@
 
                 <h4 style="font-size:14px; text-transform:uppercase; margin-bottom:12px; letter-spacing:1px; color:#fff;">SUPPORT</h4>
                 
-                <div class="footer-support-item">
+                <div class="footer-support-item" onclick="openSupportModal()" style="cursor:pointer;">
                     <span style="color:var(--red-glow); font-size:18px;">💬</span>
-                    <span style="font-size:13px; color:#ddd;">24/7 Support via WhatsApp</span>
+                    <span style="font-size:13px; color:#ddd;">24/7 Online Live Support</span>
                 </div>
 
                 <div class="footer-support-item">
@@ -364,9 +421,8 @@
                     © 2026 CheatX Store. All rights reserved.
                 </div>
             </div>
-        </div>
-
-        <!-- ================= PAGE 2: MAIN PANEL STORE ================= -->
+                </div>
+                            <!-- ================= PAGE 2: MAIN PANEL STORE ================= -->
         <div id="pageMainStore" class="page-view">
             <div style="text-align:center; margin-bottom:15px;">
                 <div class="brand-header-left" style="font-size:22px; justify-content:center; margin-bottom:10px;">
@@ -375,7 +431,7 @@
                 <h3 style="text-align:left; color:#fff; font-size:18px; margin-top:10px; letter-spacing:0.5px;">OUR PRODUCTS</h3>
             </div>
 
-            <!-- GITHUB REPO BANNER 1 (android-banner.jpg) -->
+            <!-- BANNER 1 -->
             <div class="banner-img-box">
                 <img src="android-banner.jpg" onerror="this.src='https://via.placeholder.com/450x120/1f0000/ff1a1a?text=ANDROID+PANEL+BANNER'" alt="Android Banner">
             </div>
@@ -392,7 +448,7 @@
                 </div>
             </div>
 
-            <!-- GITHUB REPO BANNER 2 (ios-banner.jpg) -->
+            <!-- BANNER 2 -->
             <div class="banner-img-box">
                 <img src="ios-banner.jpg" onerror="this.src='https://via.placeholder.com/450x120/001f0a/00ff66?text=IOS+VIP+PANEL+BANNER'" alt="iOS Banner">
             </div>
@@ -409,17 +465,20 @@
                 </div>
             </div>
 
-            <!-- REUSED FOOTER / SUPPORT IN STORE PAGE -->
+            <!-- REUSED FOOTER -->
             <div class="footer-support-box">
                 <h4 style="font-size:14px; text-transform:uppercase; margin-bottom:12px; letter-spacing:1px; color:#fff;">SUPPORT</h4>
+                <div class="footer-support-item" onclick="openSupportModal()" style="cursor:pointer;">
+                    <span style="color:var(--red-glow); font-size:18px;">💬</span>
+                    <span style="font-size:13px; color:#ddd;">Click Here For Live Support</span>
+                </div>
                 <div class="footer-support-item">
                     <span style="color:var(--red-glow); font-size:18px;">✉️</span>
                     <span style="font-size:13px; color:#ddd;">hubofico@gmail.com</span>
                 </div>
             </div>
-        </div>
-        
-              <!-- ================= PAGE 3: ANDROID EXTERNAL (3 DASHBOARDS) ================= -->
+                        </div>
+                    <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -469,7 +528,7 @@
             </div>
         </div>
 
-        <!-- ================= PAGE 4: ANDROID INTERNAL (EXACT REPLICA FOR INTERNAL) ================= -->
+        <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -517,9 +576,8 @@
                     <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">60 DAYS</div><div style="font-size:16px; font-weight:bold;">₹999</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT INT (60 Days)', 999)">🛒 Buy Now</button></div>
                 </div>
             </div>
-                        </div>
-
-                    <!-- ================= PAGE 5: IOS EXTERNAL (3 DASHBOARDS) ================= -->
+                                                                                                                                                       </div>
+                                <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -569,7 +627,7 @@
             </div>
         </div>
 
-        <!-- ================= PAGE 6: IOS INTERNAL (3 DASHBOARDS) ================= -->
+        <!-- ================= PAGE 6: IOS INTERNAL ================= -->
         <div id="pageIosInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
 
@@ -617,11 +675,10 @@
                     <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">PERMANENT</div><div style="font-size:15px; font-weight:bold;">₹13,450</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS INT Permanent', 13450)">🛒 Buy Now</button></div>
                 </div>
             </div>
-        </div>
-
-                <!-- ================= PAGE 7: FULL-SCREEN PROFESSIONAL PROFILE ================= -->
+                                                                                                                                                                                                                 </div>
+                            <!-- ================= PAGE 7: FULL PROFILE ================= -->
         <div id="pageProfile" class="page-view">
-            <!-- ENLARGED FULL DISPLAY DASHBOARD 1 -->
+            <!-- DISPLAY DASHBOARD 1 -->
             <div class="dash-card" style="padding:25px; margin-bottom:25px; border-width:2px;">
                 <div style="display:flex; align-items:center; gap:18px; margin-bottom:25px;">
                     <div style="width:70px; height:70px; background:linear-gradient(135deg, #ff1a1a, #ffcc00); border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:32px; font-weight:bold; color:#000; box-shadow:0 0 20px rgba(255,26,26,0.5);">
@@ -642,7 +699,7 @@
                 </div>
             </div>
 
-            <!-- ENLARGED FULL DISPLAY DASHBOARD 2 -->
+            <!-- DISPLAY DASHBOARD 2 -->
             <div class="dash-card" style="padding:25px; margin-bottom:25px; border-width:2px;">
                 <h3 style="color:#fff; font-size:18px; margin-bottom:18px; text-transform:uppercase; letter-spacing:1px;">Account Management</h3>
                 <button class="btn-glow-yellow" style="width:100%; padding:15px; font-size:16px; margin-bottom:15px;" onclick="switchPage('pagePurchaseHistory')">📜 View Purchase History</button>
@@ -679,8 +736,53 @@
                 <div id="depositListFull" class="history-list-box" style="max-height:350px;">No deposit requests found.</div>
             </div>
         </div>
+                    </div>
+        <!-- FLOATING RED SUPPORT BUTTON (BOTTOM RIGHT) -->
+    <div class="floating-support-btn" onclick="openSupportModal()" title="Live Support">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
     </div>
-        <!-- BUY PRODUCT MODAL -->
+
+    <!-- LIVE SUPPORT ONLINE MODAL (EXACT MATCHING DESIGN) -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="support-card-modal">
+            <div class="support-modal-header">
+                <div class="support-header-title-box">
+                    <div class="support-avatar-circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d61818" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        <div class="online-status-dot"></div>
+                    </div>
+                    <div class="support-header-text">
+                        <h3>Suporte Online</h3>
+                        <span><span style="color:var(--green-glow);">●</span> Atendimento ativo</span>
+                    </div>
+                </div>
+                <div class="support-close-x" onclick="closeModal('supportModal')">✕</div>
+            </div>
+
+            <div class="support-modal-body">
+                <div class="support-field-group">
+                    <label>Nome</label>
+                    <input type="text" id="suppName" class="support-input-custom" placeholder="Seu nome">
+                </div>
+                <div class="support-field-group">
+                    <label>Email</label>
+                    <input type="email" id="suppEmail" class="support-input-custom" placeholder="seu@email.com">
+                </div>
+                <div class="support-field-group">
+                    <label>Mensagem</label>
+                    <textarea id="suppMsg" class="support-textarea-custom" placeholder="Como podemos ajudar? Describe your problem here..."></textarea>
+                </div>
+                <button class="btn-support-submit" onclick="submitSupportForm()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    Enviar Mensagem
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BUY PRODUCT MODAL -->
     <div class="modal-overlay" id="buyModal">
         <div style="padding:20px; background:#0d121d; border-radius:16px; border:1px solid var(--red-glow); width:90%; max-width:360px;">
             <h3 style="color:#fff; margin-bottom:8px;">Complete Purchase</h3>
@@ -694,9 +796,9 @@
         </div>
     </div>
 
-    <!-- SUCCESS POPUP -->
+    <!-- SUCCESS POPUP MODAL -->
     <div class="modal-overlay" id="successModal">
-        <div style="padding: 20px; text-align:center; background:#0d121d; border-radius:16px; border:1px solid var(--green-glow); width:90%; max-width:360px;">
+        <div style="padding: 22px; text-align:center; background:#0d121d; border-radius:16px; border:1px solid var(--green-glow); width:90%; max-width:360px;">
             <div id="successMsg" style="color:#fff;"></div>
             <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff; margin-top:15px; width:100%; border:none;" onclick="closeModal('successModal')">OK</button>
         </div>
@@ -713,11 +815,11 @@
             <span>Store</span>
         </button>
         <button class="nav-link-item" id="navProfileBtn" onclick="switchPage('pageProfile')">
-            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
             <span>Profile</span>
         </button>
-                                                              </div>
-               <script>
+    </div>
+        <script>
         const firebaseConfig = {
           apiKey: "AIzaSyAPUoAlktXoQ2wPEfWm29rZTEjefbQRMLA",
           authDomain: "cheatx-store-cdc7f.firebaseapp.com",
@@ -734,6 +836,7 @@
 
         let currentUser = null, userWallet = 0;
         let selectedProductForBuy = null;
+        let pageHistory = ['pageHome']; // Back navigation stack
 
         // AUTHENTICATION STATE MONITOR
         auth.onAuthStateChanged(user => {
@@ -762,7 +865,7 @@
             }
         });
 
-        // LIVE RANDOM ONLINE PULSE COUNTER (1 TO 100)
+        // LIVE RANDOM ONLINE PULSE COUNTER
         setInterval(() => {
             const count = Math.floor(Math.random() * 100) + 1;
             const el = document.getElementById('activeUserCount');
@@ -783,6 +886,41 @@
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function openSupportModal() {
+            if(currentUser) {
+                document.getElementById('suppEmail').value = currentUser.email;
+                db.ref('users/' + currentUser.uid).once('value').then(snap => {
+                    if(snap.val() && snap.val().username) document.getElementById('suppName').value = snap.val().username;
+                });
+            }
+            openModal('supportModal');
+        }
+
+        function submitSupportForm() {
+            const name = document.getElementById('suppName').value;
+            const email = document.getElementById('suppEmail').value;
+            const msg = document.getElementById('suppMsg').value;
+
+            if(!name || !email || !msg) return alert("Please fill all support fields!");
+
+            // Push support ticket to Firebase directed to hubofico@gmail.com
+            db.ref('support_messages/').push({
+                targetOwnerEmail: "hubofico@gmail.com",
+                senderName: name,
+                senderEmail: email,
+                problemDescription: msg,
+                date: new Date().toLocaleString()
+            }).then(() => {
+                closeModal('supportModal');
+                document.getElementById('suppMsg').value = "";
+                document.getElementById('successMsg').innerHTML = `
+                    <div style="font-size:18px; font-weight:bold; color:var(--green-glow);">Sent Successfully!</div>
+                    <div style="font-size:12px; color:#ccc; margin-top:8px;">Your problem has been sent to support (hubofico@gmail.com). We will reach out to you shortly.</div>
+                `;
+                openModal('successModal');
+            }).catch(err => alert(err.message));
+        }
 
         function toggleAuthTab(tab) {
             if(tab === 'register') {
@@ -821,8 +959,11 @@
         }
 
         function handleLogout() { auth.signOut().then(() => switchPage('pageHome')); }
+                   // SINGLE PAGE APPLICATION HISTORY & BACK BUTTON MANAGEMENT
+        function switchPage(pageId, isBackAction = false) {
+            const currentActive = document.querySelector('.page-view.active');
+            if(currentActive && currentActive.id === pageId) return;
 
-        function switchPage(pageId) {
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
 
@@ -834,8 +975,27 @@
             else if(pageId === 'pageProfile') document.getElementById('navProfileBtn').classList.add('active');
             else document.getElementById('navStoreBtn').classList.add('active');
 
+            if(!isBackAction) {
+                pageHistory.push(pageId);
+                window.history.pushState({ page: pageId }, "", "#" + pageId);
+            }
+
             window.scrollTo(0,0);
         }
+
+        // PHONE BACK BUTTON LISTENER (PREVENTS ACCIDENTAL EXIT)
+        window.addEventListener('popstate', (e) => {
+            if (pageHistory.length > 1) {
+                pageHistory.pop();
+                const previousPage = pageHistory[pageHistory.length - 1];
+                switchPage(previousPage, true);
+            } else {
+                switchPage('pageHome', true);
+            }
+        });
+
+        // INITIAL HISTORY PUSH ON LOAD
+        window.history.replaceState({ page: 'pageHome' }, "", "#pageHome");
 
         function openUpiAppDirect() {
             const amt = document.getElementById('addMoneyInput').value;
@@ -895,7 +1055,7 @@
 
                     document.getElementById('successMsg').innerHTML = `
                         <div style="font-size:18px; font-weight:bold; color:var(--green-glow);">Successfully Purchased!</div>
-                        <div style="font-size:12px; color:#ccc; margin-top:8px;">Product key/file delivered to your Gmail!</div>
+                        <div style="font-size:12px; color:#ccc; margin-top:8px;">Purchase notification sent to owner (hubofico@gmail.com) and product key/file delivered to your Gmail!</div>
                     `;
                 });
             }, 3000);
@@ -938,5 +1098,8 @@
     </script>
 </body>
 </html>
+        
+
+
 
   
