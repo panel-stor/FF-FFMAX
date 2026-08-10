@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
 
         body {
             background-color: var(--bg-color); color: #ffffff;
-            min-height: 100vh; position: relative; overflow-x: hidden; padding-bottom: 75px;
+            min-height: 100vh; position: relative; overflow-x: hidden; padding-bottom: 80px;
         }
 
         #bgCanvas {
@@ -31,20 +32,61 @@
         }
 
         .container {
-            max-width: 480px; margin: 0 auto; padding: 15px 15px 100px 15px; position: relative; z-index: 10;
+            max-width: 480px; margin: 0 auto; padding: 75px 15px 100px 15px; position: relative; z-index: 10;
         }
 
         .page-view { display: none; }
         .page-view.active { display: block; animation: fadeIn 0.3s ease-in-out; }
 
-        /* BRAND TITLE LOGO STYLING */
-        .brand-logo-container {
-            text-align: center; font-size: 26px; font-weight: 900; letter-spacing: 2px;
-            margin: 15px 0 25px 0; text-transform: uppercase;
+        /* HEADER & TOP NAV STYLING */
+        .header-bar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 15px; z-index: 100;
         }
-        .brand-cheat { color: var(--red-glow); text-shadow: 0 0 12px var(--red-glow); }
-        .brand-x { color: var(--yellow-glow); text-shadow: 0 0 12px var(--yellow-glow); }
-        .brand-store { color: #ffffff; text-shadow: 0 0 10px #ffffff; }
+
+        .brand-header-left {
+            display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 16px;
+            letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+        }
+        .brand-cheat { color: var(--red-glow); text-shadow: 0 0 10px var(--red-glow); }
+        .brand-x { color: var(--yellow-glow); text-shadow: 0 0 10px var(--yellow-glow); }
+        .brand-store { color: #ffffff; }
+
+        .header-right-actions { display: flex; align-items: center; gap: 15px; }
+        
+        .cart-icon-btn {
+            position: relative; background: none; border: none; color: #fff; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cart-badge {
+            position: absolute; top: -6px; right: -8px; background: var(--red-glow);
+            color: #fff; font-size: 10px; font-weight: bold; width: 16px; height: 16px;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 8px var(--red-glow);
+        }
+
+        .hamburger-btn {
+            background: none; border: none; color: #fff; cursor: pointer;
+            display: flex; flex-direction: column; gap: 4px; padding: 4px;
+        }
+        .hamburger-btn span { width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+
+        /* SIDE DRAWER MENU */
+        .side-drawer {
+            position: fixed; top: 0; right: -60%; width: 55%; height: 100%;
+            background: rgba(10, 13, 20, 0.98); backdrop-filter: blur(12px);
+            border-left: 1px solid var(--red-glow); box-shadow: -5px 0 25px rgba(255, 26, 26, 0.3);
+            z-index: 250; transition: right 0.3s ease; padding: 80px 15px 20px 15px;
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .side-drawer.active { right: 0; }
+        .side-drawer-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 240; backdrop-filter: blur(3px);
+        }
 
         .dash-card {
             background: var(--card-dark); border: 1px solid var(--red-glow);
@@ -52,93 +94,43 @@
             padding: 18px; margin-bottom: 20px; backdrop-filter: blur(8px);
         }
 
-        .top-nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 5px; margin-bottom: 10px;
-        }
-
         /* LIVE ONLINE PULSE COUNTER */
-        .online-badge {
-            display: flex; align-items: center; gap: 6px;
-            color: var(--green-glow); font-size: 13px; font-weight: bold;
-            background: rgba(0, 255, 102, 0.1); padding: 6px 14px; border-radius: 20px;
-            border: 1px solid var(--green-glow); box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+        .online-badge-center {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--green-glow); font-size: 14px; font-weight: 900;
+            background: rgba(0, 255, 102, 0.1); padding: 8px 20px; border-radius: 25px;
+            border: 1px solid var(--green-glow); box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+            margin: 15px 0 25px 0; letter-spacing: 1px;
         }
 
         .pulse-bulb {
-            width: 9px; height: 9px; background-color: var(--green-glow);
-            border-radius: 50%; box-shadow: 0 0 10px var(--green-glow);
+            width: 10px; height: 10px; background-color: var(--green-glow);
+            border-radius: 50%; box-shadow: 0 0 12px var(--green-glow);
             animation: bulbPulse 1.2s infinite alternate;
         }
 
         @keyframes bulbPulse {
             0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1.3); }
         }
 
-        .glow-pink-title {
-            color: var(--pink-glow); font-size: 18px; font-weight: 900;
-            text-shadow: 0 0 12px var(--pink-glow); margin-bottom: 10px;
+        /* CUSTOMER RESULT CARD STYLING */
+        .result-card {
+            background: rgba(15, 20, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px; padding: 12px; margin-bottom: 20px; text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
-        .glow-red-title {
-            color: var(--red-glow); font-size: 18px; font-weight: 900;
-            text-shadow: 0 0 12px var(--red-glow); margin-bottom: 10px;
+        .result-img {
+            width: 100%; border-radius: 8px; object-fit: cover; margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08); display: block;
         }
-
-        .glow-green-title {
-            color: var(--green-glow); font-size: 18px; font-weight: 900;
-            text-shadow: 0 0 12px var(--green-glow); margin-bottom: 10px;
-        }
-
-        .features-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            font-size: 11px; text-align: left; margin: 10px 0 15px 0;
-            background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .feature-col-title { font-weight: bold; color: #fff; font-size: 12px; margin-bottom: 5px; }
-        .feature-item { color: #cccccc; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
-        .feature-item::before { content: "•"; color: var(--yellow-glow); }
-
-        .brutal-line {
-            color: var(--red-glow); font-size: 12px; font-weight: 800; text-align: left;
-            margin: 8px 0; text-shadow: 0 0 8px rgba(255,26,26,0.6);
-        }
-
-        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
-        .price-card {
-            background: #0f1522; border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 12px; padding: 12px; text-align: left; position: relative; overflow: hidden;
-        }
-
-        .discount-badge {
-            position: absolute; top: 0; right: 0; background: var(--red-glow); color: #fff;
-            font-size: 9px; font-weight: 900; padding: 3px 6px; border-bottom-left-radius: 8px;
-        }
-
-        .duration-tag { font-size: 11px; color: #aaaaaa; text-transform: uppercase; font-weight: bold; margin-bottom: 6px; }
-        .price-amount { font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 8px; }
-
-        .btn-buy-card {
-            width: 100%; background: #1a2233; color: #fff; border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px; border-radius: 8px; font-weight: bold; font-size: 13px;
-            cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px;
-        }
-        .btn-buy-card:hover { background: var(--red-glow); box-shadow: 0 0 12px var(--red-glow); }
-
-        .guide-box {
-            background: rgba(10, 15, 25, 0.9); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--red-glow); border-radius: 12px; padding: 14px;
-            margin-top: 15px; margin-bottom: 15px; text-align: left;
-        }
-        .guide-step { font-size: 12px; color: #dddddd; line-height: 1.5; margin-bottom: 6px; }
-        .guide-step strong { color: var(--yellow-glow); }
+        .result-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #ccc; }
+        .result-dot { width: 8px; height: 8px; background: var(--green-glow); border-radius: 50%; display: inline-block; }
 
         .btn-glow-yellow {
-            width: 100%; padding: 14px; background: linear-gradient(135deg, #ffcc00, #b38f00);
-            color: #000; font-size: 15px; font-weight: 900; border: 2px solid #ffee80;
-            border-radius: 12px; cursor: pointer; box-shadow: 0 0 20px var(--yellow-glow);
+            width: 100%; padding: 12px; background: linear-gradient(135deg, #ffcc00, #b38f00);
+            color: #000; font-size: 14px; font-weight: 900; border: 2px solid #ffee80;
+            border-radius: 10px; cursor: pointer; box-shadow: 0 0 15px var(--yellow-glow);
         }
 
         .btn-glow-blue {
@@ -151,49 +143,33 @@
             box-shadow: 0 0 15px var(--green-glow); padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 48%;
         }
 
-        .feedback-section {
-            background: rgba(15, 20, 30, 0.85); border: 1px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 12px; padding: 14px; margin-top: 15px; text-align: center;
-        }
-
-        .star-rating { display: flex; justify-content: center; gap: 5px; font-size: 22px; cursor: pointer; margin: 8px 0; }
-        .star { color: #555; transition: color 0.2s; }
-        .star.active { color: var(--yellow-glow); text-shadow: 0 0 8px var(--yellow-glow); }
-
-        .btn-floating-support {
-            position: fixed; bottom: 75px; right: 20px; width: 55px; height: 55px;
-            background: linear-gradient(135deg, #ff1a1a, #990000); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; color: #fff; font-size: 26px;
-            border: 2px solid rgba(255, 255, 255, 0.4); box-shadow: 0 0 20px var(--red-glow);
-            cursor: pointer; z-index: 150; animation: pulse-red 2s infinite;
-        }
-
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); z-index: 200;
-            justify-content: center; align-items: center;
-        }
-
         .form-input-box {
             width: 100%; padding: 12px; background: #151c28; border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px; color: #fff; font-size: 14px; outline: none; margin-bottom: 12px;
         }
 
+        /* BOTTOM NAV BAR */
         .bottom-nav-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.08);
+            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(8, 10, 15, 0.96);
+            backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex; justify-content: space-around; padding: 10px 0; z-index: 100;
         }
-
         .nav-link-item {
-            display: flex; flex-direction: column; align-items: center; gap: 2px;
+            display: flex; flex-direction: column; align-items: center; gap: 3px;
             color: #888888; font-size: 11px; font-weight: bold; background: none; border: none; cursor: pointer;
         }
         .nav-link-item.active { color: var(--red-glow); }
+        .nav-icon-svg { width: 20px; height: 20px; fill: currentColor; }
 
         .btn-back-nav {
             background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff;
             padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-bottom: 15px;
+        }
+
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); z-index: 300;
+            justify-content: center; align-items: center;
         }
 
         .history-list-box {
@@ -208,14 +184,6 @@
         }
         .banner-img-box img { width: 100%; display: block; object-fit: cover; }
 
-        .admin-feed-card {
-            background: rgba(20, 25, 35, 0.9); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px; padding: 10px; margin-bottom: 10px; text-align: left;
-            display: flex; gap: 10px; align-items: center;
-        }
-        .admin-feed-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid var(--yellow-glow); }
-
-        /* IMAGE 2 SUPPORT MODAL DESIGN EXCITING STYLE */
         .support-modal-card {
             background: #0b0e14; width: 90%; max-width: 380px; border-radius: 16px;
             overflow: hidden; border: 1px solid #d32f2f; box-shadow: 0 0 25px rgba(211, 47, 47, 0.4);
@@ -223,13 +191,17 @@
         .support-modal-header {
             background: #d32f2f; padding: 15px; color: #fff; display: flex; align-items: center; gap: 12px; position: relative;
         }
-        .support-avatar {
-            width: 45px; height: 45px; background: #fff; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-size: 22px; color: #d32f2f;
+
+        /* FOOTER / SUPPORT SECTION */
+        .footer-support-box {
+            margin-top: 30px; text-align: left; padding: 20px 10px; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-support-item {
+            display: flex; align-items: center; gap: 12px; background: rgba(20, 25, 35, 0.8);
+            padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 10px;
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse-red { 0% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } 50% { box-shadow: 0 0 22px rgba(255, 26, 26, 0.9); } 100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.5); } }
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
@@ -238,14 +210,45 @@
 </head>
 <body>
     <canvas id="bgCanvas"></canvas>
+        <!-- TOP HEADER BAR WITH LOGO, CART & HAMBURGER -->
+    <div class="header-bar">
+        <div class="brand-header-left" onclick="switchPage('pageHome')">
+            <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
+        </div>
+        <div class="header-right-actions">
+            <button class="cart-icon-btn" onclick="switchPage('pageMainStore')" title="Panel Store">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <div class="cart-badge">1</div>
+            </button>
+            <button class="hamburger-btn" onclick="toggleSideDrawer(true)" title="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- SIDE DRAWER OVERLAY & PANEL -->
+    <div class="side-drawer-overlay" id="drawerOverlay" onclick="toggleSideDrawer(false)"></div>
+    <div class="side-drawer" id="sideDrawer">
+        <div style="text-align:right; margin-bottom:10px;">
+            <span style="font-size:22px; cursor:pointer; color:#aaa;" onclick="toggleSideDrawer(false)">✕</span>
+        </div>
+        <button class="btn-glow-yellow" onclick="toggleSideDrawer(false); switchPage('pagePurchaseHistory');">📜 Purchase History</button>
+        <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="toggleSideDrawer(false); switchPage('pageDepositHistory');">💳 Deposit History</button>
+    </div>
+
     <div class="container">
-                <!-- ================= PAGE 1: HOME / AUTH LANDING ================= -->
+        <!-- ================= PAGE 1: HOME / AUTH & CUSTOMER RESULTS ================= -->
         <div id="pageHome" class="page-view active">
-            <div class="brand-logo-container">
-                <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
+            
+            <!-- LIVE RANDOM USER PULSE COUNTER (1 TO 100) -->
+            <div style="text-align:center;">
+                <div class="online-badge-center">
+                    <div class="pulse-bulb"></div>
+                    <span id="activeUserCount">93</span> ONLINE
+                </div>
             </div>
 
-            <!-- LOGIN / REGISTER FORM BOX (REQUIRED BEFORE ACCESS) -->
+            <!-- LOGIN / REGISTER FORM BOX -->
             <div id="authBoxContainer" class="dash-card">
                 <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
                     <button id="tabLoginBtn" style="background:none; border:none; color:var(--yellow-glow); font-size:16px; font-weight:bold; cursor:pointer;" onclick="toggleAuthTab('login')">LOGIN</button>
@@ -270,31 +273,103 @@
                 </div>
             </div>
 
-            <!-- STORE ENTRY DASHBOARD (POST LOGIN) -->
             <div id="storeEntryBox" class="dash-card" style="display:none; text-align:center;">
                 <div style="font-size:16px; color:var(--green-glow); font-weight:bold; margin-bottom:10px;">Welcome Back!</div>
                 <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">ENTER PANEL STORE ➔</button>
+    </div>
+                        <!-- CUSTOMER RESULTS TITLE -->
+            <div style="text-align:center; margin:30px 0 10px 0;">
+                <h2 style="font-size:22px; font-weight:900; letter-spacing:1px; text-transform:uppercase;">CUSTOMER RESULTS</h2>
+                <p style="color:#aaa; font-size:12px; margin-top:4px;">See what our customers are achieving</p>
             </div>
 
-            <div class="guide-box">
-                <div style="color:#fff; font-weight:bold; font-size:15px; margin-bottom:8px;">📖 How To Buy Panel?</div>
-                <div class="guide-step">1. Login or Register your account above.</div>
-                <div class="guide-step">2. Enter Panel Store and choose Android / iOS VIP Panel.</div>
-                <div class="guide-step">3. Keep balance in Wallet using Add Money options.</div>
+            <!-- DASHBOARD 1 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Free+Fire+Master+Rank+Proof+1" class="result-img" alt="Result 1">
+                <div class="result-meta"><span class="result-dot"></span> <b>silva</b> — "Do prata ao mestre full magnet"</div>
             </div>
-                </div>
-                            <!-- ================= PAGE 2: MAIN STORE PAGE ================= -->
-        <div id="pageMainStore" class="page-view">
-            <div class="top-nav">
-                <div class="brand-logo-container" style="margin:0; font-size:18px;">
+
+            <!-- DASHBOARD 2 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Free+Fire+BR+Ranqueado+S51+Proof+2" class="result-img" alt="Result 2">
+                <div class="result-meta"><span class="result-dot"></span> <b>jpzz.ks</b> — "Slk o melhor 01"</div>
+            </div>
+
+            <!-- DASHBOARD 3 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Grandmaster+Panel+Proof+3" class="result-img" alt="Result 3">
+                <div class="result-meta"><span class="result-dot"></span> <b>rahul_ff</b> — "100% Antiban External Working Great!"</div>
+            </div>
+
+            <!-- DASHBOARD 4 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=CS+Ranked+Headshot+Proof+4" class="result-img" alt="Result 4">
+                <div class="result-meta"><span class="result-dot"></span> <b>vikram_gamer</b> — "Easy Rank Push to Desafiante"</div>
+            </div>
+
+            <!-- DASHBOARD 5 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=iOS+Fulorite+VIP+Proof+5" class="result-img" alt="Result 5">
+                <div class="result-meta"><span class="result-dot"></span> <b>alex_ios</b> — "Best iOS internal panel no ban"</div>
+            </div>
+
+            <!-- DASHBOARD 6 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Aimbot+Esp+Match+Result+6" class="result-img" alt="Result 6">
+                <div class="result-meta"><span class="result-dot"></span> <b>suresh_king</b> — "Direct Headshot Aim Silent super clean"</div>
+            </div>
+
+            <!-- DASHBOARD 7 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Tournament+Win+Proof+7" class="result-img" alt="Result 7">
+                <div class="result-meta"><span class="result-dot"></span> <b>pro_player99</b> — "Won custom tournament easily"</div>
+            </div>
+
+            <!-- DASHBOARD 8 -->
+            <div class="result-card">
+                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Free+Fire+Max+Updated+Panel+8" class="result-img" alt="Result 8">
+                <div class="result-meta"><span class="result-dot"></span> <b>eklavya_mods</b> — "CheatX Store is 100% Trusted!"</div>
+    </div>
+                <!-- FOOTER & SUPPORT SECTION (MATCHING IMAGE 2) -->
+            <div class="footer-support-box">
+                <div class="brand-header-left" style="font-size:18px; margin-bottom:8px;">
                     <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
                 </div>
-                <div class="online-badge">
-                    <div class="pulse-bulb"></div>
-                    <span id="activeUserCount">124</span> Online
+                <p style="color:#aaa; font-size:12px; margin-bottom:20px; line-height:1.5;">
+                    The best panels and cheats for Free Fire. Dominate the game with safety and 24/7 dedicated support.
+                </p>
+
+                <h4 style="font-size:14px; text-transform:uppercase; margin-bottom:10px; letter-spacing:1px; color:#fff;">QUICK LINKS</h4>
+                <div style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:#ccc; margin-bottom:25px;">
+                    <span style="cursor:pointer;" onclick="switchPage('pageMainStore')">• Products</span>
+                    <span style="cursor:pointer;" onclick="switchPage('pageMainStore')">• Feedbacks</span>
+                    <span style="cursor:pointer;" onclick="switchPage('pageMainStore')">• Cart</span>
+                </div>
+
+                <h4 style="font-size:14px; text-transform:uppercase; margin-bottom:12px; letter-spacing:1px; color:#fff;">SUPPORT</h4>
+                
+                <div class="footer-support-item">
+                    <span style="color:var(--red-glow); font-size:18px;">💬</span>
+                    <span style="font-size:13px; color:#ddd;">24/7 Support via WhatsApp</span>
+                </div>
+
+                <div class="footer-support-item">
+                    <span style="color:var(--red-glow); font-size:18px;">✉️</span>
+                    <span style="font-size:13px; color:#ddd;">hubofico@gmail.com</span>
+                </div>
+
+                <div class="footer-support-item">
+                    <span style="color:var(--red-glow); font-size:18px;">🛡️</span>
+                    <span style="font-size:13px; color:#ddd;">Secure Payment</span>
+                </div>
+
+                <div style="text-align:center; font-size:11px; color:#666; margin-top:30px;">
+                    © 2026 CheatX Store. All rights reserved.
                 </div>
             </div>
-
+                        </div>
+                           <!-- ================= PAGE 2: MAIN STORE PAGE ================= -->
+        <div id="pageMainStore" class="page-view">
             <!-- PROMO BANNER 1 -->
             <div class="banner-img-box">
                 <img src="https://via.placeholder.com/450x120/1f0000/ff1a1a?text=SPECIAL+FF+MOD+PANELS+OFFER" alt="Android Banner">
@@ -328,63 +403,17 @@
                     <button class="btn-glow-green" onclick="switchPage('pageIosInternal')">Buy Internal</button>
                 </div>
             </div>
-
-            <!-- ADMIN ADDED CUSTOMER REVIEWS -->
-            <div class="dash-card">
-                <h4 style="color:var(--yellow-glow); margin-bottom:12px; text-align:left;">💬 Top Customer Reviews</h4>
-                <div id="adminFeedbackContainer">
-                    <div class="admin-feed-card">
-                        <img src="https://via.placeholder.com/45/ffcc00/000000?text=FF" class="admin-feed-img" alt="User">
-                        <div>
-                            <div style="color:var(--yellow-glow); font-size:11px;">⭐⭐⭐⭐⭐</div>
-                            <div style="font-size:12px; color:#fff; font-weight:bold;">Aman Sharma</div>
-                            <div style="font-size:11px; color:#ccc;">Best Antiban External Panel! Working smoothly on Free Fire Max.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
-            <div class="brand-logo-container" style="font-size:20px; margin:5px 0 15px 0;">
-                <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
-            </div>
-
-            <!-- DRIP CLIENT -->
             <div class="dash-card">
-                <div class="glow-pink-title">DRIP-CLIENT [EXTERNAL]</div>
-                <div class="features-grid">
-                    <div>
-                        <div class="feature-col-title">Aimbot</div>
-                        <div class="feature-item">Assest-Pro</div>
-                        <div class="feature-item">Aim Silent</div>
-                        <div class="feature-item">Aim Magnet</div>
-                    </div>
-                    <div>
-                        <div class="feature-col-title">Visual [Esp]</div>
-                        <div class="feature-item">Esp Line</div>
-                        <div class="feature-item">Esp Box</div>
-                        <div class="feature-item">Esp Health</div>
-                    </div>
+                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">DRIP-CLIENT [EXTERNAL]</div>
+                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">1 Day</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (1 Day)', 90)">Buy Now</button></div>
+                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (10 Days)', 200)">Buy Now</button></div>
                 </div>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="openBuyModal('DRIP EXT (1 Day)', 90)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="openBuyModal('DRIP EXT (10 Days)', 200)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">25 Days</div><div class="price-amount">₹350</div><button class="btn-buy-card" onclick="openBuyModal('DRIP EXT (25 Days)', 350)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="openBuyModal('DRIP EXT (30 Days)', 400)">🛒 Buy Now</button></div>
-                </div>
-            </div>
-
-            <div class="feedback-section">
-                <h4 style="color:#fff;">⭐ Rate Android External</h4>
-                <div class="star-rating" onclick="rateFeedback(event, 'Android External')">
-                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
-                </div>
-                <input type="text" id="feedMsg_AndroidExt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
-                <button class="btn-buy-card" onclick="submitFeedback('Android External', 'feedMsg_AndroidExt')">Submit Feedback</button>
-                <div id="liveFeed_AndroidExternal" class="history-list-box" style="margin-top:10px;"></div>
             </div>
         </div>
 
@@ -392,43 +421,22 @@
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
             <div class="dash-card">
-                <div class="glow-pink-title">DRIP-CLIENT [INTERNAL]</div>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">1 Day</div><div class="price-amount">₹90</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (1 Day)', 90)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹200</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (10 Days)', 200)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹400</div><button class="btn-buy-card" onclick="openBuyModal('DRIP INT (30 Days)', 400)">🛒 Buy Now</button></div>
+                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">DRIP-CLIENT [INTERNAL]</div>
+                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">1 Day</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (1 Day)', 90)">Buy Now</button></div>
+                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (10 Days)', 200)">Buy Now</button></div>
                 </div>
             </div>
+        </div>
 
-            <div class="feedback-section">
-                <h4 style="color:#fff;">⭐ Rate Android Internal</h4>
-                <div class="star-rating" onclick="rateFeedback(event, 'Android Internal')">
-                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
-                </div>
-                <input type="text" id="feedMsg_AndroidInt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
-                <button class="btn-buy-card" onclick="submitFeedback('Android Internal', 'feedMsg_AndroidInt')">Submit Feedback</button>
-                <div id="liveFeed_AndroidInternal" class="history-list-box" style="margin-top:10px;"></div>
-            </div>
-    </div>
-            <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
+        <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
             <div class="dash-card">
-                <div class="glow-green-title">FULORITE IOS [EXTERNAL]</div>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS EXT (10 Days)', 310)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS EXT (30 Days)', 550)">🛒 Buy Now</button></div>
+                <div style="color:var(--green-glow); font-size:18px; font-weight:900; margin-bottom:10px;">FULORITE IOS [EXTERNAL]</div>
+                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹310</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE IOS EXT (10 Days)', 310)">Buy Now</button></div>
                 </div>
-            </div>
-
-            <div class="feedback-section">
-                <h4 style="color:#fff;">⭐ Rate iOS External</h4>
-                <div class="star-rating" onclick="rateFeedback(event, 'iOS External')">
-                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
-                </div>
-                <input type="text" id="feedMsg_IosExt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
-                <button class="btn-buy-card" onclick="submitFeedback('iOS External', 'feedMsg_IosExt')">Submit Feedback</button>
-                <div id="liveFeed_iOS External" class="history-list-box" style="margin-top:10px;"></div>
             </div>
         </div>
 
@@ -436,27 +444,14 @@
         <div id="pageIosInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
             <div class="dash-card">
-                <div class="glow-green-title">FULORITE IOS [INTERNAL]</div>
-                <div class="pricing-grid">
-                    <div class="price-card"><div class="duration-tag">10 Days</div><div class="price-amount">₹310</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (10 Days)', 310)">🛒 Buy Now</button></div>
-                    <div class="price-card"><div class="duration-tag">30 Days</div><div class="price-amount">₹550</div><button class="btn-buy-card" onclick="openBuyModal('FULORITE IOS INT (30 Days)', 550)">🛒 Buy Now</button></div>
+                <div style="color:var(--green-glow); font-size:18px; font-weight:900; margin-bottom:10px;">FULORITE IOS [INTERNAL]</div>
+                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹310</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE IOS INT (10 Days)', 310)">Buy Now</button></div>
                 </div>
             </div>
-
-            <div class="feedback-section">
-                <h4 style="color:#fff;">⭐ Rate iOS Internal</h4>
-                <div class="star-rating" onclick="rateFeedback(event, 'iOS Internal')">
-                    <span class="star" data-val="1">★</span><span class="star" data-val="2">★</span><span class="star" data-val="3">★</span><span class="star" data-val="4">★</span><span class="star" data-val="5">★</span>
-                </div>
-                <input type="text" id="feedMsg_IosInt" class="form-input-box" placeholder="Write feedback..." style="margin-bottom:8px;">
-                <button class="btn-buy-card" onclick="submitFeedback('iOS Internal', 'feedMsg_IosInt')">Submit Feedback</button>
-                <div id="liveFeed_iOS Internal" class="history-list-box" style="margin-top:10px;"></div>
-            </div>
-        </div>
-
-        <!-- ================= PAGE 7: CUSTOMER PROFILE DASHBOARD ================= -->
+    </div>
+                                                                                                                                                                                                                <!-- ================= PAGE 7: PROFILE DASHBOARD ================= -->
         <div id="pageProfile" class="page-view">
-            <!-- DASHBOARD 1: USER INFO & WALLET -->
             <div class="dash-card">
                 <div style="display:flex; align-items:center; gap:12px; margin-bottom:15px;">
                     <div style="width:50px; height:50px; background:linear-gradient(135deg, #ff1a1a, #ffcc00); border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:24px; font-weight:bold; color:#000;">
@@ -477,31 +472,19 @@
                 </div>
             </div>
 
-            <!-- DASHBOARD 2: HISTORY & LOGOUT -->
             <div class="dash-card">
                 <button class="btn-glow-yellow" style="width:100%; margin-bottom:10px;" onclick="switchPage('pagePurchaseHistory')">📜 Purchase History</button>
                 <button class="btn-glow-yellow" style="width:100%; background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="switchPage('pageDepositHistory')">💳 Deposit History</button>
                 <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; margin-top:15px; background:#222; color:#ff1a1a; border-color:var(--red-glow);" onclick="handleLogout()">🚪 Logout Account</button>
             </div>
-
-            <!-- HOW TO ADD MONEY STEPS GUIDE -->
-            <div class="guide-box">
-                <div style="color:var(--yellow-glow); font-weight:bold; font-size:14px; margin-bottom:8px;">💡 How To Add Money To Your Wallet?</div>
-                <div class="guide-step">1. Click <strong>+ Add Money</strong> button above.</div>
-                <div class="guide-step">2. Enter desired amount & click <strong>Go And Add Wallet</strong> to pay via PhonePe/GPay/Paytm.</div>
-                <div class="guide-step">3. After payment, click <strong>Confirm Your Payment</strong>.</div>
-                <div class="guide-step">4. Wait a few moments; once approved, balance will update automatically!</div>
-            </div>
         </div>
 
-        <!-- SUB PAGE: ADD MONEY PAGE -->
+        <!-- SUB PAGE: ADD MONEY -->
         <div id="pageAddMoney" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageProfile')">← Back To Profile</button>
             <div class="dash-card">
                 <h3 style="color:#fff; margin-bottom:12px;">Add Balance To Wallet</h3>
-                <label style="font-size:12px; color:#aaa; display:block; text-align:left; margin-bottom:5px;">Enter Amount (INR)</label>
-                <input type="number" id="addMoneyInput" class="form-input-box" placeholder="e.g. 500">
-
+                <input type="number" id="addMoneyInput" class="form-input-box" placeholder="Enter Amount (INR) e.g. 500">
                 <button class="btn-glow-green" style="width:100%; margin-bottom:12px;" onclick="openUpiAppDirect()">📱 Go And Add Wallet</button>
                 <button class="btn-glow-yellow" style="width:100%; background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="confirmAddMoneyRequest()">✅ Confirm Your Payment</button>
             </div>
@@ -509,7 +492,7 @@
 
         <!-- SUB PAGE: PURCHASE HISTORY -->
         <div id="pagePurchaseHistory" class="page-view">
-            <button class="btn-back-nav" onclick="switchPage('pageProfile')">← Back To Profile</button>
+            <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back</button>
             <div class="dash-card">
                 <h3 style="color:var(--yellow-glow); margin-bottom:10px;">Your Purchase History</h3>
                 <div id="purchaseListFull" class="history-list-box" style="max-height:350px;">No purchases found.</div>
@@ -518,71 +501,49 @@
 
         <!-- SUB PAGE: DEPOSIT HISTORY -->
         <div id="pageDepositHistory" class="page-view">
-            <button class="btn-back-nav" onclick="switchPage('pageProfile')">← Back To Profile</button>
+            <button class="btn-back-nav" onclick="switchPage('pageHome')">← Back</button>
             <div class="dash-card">
                 <h3 style="color:var(--blue-glow); margin-bottom:10px;">Your Deposit Requests</h3>
                 <div id="depositListFull" class="history-list-box" style="max-height:350px;">No deposit requests found.</div>
             </div>
         </div>
-    </div>
-        <!-- FLOATING SUPPORT BUTTON -->
-    <div class="btn-floating-support" id="btnOpenSupport">👩‍💼</div>
-
-    <!-- CUSTOMER SUPPORT MODAL (RED HEADER / MATCHING IMAGE 2 EXACTLY) -->
-    <div class="modal-overlay" id="supportModal">
-        <div class="support-modal-card">
-            <div class="support-modal-header">
-                <div class="support-avatar">💬</div>
-                <div>
-                    <div style="font-weight:bold; font-size:16px;">Suporte Online</div>
-                    <div style="font-size:11px; color:#a3ffb8;">● Atendimento ativo</div>
-                </div>
-                <span style="position:absolute; right:15px; top:15px; cursor:pointer; font-weight:bold; font-size:18px;" onclick="closeModal('supportModal')">✕</span>
-            </div>
-            <div style="padding:20px;">
-                <label style="font-size:12px; color:#aaa; display:block; text-align:left; margin-bottom:4px;">Nome</label>
-                <input type="text" id="custName" class="form-input-box" placeholder="Seu nome">
-
-                <label style="font-size:12px; color:#aaa; display:block; text-align:left; margin-bottom:4px;">Email</label>
-                <input type="email" id="custEmail" class="form-input-box" placeholder="seu@email.com">
-
-                <label style="font-size:12px; color:#aaa; display:block; text-align:left; margin-bottom:4px;">Mensagem</label>
-                <textarea id="custMsg" class="form-input-box" placeholder="Como podemos ajudar?" style="height:80px;"></textarea>
-
-                <button class="btn-glow-yellow" style="background:#d32f2f; color:#fff; border:none; margin-top:5px;" onclick="sendSupportMessage()">
-                    🚀 Enviar Mensagem
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- BUY PRODUCT MODAL (GMAIL & NAME VERIFICATION) -->
+                    </div>
+                        <!-- BUY PRODUCT MODAL -->
     <div class="modal-overlay" id="buyModal">
-        <div class="modal-card-support" style="padding:20px; background:#0d121d; border-radius:16px; border:1px solid var(--red-glow);">
+        <div style="padding:20px; background:#0d121d; border-radius:16px; border:1px solid var(--red-glow); width:90%; max-width:360px;">
             <h3 style="color:#fff; margin-bottom:8px;">Complete Purchase</h3>
             <p style="color:var(--yellow-glow); font-size:12px; margin-bottom:12px;" id="buyProductName">Product Name</p>
 
             <input type="text" id="buyName" class="form-input-box" placeholder="Your Name">
             <input type="email" id="buyEmail" class="form-input-box" placeholder="Gmail Address">
-            <p style="font-size:11px; color:var(--green-glow); margin-bottom:12px;">* Product will be sent to your Gmail!</p>
 
             <button class="btn-glow-green" style="width:100%;" onclick="executeBuyProduct()">🛒 Purchase Now</button>
+            <button class="btn-back-nav" style="width:100%; margin-top:8px;" onclick="closeModal('buyModal')">Cancel</button>
         </div>
     </div>
 
-    <!-- SUCCESS / GENERIC POPUP -->
+    <!-- SUCCESS POPUP -->
     <div class="modal-overlay" id="successModal">
-        <div class="modal-card-support" style="padding: 20px; text-align:center; background:#0d121d; border-radius:16px; border:1px solid var(--green-glow);">
+        <div style="padding: 20px; text-align:center; background:#0d121d; border-radius:16px; border:1px solid var(--green-glow); width:90%; max-width:360px;">
             <div id="successMsg" style="color:#fff;"></div>
             <button class="btn-glow-yellow" style="background:linear-gradient(135deg, #00cc55, #006622); color:#fff; margin-top:15px; width:100%; border:none;" onclick="closeModal('successModal')">OK</button>
         </div>
     </div>
 
-    <!-- BOTTOM NAVIGATION BAR -->
+    <!-- PROFESSIONAL BOTTOM VECTOR NAVIGATION BAR -->
     <div class="bottom-nav-bar">
-        <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')"><span style="font-size:18px;">🏠</span><span>Home</span></button>
-        <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')"><span style="font-size:18px;">🏪</span><span>Store</span></button>
-        <button class="nav-link-item" id="navProfileBtn" onclick="switchPage('pageProfile')"><span style="font-size:18px;">👤</span><span>Profile</span></button>
+        <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')">
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </button>
+        <button class="nav-link-item" id="navStoreBtn" onclick="switchPage('pageMainStore')">
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
+            <span>Store</span>
+        </button>
+        <button class="nav-link-item" id="navProfileBtn" onclick="switchPage('pageProfile')">
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Profile</span>
+        </button>
     </div>
         <script>
         const firebaseConfig = {
@@ -600,7 +561,6 @@
         const db = firebase.database();
 
         let currentUser = null, userWallet = 0;
-        let selectedStars = {};
         let selectedProductForBuy = null;
 
         // AUTH MONITOR
@@ -609,9 +569,7 @@
                 currentUser = user;
                 document.getElementById('authBoxContainer').style.display = 'none';
                 document.getElementById('storeEntryBox').style.display = 'block';
-
                 document.getElementById('profEmailDisplay').innerText = user.email;
-                document.getElementById('custEmail').value = user.email;
 
                 db.ref('users/' + user.uid).on('value', snap => {
                     const data = snap.val();
@@ -619,7 +577,6 @@
                         userWallet = data.wallet || 0;
                         document.getElementById('profNameDisplay').innerText = data.username || user.email.split('@')[0];
                         document.getElementById('profWalletDisplay').innerText = userWallet;
-                        document.getElementById('custName').value = data.username || "";
                     }
                 });
                 loadHistoryData(user.uid);
@@ -633,12 +590,24 @@
             }
         });
 
-        // DYNAMIC RANDOM USER COUNTER (1 TO 200 EVERY 4 SECONDS)
+        // DYNAMIC RANDOM USER COUNTER (1 TO 100 EVERY 3 SECONDS)
         setInterval(() => {
-            const count = Math.floor(Math.random() * 200) + 1;
+            const count = Math.floor(Math.random() * 100) + 1;
             const el = document.getElementById('activeUserCount');
             if(el) el.innerText = count;
-        }, 4000);
+        }, 3000);
+
+        function toggleSideDrawer(open) {
+            const drawer = document.getElementById('sideDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            if(open) {
+                drawer.classList.add('active');
+                overlay.style.display = 'block';
+            } else {
+                drawer.classList.remove('active');
+                overlay.style.display = 'none';
+            }
+        }
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -679,9 +648,7 @@
             }).catch(err => alert(err.message));
         }
 
-        function handleLogout() {
-            auth.signOut().then(() => switchPage('pageHome'));
-        }
+        function handleLogout() { auth.signOut().then(() => switchPage('pageHome')); }
 
         function switchPage(pageId) {
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
@@ -697,7 +664,7 @@
 
             window.scrollTo(0,0);
         }
-                   // UPI INTENT ADD MONEY
+
         function openUpiAppDirect() {
             const amt = document.getElementById('addMoneyInput').value;
             if(!amt || amt <= 0) return alert("Enter valid amount!");
@@ -721,7 +688,6 @@
             });
         }
 
-        // BUY PRODUCT SYSTEM WITH GMAIL NOTIFICATION TRIGGER
         function openBuyModal(pName, price) {
             if(!currentUser) return switchPage('pageHome');
             selectedProductForBuy = { name: pName, price: price };
@@ -760,54 +726,7 @@
                         <div style="font-size:12px; color:#ccc; margin-top:8px;">Panel file delivered your Gmail yet !</div>
                     `;
                 });
-            }, 4000);
-        }
-
-        // CUSTOMER SUPPORT DISPATCH TO hubofico@gmail.com
-        function sendSupportMessage() {
-            const name = document.getElementById('custName').value;
-            const email = document.getElementById('custEmail').value;
-            const msg = document.getElementById('custMsg').value;
-            if(!name || !msg || !email) return alert("Please fill all details!");
-
-            db.ref('support_tickets/').push({
-                name: name, email: email, message: msg,
-                targetOwnerEmail: "hubofico@gmail.com", date: new Date().toLocaleString()
-            }).then(() => {
-                closeModal('supportModal');
-                document.getElementById('successMsg').innerHTML = `
-                    <div style="font-size:18px; font-weight:bold; color:var(--green-glow);">Successfully Sent!</div>
-                    <div style="font-size:12px; color:#fff; margin-top:5px;">Your support issue has been submitted.</div>
-                `;
-                openModal('successModal');
-            });
-        }
-
-        document.getElementById('btnOpenSupport').onclick = () => openModal('supportModal');
-
-        // REVIEWS & HISTORY LOADER
-        function rateFeedback(e, cat) {
-            if(e.target.classList.contains('star')) {
-                const val = e.target.getAttribute('data-val');
-                selectedStars[cat] = val;
-                e.currentTarget.querySelectorAll('.star').forEach((s, idx) => {
-                    if(idx < val) s.classList.add('active'); else s.classList.remove('active');
-                });
-            }
-        }
-
-        function submitFeedback(cat, inputId) {
-            const msg = document.getElementById(inputId).value;
-            if(!msg) return alert("Enter feedback text!");
-            if(!currentUser) return switchPage('pageHome');
-
-            db.ref('feedbacks/').push({
-                uid: currentUser.uid, user: currentUser.email.split('@')[0],
-                category: cat, rating: selectedStars[cat] || 5, message: msg
-            }).then(() => {
-                alert("Feedback submitted!");
-                document.getElementById(inputId).value = "";
-            });
+            }, 3000);
         }
 
         function loadHistoryData(uid) {
@@ -826,7 +745,7 @@
             });
         }
 
-        // RED LIGHT PARTICLES CANVAS
+        // RED PARTICLES ANIMATION
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -836,7 +755,7 @@
         for(let i = 0; i < 40; i++) particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, radius: Math.random()*2 + 1, speedY: Math.random()*1.2 + 0.4 });
         function animate() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = 'rgba(255,26,26,0.6)';
+            ctx.fillStyle = 'rgba(255,26,26,0.5)';
             particles.forEach(p => {
                 ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2); ctx.fill();
                 p.y += p.speedY; if(p.y > canvas.height) { p.y = 0; p.x = Math.random()*canvas.width; }
