@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CheatX Store - FF & FFMAX</title>
+    <title>CheatX Store - Official Web Store</title>
     <style>
         :root {
             --bg-color: #050505;
@@ -13,7 +12,7 @@
             --green-glow: #00ff66;
             --blue-glow: #0088ff;
             --pink-glow: #ff007f;
-            --card-dark: rgba(15, 18, 25, 0.92);
+            --card-dark: rgba(15, 18, 25, 0.95);
         }
 
         * {
@@ -24,7 +23,7 @@
 
         body {
             background-color: var(--bg-color); color: #ffffff;
-            min-height: 100vh; position: relative; overflow-x: hidden; padding-bottom: 80px;
+            min-height: 100vh; position: relative; overflow-x: hidden; padding-bottom: 85px;
         }
 
         #bgCanvas {
@@ -32,19 +31,19 @@
         }
 
         .container {
-            max-width: 480px; margin: 0 auto; padding: 75px 15px 100px 15px; position: relative; z-index: 10;
+            max-width: 480px; margin: 0 auto; padding: 75px 12px 100px 12px; position: relative; z-index: 10;
         }
 
         .page-view { display: none; }
         .page-view.active { display: block; animation: fadeIn 0.3s ease-in-out; }
 
-        /* HEADER & TOP NAV STYLING */
+        /* FIXED HEADER BAR (Visible Across All Pages) */
         .header-bar {
             position: fixed; top: 0; left: 0; width: 100%; height: 60px;
             background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 15px; z-index: 100;
+            padding: 0 15px; z-index: 200;
         }
 
         .brand-header-left {
@@ -88,19 +87,19 @@
             background: rgba(0,0,0,0.7); z-index: 240; backdrop-filter: blur(3px);
         }
 
+        /* CARD & GRID COMPONENT STYLES */
         .dash-card {
             background: var(--card-dark); border: 1px solid var(--red-glow);
-            box-shadow: 0 0 15px rgba(255, 26, 26, 0.3); border-radius: 16px;
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.25); border-radius: 16px;
             padding: 18px; margin-bottom: 20px; backdrop-filter: blur(8px);
         }
 
-        /* LIVE ONLINE PULSE COUNTER */
         .online-badge-center {
             display: inline-flex; align-items: center; gap: 8px;
             color: var(--green-glow); font-size: 14px; font-weight: 900;
             background: rgba(0, 255, 102, 0.1); padding: 8px 20px; border-radius: 25px;
             border: 1px solid var(--green-glow); box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
-            margin: 15px 0 25px 0; letter-spacing: 1px;
+            margin: 15px 0 20px 0; letter-spacing: 1px;
         }
 
         .pulse-bulb {
@@ -114,18 +113,16 @@
             100% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* CUSTOMER RESULT CARD STYLING */
-        .result-card {
-            background: rgba(15, 20, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px; padding: 12px; margin-bottom: 20px; text-align: left;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        /* PRICING & BUY CARDS */
+        .pricing-grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+        .price-card-box {
+            background: #0f1522; border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px; padding: 12px; text-align: left; position: relative; overflow: hidden;
         }
-        .result-img {
-            width: 100%; border-radius: 8px; object-fit: cover; margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.08); display: block;
+        .discount-badge-tag {
+            position: absolute; top: 0; right: 0; background: var(--red-glow); color: #fff;
+            font-size: 9px; font-weight: 900; padding: 2px 6px; border-bottom-left-radius: 6px;
         }
-        .result-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #ccc; }
-        .result-dot { width: 8px; height: 8px; background: var(--green-glow); border-radius: 50%; display: inline-block; }
 
         .btn-glow-yellow {
             width: 100%; padding: 12px; background: linear-gradient(135deg, #ffcc00, #b38f00);
@@ -148,11 +145,11 @@
             border-radius: 8px; color: #fff; font-size: 14px; outline: none; margin-bottom: 12px;
         }
 
-        /* BOTTOM NAV BAR */
+        /* BOTTOM FIXED NAVIGATION BAR */
         .bottom-nav-bar {
             position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(8, 10, 15, 0.96);
             backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex; justify-content: space-around; padding: 10px 0; z-index: 100;
+            display: flex; justify-content: space-around; padding: 10px 0; z-index: 200;
         }
         .nav-link-item {
             display: flex; flex-direction: column; align-items: center; gap: 3px;
@@ -184,15 +181,18 @@
         }
         .banner-img-box img { width: 100%; display: block; object-fit: cover; }
 
-        .support-modal-card {
-            background: #0b0e14; width: 90%; max-width: 380px; border-radius: 16px;
-            overflow: hidden; border: 1px solid #d32f2f; box-shadow: 0 0 25px rgba(211, 47, 47, 0.4);
+        .result-card {
+            background: rgba(15, 20, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px; padding: 12px; margin-bottom: 20px; text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .support-modal-header {
-            background: #d32f2f; padding: 15px; color: #fff; display: flex; align-items: center; gap: 12px; position: relative;
+        .result-img {
+            width: 100%; border-radius: 8px; object-fit: cover; margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08); display: block;
         }
+        .result-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #ccc; }
+        .result-dot { width: 8px; height: 8px; background: var(--green-glow); border-radius: 50%; display: inline-block; }
 
-        /* FOOTER / SUPPORT SECTION */
         .footer-support-box {
             margin-top: 30px; text-align: left; padding: 20px 10px; border-top: 1px solid rgba(255,255,255,0.1);
         }
@@ -210,7 +210,7 @@
 </head>
 <body>
     <canvas id="bgCanvas"></canvas>
-        <!-- TOP HEADER BAR WITH LOGO, CART & HAMBURGER -->
+        <!-- UNIVERSAL FIXED TOP HEADER BAR -->
     <div class="header-bar">
         <div class="brand-header-left" onclick="switchPage('pageHome')">
             <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
@@ -226,7 +226,7 @@
         </div>
     </div>
 
-    <!-- SIDE DRAWER OVERLAY & PANEL -->
+    <!-- SIDE DRAWER OVERLAY & MENU -->
     <div class="side-drawer-overlay" id="drawerOverlay" onclick="toggleSideDrawer(false)"></div>
     <div class="side-drawer" id="sideDrawer">
         <div style="text-align:right; margin-bottom:10px;">
@@ -237,10 +237,9 @@
     </div>
 
     <div class="container">
-        <!-- ================= PAGE 1: HOME / AUTH & CUSTOMER RESULTS ================= -->
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
         <div id="pageHome" class="page-view active">
             
-            <!-- LIVE RANDOM USER PULSE COUNTER (1 TO 100) -->
             <div style="text-align:center;">
                 <div class="online-badge-center">
                     <div class="pulse-bulb"></div>
@@ -248,14 +247,13 @@
                 </div>
             </div>
 
-            <!-- LOGIN / REGISTER FORM BOX -->
+            <!-- AUTH DASHBOARD CONTAINER -->
             <div id="authBoxContainer" class="dash-card">
                 <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
                     <button id="tabLoginBtn" style="background:none; border:none; color:var(--yellow-glow); font-size:16px; font-weight:bold; cursor:pointer;" onclick="toggleAuthTab('login')">LOGIN</button>
                     <button id="tabRegBtn" style="background:none; border:none; color:#888; font-size:16px; font-weight:bold; cursor:pointer;" onclick="toggleAuthTab('register')">REGISTER</button>
                 </div>
 
-                <!-- REGISTER FORM -->
                 <div id="registerFormView" style="display:none;">
                     <div style="color:var(--red-glow); font-size:12px; margin-bottom:10px;">Create account to buy panel keys & track wallet!</div>
                     <input type="text" id="regUname" class="form-input-box" placeholder="Name">
@@ -264,7 +262,6 @@
                     <button class="btn-glow-yellow" onclick="handleRegister()">✅ Create Account</button>
                 </div>
 
-                <!-- LOGIN FORM -->
                 <div id="loginFormView">
                     <div style="color:#aaa; font-size:12px; margin-bottom:10px;">Enter your Gmail & Password to continue.</div>
                     <input type="email" id="loginEmail" class="form-input-box" placeholder="Gmail">
@@ -277,7 +274,7 @@
                 <div style="font-size:16px; color:var(--green-glow); font-weight:bold; margin-bottom:10px;">Welcome Back!</div>
                 <button class="btn-glow-yellow" onclick="switchPage('pageMainStore')">ENTER PANEL STORE ➔</button>
     </div>
-                        <!-- CUSTOMER RESULTS TITLE -->
+                            <!-- CUSTOMER RESULTS TITLE -->
             <div style="text-align:center; margin:30px 0 10px 0;">
                 <h2 style="font-size:22px; font-weight:900; letter-spacing:1px; text-transform:uppercase;">CUSTOMER RESULTS</h2>
                 <p style="color:#aaa; font-size:12px; margin-top:4px;">See what our customers are achieving</p>
@@ -285,52 +282,52 @@
 
             <!-- DASHBOARD 1 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Free+Fire+Master+Rank+Proof+1" class="result-img" alt="Result 1">
+                <img src="https://i.ibb.co/Tx2MZF10/image.jpg" class="result-img" alt="Result 1">
                 <div class="result-meta"><span class="result-dot"></span> <b>silva</b> — "Do prata ao mestre full magnet"</div>
             </div>
 
             <!-- DASHBOARD 2 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Free+Fire+BR+Ranqueado+S51+Proof+2" class="result-img" alt="Result 2">
+                <img src="https://i.ibb.co/tTVyvwvy/image.jpg" class="result-img" alt="Result 2">
                 <div class="result-meta"><span class="result-dot"></span> <b>jpzz.ks</b> — "Slk o melhor 01"</div>
             </div>
 
             <!-- DASHBOARD 3 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Grandmaster+Panel+Proof+3" class="result-img" alt="Result 3">
+                <img src="https://i.ibb.co/kgjQrfzB/image.jpg" class="result-img" alt="Result 3">
                 <div class="result-meta"><span class="result-dot"></span> <b>rahul_ff</b> — "100% Antiban External Working Great!"</div>
             </div>
 
             <!-- DASHBOARD 4 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=CS+Ranked+Headshot+Proof+4" class="result-img" alt="Result 4">
+                <img src="https://i.ibb.co/XZH9bhzk/image.jpg" class="result-img" alt="Result 4">
                 <div class="result-meta"><span class="result-dot"></span> <b>vikram_gamer</b> — "Easy Rank Push to Desafiante"</div>
             </div>
 
             <!-- DASHBOARD 5 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=iOS+Fulorite+VIP+Proof+5" class="result-img" alt="Result 5">
+                <img src="https://i.ibb.co/PB2JmtK/image.jpg" class="result-img" alt="Result 5">
                 <div class="result-meta"><span class="result-dot"></span> <b>alex_ios</b> — "Best iOS internal panel no ban"</div>
             </div>
 
             <!-- DASHBOARD 6 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Aimbot+Esp+Match+Result+6" class="result-img" alt="Result 6">
+                <img src="https://i.ibb.co/Zz0vNDxt/image.jpg" class="result-img" alt="Result 6">
                 <div class="result-meta"><span class="result-dot"></span> <b>suresh_king</b> — "Direct Headshot Aim Silent super clean"</div>
             </div>
 
             <!-- DASHBOARD 7 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Tournament+Win+Proof+7" class="result-img" alt="Result 7">
+                <img src="https://i.ibb.co/RkVNc5nd/image.jpg" class="result-img" alt="Result 7">
                 <div class="result-meta"><span class="result-dot"></span> <b>pro_player99</b> — "Won custom tournament easily"</div>
             </div>
 
             <!-- DASHBOARD 8 -->
             <div class="result-card">
-                <img src="https://via.placeholder.com/450x220/121824/ffffff?text=Free+Fire+Max+Updated+Panel+8" class="result-img" alt="Result 8">
+                <img src="https://i.ibb.co/s90Nfbbg/image.jpg" class="result-img" alt="Result 8">
                 <div class="result-meta"><span class="result-dot"></span> <b>eklavya_mods</b> — "CheatX Store is 100% Trusted!"</div>
-    </div>
-                <!-- FOOTER & SUPPORT SECTION (MATCHING IMAGE 2) -->
+                    </div>
+                        <!-- FOOTER & SUPPORT SECTION (UNIVERSAL REUSABLE COMPONENT) -->
             <div class="footer-support-box">
                 <div class="brand-header-left" style="font-size:18px; margin-bottom:8px;">
                     <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
@@ -367,15 +364,23 @@
                     © 2026 CheatX Store. All rights reserved.
                 </div>
             </div>
-                        </div>
-                           <!-- ================= PAGE 2: MAIN STORE PAGE ================= -->
+        </div>
+
+        <!-- ================= PAGE 2: MAIN PANEL STORE ================= -->
         <div id="pageMainStore" class="page-view">
-            <!-- PROMO BANNER 1 -->
-            <div class="banner-img-box">
-                <img src="https://via.placeholder.com/450x120/1f0000/ff1a1a?text=SPECIAL+FF+MOD+PANELS+OFFER" alt="Android Banner">
+            <div style="text-align:center; margin-bottom:15px;">
+                <div class="brand-header-left" style="font-size:22px; justify-content:center; margin-bottom:10px;">
+                    <span class="brand-cheat">CHEAT</span><span class="brand-x">X</span><span class="brand-store">STORE</span>
+                </div>
+                <h3 style="text-align:left; color:#fff; font-size:18px; margin-top:10px; letter-spacing:0.5px;">OUR PRODUCTS</h3>
             </div>
 
-            <!-- ANDROID CATEGORY -->
+            <!-- GITHUB REPO BANNER 1 (android-banner.jpg) -->
+            <div class="banner-img-box">
+                <img src="android-banner.jpg" onerror="this.src='https://via.placeholder.com/450x120/1f0000/ff1a1a?text=ANDROID+PANEL+BANNER'" alt="Android Banner">
+            </div>
+
+            <!-- ANDROID CATEGORY CARD -->
             <div class="dash-card">
                 <div style="text-align:left; margin-bottom:12px;">
                     <h3 style="color:#fff; font-size:16px;">ANDROID PANEL</h3>
@@ -387,12 +392,12 @@
                 </div>
             </div>
 
-            <!-- PROMO BANNER 2 -->
+            <!-- GITHUB REPO BANNER 2 (ios-banner.jpg) -->
             <div class="banner-img-box">
-                <img src="https://via.placeholder.com/450x120/001f0a/00ff66?text=IOS+VIP+NO+ROOT+PANEL+UPDATE" alt="iOS Banner">
+                <img src="ios-banner.jpg" onerror="this.src='https://via.placeholder.com/450x120/001f0a/00ff66?text=IOS+VIP+PANEL+BANNER'" alt="iOS Banner">
             </div>
 
-            <!-- IOS CATEGORY -->
+            <!-- IOS CATEGORY CARD -->
             <div class="dash-card">
                 <div style="text-align:left; margin-bottom:12px;">
                     <h3 style="color:#fff; font-size:16px;">IOS VIP PANEL</h3>
@@ -403,90 +408,257 @@
                     <button class="btn-glow-green" onclick="switchPage('pageIosInternal')">Buy Internal</button>
                 </div>
             </div>
-        </div>
 
-        <!-- ================= PAGE 3: ANDROID EXTERNAL ================= -->
+            <!-- REUSED FOOTER / SUPPORT IN STORE PAGE -->
+            <div class="footer-support-box">
+                <h4 style="font-size:14px; text-transform:uppercase; margin-bottom:12px; letter-spacing:1px; color:#fff;">SUPPORT</h4>
+                <div class="footer-support-item">
+                    <span style="color:var(--red-glow); font-size:18px;">✉️</span>
+                    <span style="font-size:13px; color:#ddd;">hubofico@gmail.com</span>
+                </div>
+            </div>
+        </div>
+        
+              <!-- ================= PAGE 3: ANDROID EXTERNAL (3 DASHBOARDS) ================= -->
         <div id="pageExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <!-- 1. DRIP CLIENT [EXTERNAL] -->
             <div class="dash-card">
-                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">DRIP-CLIENT [EXTERNAL]</div>
-                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">1 Day</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (1 Day)', 90)">Buy Now</button></div>
-                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (10 Days)', 200)">Buy Now</button></div>
+                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">DRIP CLIENT [EXTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Silent<br><b>Visual - ESP:</b><br>• Box<br>• Name<br>• Line<br>• Distance</div>
+                    <div><b>Brutal:</b><br>• Speed<br>• Magnet<br>• Fly<br>• Teleport</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">1 DAY</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹550</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (20 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹700</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (30 Days)', 700)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">60 DAYS</div><div style="font-size:16px; font-weight:bold;">₹999</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP EXT (60 Days)', 999)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 2. HAX-CRACKER -->
+            <div class="dash-card">
+                <div style="color:var(--yellow-glow); font-size:18px; font-weight:900; margin-bottom:10px;">HAX-CRACKER</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Silent</div>
+                    <div><b>Visual - ESP:</b><br>• Box<br>• Name<br>• Line<br>• Distance</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">1 DAY</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹550</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER (20 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹700</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER (30 Days)', 700)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">60 DAYS</div><div style="font-size:16px; font-weight:bold;">₹999</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER (60 Days)', 999)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 3. SILENT CHEAT [EXTERNAL] -->
+            <div class="dash-card">
+                <div style="color:var(--blue-glow); font-size:18px; font-weight:900; margin-bottom:10px;">SILENT CHEAT [EXTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Silent<br><b>Visual - ESP:</b><br>• Box<br>• Name<br>• Line<br>• Distance</div>
+                    <div><b>Brutal:</b><br>• Speed<br>• Magnet<br>• Fly<br>• Teleport</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">1 DAY</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT EXT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹550</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT EXT (20 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹700</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT EXT (30 Days)', 700)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">60 DAYS</div><div style="font-size:16px; font-weight:bold;">₹999</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT EXT (60 Days)', 999)">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 4: ANDROID INTERNAL ================= -->
+        <!-- ================= PAGE 4: ANDROID INTERNAL (EXACT REPLICA FOR INTERNAL) ================= -->
         <div id="pageInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <!-- 1. DRIP CLIENT [INTERNAL] -->
             <div class="dash-card">
-                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">DRIP-CLIENT [INTERNAL]</div>
-                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">1 Day</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (1 Day)', 90)">Buy Now</button></div>
-                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (10 Days)', 200)">Buy Now</button></div>
+                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">DRIP CLIENT [INTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Silent<br><b>Visual - ESP:</b><br>• Box<br>• Name<br>• Line<br>• Distance</div>
+                    <div><b>Brutal:</b><br>• Speed<br>• Magnet<br>• Fly<br>• Teleport</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">1 DAY</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹550</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (20 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹700</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (30 Days)', 700)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">60 DAYS</div><div style="font-size:16px; font-weight:bold;">₹999</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('DRIP INT (60 Days)', 999)">🛒 Buy Now</button></div>
                 </div>
             </div>
-        </div>
 
-        <!-- ================= PAGE 5: IOS EXTERNAL ================= -->
+            <!-- 2. HAX-CRACKER [INTERNAL] -->
+            <div class="dash-card">
+                <div style="color:var(--yellow-glow); font-size:18px; font-weight:900; margin-bottom:10px;">HAX-CRACKER [INTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Silent</div>
+                    <div><b>Visual - ESP:</b><br>• Box<br>• Name<br>• Line<br>• Distance</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">1 DAY</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER INT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹550</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER INT (20 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹700</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER INT (30 Days)', 700)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">60 DAYS</div><div style="font-size:16px; font-weight:bold;">₹999</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('HAX-CRACKER INT (60 Days)', 999)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 3. SILENT CHEAT [INTERNAL] -->
+            <div class="dash-card">
+                <div style="color:var(--blue-glow); font-size:18px; font-weight:900; margin-bottom:10px;">SILENT CHEAT [INTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Silent<br><b>Visual - ESP:</b><br>• Box<br>• Name<br>• Line<br>• Distance</div>
+                    <div><b>Brutal:</b><br>• Speed<br>• Magnet<br>• Fly<br>• Teleport</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">1 DAY</div><div style="font-size:16px; font-weight:bold;">₹90</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT INT (1 Day)', 90)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹550</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT INT (20 Days)', 550)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹700</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT INT (30 Days)', 700)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">60 DAYS</div><div style="font-size:16px; font-weight:bold;">₹999</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('SILENT CHEAT INT (60 Days)', 999)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+                        </div>
+
+                    <!-- ================= PAGE 5: IOS EXTERNAL (3 DASHBOARDS) ================= -->
         <div id="pageIosExternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <!-- 1. FULORITE IOS [EXTERNAL] -->
             <div class="dash-card">
                 <div style="color:var(--green-glow); font-size:18px; font-weight:900; margin-bottom:10px;">FULORITE IOS [EXTERNAL]</div>
-                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹310</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE IOS EXT (10 Days)', 310)">Buy Now</button></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Assist<br>• Aimbot Normal<br>• Autofire<br>• Aim Legit<br>• Spinbot 360</div>
+                    <div><b>Visual:</b><br>• Esp Line<br>• Esp Box<br>• Esp Name<br>• Esp Distance<br><b>Speed:</b> Ghost mode - Reset Guest</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">10 DAYS</div><div style="font-size:16px; font-weight:bold;">₹610</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE EXT (10 Days)', 610)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE EXT (20 Days)', 1200)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1500</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE EXT (30 Days)', 1500)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">PERMANENT</div><div style="font-size:15px; font-weight:bold;">₹13,450</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE EXT Permanent', 13450)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 2. MUGOL PRO [EXTERNAL] -->
+            <div class="dash-card">
+                <div style="color:var(--yellow-glow); font-size:18px; font-weight:900; margin-bottom:10px;">MUGOL PRO [EXTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Assist<br>• Aimbot Normal<br>• Autofire<br>• Aim Legit<br>• Spinbot 360</div>
+                    <div><b>Visual:</b><br>• Esp Line<br>• Esp Box<br>• Esp Name<br>• Esp Distance<br><b>Speed:</b> Ghost mode - Reset Guest</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">10 DAYS</div><div style="font-size:16px; font-weight:bold;">₹610</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO EXT (10 Days)', 610)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO EXT (20 Days)', 1200)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1500</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO EXT (30 Days)', 1500)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">PERMANENT</div><div style="font-size:15px; font-weight:bold;">₹13,450</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO EXT Permanent', 13450)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 3. LOTUS IOS [EXTERNAL] -->
+            <div class="dash-card">
+                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">LOTUS IOS [EXTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Assist<br>• Aimbot Normal<br>• Autofire<br>• Aim Legit<br>• Spinbot 360</div>
+                    <div><b>Visual:</b><br>• Esp Line<br>• Esp Box<br>• Esp Name<br>• Esp Distance<br><b>Speed:</b> Ghost mode - Reset Guest</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">10 DAYS</div><div style="font-size:16px; font-weight:bold;">₹610</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS EXT (10 Days)', 610)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS EXT (20 Days)', 1200)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1500</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS EXT (30 Days)', 1500)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">PERMANENT</div><div style="font-size:15px; font-weight:bold;">₹13,450</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS EXT Permanent', 13450)">🛒 Buy Now</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 6: IOS INTERNAL ================= -->
+        <!-- ================= PAGE 6: IOS INTERNAL (3 DASHBOARDS) ================= -->
         <div id="pageIosInternal" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageMainStore')">← Back To Store</button>
+
+            <!-- 1. FULORITE IOS [INTERNAL] -->
             <div class="dash-card">
                 <div style="color:var(--green-glow); font-size:18px; font-weight:900; margin-bottom:10px;">FULORITE IOS [INTERNAL]</div>
-                <div class="pricing-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#0f1522; padding:10px; border-radius:8px;"><div style="font-size:11px; color:#aaa;">10 Days</div><div style="font-size:16px; font-weight:bold;">₹310</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE IOS INT (10 Days)', 310)">Buy Now</button></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Assist<br>• Aimbot Normal<br>• Autofire<br>• Aim Legit<br>• Spinbot 360</div>
+                    <div><b>Visual:</b><br>• Esp Line<br>• Esp Box<br>• Esp Name<br>• Esp Distance<br><b>Speed:</b> Ghost mode - Reset Guest</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">10 DAYS</div><div style="font-size:16px; font-weight:bold;">₹610</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE INT (10 Days)', 610)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE INT (20 Days)', 1200)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1500</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE INT (30 Days)', 1500)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">PERMANENT</div><div style="font-size:15px; font-weight:bold;">₹13,450</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('FULORITE INT Permanent', 13450)">🛒 Buy Now</button></div>
                 </div>
             </div>
-    </div>
-                                                                                                                                                                                                                <!-- ================= PAGE 7: PROFILE DASHBOARD ================= -->
-        <div id="pageProfile" class="page-view">
+
+            <!-- 2. MUGOL PRO [INTERNAL] -->
             <div class="dash-card">
-                <div style="display:flex; align-items:center; gap:12px; margin-bottom:15px;">
-                    <div style="width:50px; height:50px; background:linear-gradient(135deg, #ff1a1a, #ffcc00); border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:24px; font-weight:bold; color:#000;">
+                <div style="color:var(--yellow-glow); font-size:18px; font-weight:900; margin-bottom:10px;">MUGOL PRO [INTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Assist<br>• Aimbot Normal<br>• Autofire<br>• Aim Legit<br>• Spinbot 360</div>
+                    <div><b>Visual:</b><br>• Esp Line<br>• Esp Box<br>• Esp Name<br>• Esp Distance<br><b>Speed:</b> Ghost mode - Reset Guest</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">10 DAYS</div><div style="font-size:16px; font-weight:bold;">₹610</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO INT (10 Days)', 610)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO INT (20 Days)', 1200)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1500</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO INT (30 Days)', 1500)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">PERMANENT</div><div style="font-size:15px; font-weight:bold;">₹13,450</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('MUGOL PRO INT Permanent', 13450)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+
+            <!-- 3. LOTUS IOS [INTERNAL] -->
+            <div class="dash-card">
+                <div style="color:var(--pink-glow); font-size:18px; font-weight:900; margin-bottom:10px;">LOTUS IOS [INTERNAL]</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:11px; background:rgba(0,0,0,0.4); padding:10px; border-radius:8px; margin-bottom:10px;">
+                    <div><b>Aimbot:</b><br>• Aim Assist<br>• Aimbot Normal<br>• Autofire<br>• Aim Legit<br>• Spinbot 360</div>
+                    <div><b>Visual:</b><br>• Esp Line<br>• Esp Box<br>• Esp Name<br>• Esp Distance<br><b>Speed:</b> Ghost mode - Reset Guest</div>
+                </div>
+                <div class="pricing-grid-4">
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">10 DAYS</div><div style="font-size:16px; font-weight:bold;">₹610</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS INT (10 Days)', 610)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">20 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1200</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS INT (20 Days)', 1200)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">30 DAYS</div><div style="font-size:16px; font-weight:bold;">₹1500</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS INT (30 Days)', 1500)">🛒 Buy Now</button></div>
+                    <div class="price-card-box"><div class="discount-badge-tag">10% OFF</div><div style="font-size:11px; color:#aaa;">PERMANENT</div><div style="font-size:15px; font-weight:bold;">₹13,450</div><button class="btn-glow-yellow" style="padding:6px; font-size:11px; margin-top:5px;" onclick="openBuyModal('LOTUS IOS INT Permanent', 13450)">🛒 Buy Now</button></div>
+                </div>
+            </div>
+        </div>
+
+                <!-- ================= PAGE 7: FULL-SCREEN PROFESSIONAL PROFILE ================= -->
+        <div id="pageProfile" class="page-view">
+            <!-- ENLARGED FULL DISPLAY DASHBOARD 1 -->
+            <div class="dash-card" style="padding:25px; margin-bottom:25px; border-width:2px;">
+                <div style="display:flex; align-items:center; gap:18px; margin-bottom:25px;">
+                    <div style="width:70px; height:70px; background:linear-gradient(135deg, #ff1a1a, #ffcc00); border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:32px; font-weight:bold; color:#000; box-shadow:0 0 20px rgba(255,26,26,0.5);">
                         👤
                     </div>
                     <div>
-                        <h3 id="profNameDisplay" style="color:#fff; font-size:18px;">Guest User</h3>
-                        <p id="profEmailDisplay" style="color:#aaa; font-size:12px;"></p>
+                        <h2 id="profNameDisplay" style="color:#fff; font-size:22px; font-weight:900;">Guest User</h2>
+                        <p id="profEmailDisplay" style="color:#aaa; font-size:14px; margin-top:4px;"></p>
                     </div>
                 </div>
 
-                <div style="background:rgba(0,255,102,0.08); border:1px solid var(--green-glow); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="background:rgba(0,255,102,0.1); border:1px solid var(--green-glow); border-radius:16px; padding:20px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 0 15px rgba(0,255,102,0.2);">
                     <div>
-                        <span style="font-size:11px; color:#aaa; display:block;">WALLET BALANCE</span>
-                        <span style="color:var(--green-glow); font-size:22px; font-weight:900;">₹<span id="profWalletDisplay">0</span></span>
+                        <span style="font-size:12px; color:#aaa; font-weight:bold; letter-spacing:1px; display:block; margin-bottom:5px;">AVAILABLE WALLET BALANCE</span>
+                        <span style="color:var(--green-glow); font-size:30px; font-weight:900;">₹<span id="profWalletDisplay">0</span></span>
                     </div>
-                    <button class="btn-glow-green" style="width:auto; padding:8px 15px;" onclick="switchPage('pageAddMoney')">+ Add Money</button>
+                    <button class="btn-glow-green" style="width:auto; padding:12px 22px; font-size:15px;" onclick="switchPage('pageAddMoney')">+ Add Money</button>
                 </div>
             </div>
 
-            <div class="dash-card">
-                <button class="btn-glow-yellow" style="width:100%; margin-bottom:10px;" onclick="switchPage('pagePurchaseHistory')">📜 Purchase History</button>
-                <button class="btn-glow-yellow" style="width:100%; background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="switchPage('pageDepositHistory')">💳 Deposit History</button>
-                <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; margin-top:15px; background:#222; color:#ff1a1a; border-color:var(--red-glow);" onclick="handleLogout()">🚪 Logout Account</button>
+            <!-- ENLARGED FULL DISPLAY DASHBOARD 2 -->
+            <div class="dash-card" style="padding:25px; margin-bottom:25px; border-width:2px;">
+                <h3 style="color:#fff; font-size:18px; margin-bottom:18px; text-transform:uppercase; letter-spacing:1px;">Account Management</h3>
+                <button class="btn-glow-yellow" style="width:100%; padding:15px; font-size:16px; margin-bottom:15px;" onclick="switchPage('pagePurchaseHistory')">📜 View Purchase History</button>
+                <button class="btn-glow-yellow" style="width:100%; padding:15px; font-size:16px; background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="switchPage('pageDepositHistory')">💳 View Deposit History</button>
+                <button class="btn-glow-yellow" id="authBtnProf" style="width:100%; padding:15px; font-size:16px; margin-top:20px; background:#222; color:#ff1a1a; border-color:var(--red-glow);" onclick="handleLogout()">🚪 Logout Account</button>
             </div>
         </div>
 
         <!-- SUB PAGE: ADD MONEY -->
         <div id="pageAddMoney" class="page-view">
             <button class="btn-back-nav" onclick="switchPage('pageProfile')">← Back To Profile</button>
-            <div class="dash-card">
-                <h3 style="color:#fff; margin-bottom:12px;">Add Balance To Wallet</h3>
-                <input type="number" id="addMoneyInput" class="form-input-box" placeholder="Enter Amount (INR) e.g. 500">
-                <button class="btn-glow-green" style="width:100%; margin-bottom:12px;" onclick="openUpiAppDirect()">📱 Go And Add Wallet</button>
-                <button class="btn-glow-yellow" style="width:100%; background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="confirmAddMoneyRequest()">✅ Confirm Your Payment</button>
+            <div class="dash-card" style="padding:22px;">
+                <h3 style="color:#fff; margin-bottom:15px; font-size:18px;">Add Balance To Wallet</h3>
+                <input type="number" id="addMoneyInput" class="form-input-box" placeholder="Enter Amount (INR) e.g. 500" style="padding:15px; font-size:16px;">
+                <button class="btn-glow-green" style="width:100%; padding:15px; font-size:16px; margin-bottom:12px;" onclick="openUpiAppDirect()">📱 Go And Add Wallet</button>
+                <button class="btn-glow-yellow" style="width:100%; padding:15px; font-size:16px; background:linear-gradient(135deg, #0088ff, #004499); color:#fff; border-color:#80c4ff;" onclick="confirmAddMoneyRequest()">✅ Confirm Your Payment</button>
             </div>
         </div>
 
@@ -507,8 +679,8 @@
                 <div id="depositListFull" class="history-list-box" style="max-height:350px;">No deposit requests found.</div>
             </div>
         </div>
-                    </div>
-                        <!-- BUY PRODUCT MODAL -->
+    </div>
+        <!-- BUY PRODUCT MODAL -->
     <div class="modal-overlay" id="buyModal">
         <div style="padding:20px; background:#0d121d; border-radius:16px; border:1px solid var(--red-glow); width:90%; max-width:360px;">
             <h3 style="color:#fff; margin-bottom:8px;">Complete Purchase</h3>
@@ -530,7 +702,7 @@
         </div>
     </div>
 
-    <!-- PROFESSIONAL BOTTOM VECTOR NAVIGATION BAR -->
+    <!-- UNIVERSAL VECTOR BOTTOM NAVIGATION BAR -->
     <div class="bottom-nav-bar">
         <button class="nav-link-item active" id="navHomeBtn" onclick="switchPage('pageHome')">
             <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -544,8 +716,8 @@
             <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
             <span>Profile</span>
         </button>
-    </div>
-        <script>
+                                                              </div>
+               <script>
         const firebaseConfig = {
           apiKey: "AIzaSyAPUoAlktXoQ2wPEfWm29rZTEjefbQRMLA",
           authDomain: "cheatx-store-cdc7f.firebaseapp.com",
@@ -563,7 +735,7 @@
         let currentUser = null, userWallet = 0;
         let selectedProductForBuy = null;
 
-        // AUTH MONITOR
+        // AUTHENTICATION STATE MONITOR
         auth.onAuthStateChanged(user => {
             if(user) {
                 currentUser = user;
@@ -590,7 +762,7 @@
             }
         });
 
-        // DYNAMIC RANDOM USER COUNTER (1 TO 100 EVERY 3 SECONDS)
+        // LIVE RANDOM ONLINE PULSE COUNTER (1 TO 100)
         setInterval(() => {
             const count = Math.floor(Math.random() * 100) + 1;
             const el = document.getElementById('activeUserCount');
@@ -677,8 +849,8 @@
             if(!currentUser) return switchPage('pageHome');
 
             document.getElementById('successMsg').innerHTML = `
-                <div style="font-size:18px; font-weight:bold; color:var(--yellow-glow); margin-bottom:8px;">⏳ Loading...</div>
-                <div style="font-size:13px; color:#fff;">Wait,<br>Confirm Your Payment and adding Your wallet.</div>
+                <div style="font-size:18px; font-weight:bold; color:var(--yellow-glow); margin-bottom:8px;">⏳ Processing...</div>
+                <div style="font-size:13px; color:#fff;">Wait,<br>Confirming Your Payment and updating wallet balance.</div>
             `;
             openModal('successModal');
 
@@ -723,7 +895,7 @@
 
                     document.getElementById('successMsg').innerHTML = `
                         <div style="font-size:18px; font-weight:bold; color:var(--green-glow);">Successfully Purchased!</div>
-                        <div style="font-size:12px; color:#ccc; margin-top:8px;">Panel file delivered your Gmail yet !</div>
+                        <div style="font-size:12px; color:#ccc; margin-top:8px;">Product key/file delivered to your Gmail!</div>
                     `;
                 });
             }, 3000);
@@ -745,7 +917,7 @@
             });
         }
 
-        // RED PARTICLES ANIMATION
+        // RED PARTICLES CANVAS BACKGROUND
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -767,3 +939,4 @@
 </body>
 </html>
 
+  
